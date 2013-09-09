@@ -27,10 +27,18 @@ namespace Customer_App
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            m_pNetworkClient.connect("127.0.0.1", Ketler_X7_Lib.Classes.Global.TCPSERVER_PORT, Ketler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP);
+            m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
+
             m_pKetlerX7.connect("COM14");
             m_pKetlerX7.startParsingValues(1000);
 
             m_pKetlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
+        }
+
+        void m_pNetworkClient_DataReceived(object sender, Ketler_X7_Lib.Networking.Server.DataReceivedEventArgs e)
+        {
+            
         }
 
         void pKetlerX7_ValuesParsed(object sender, Ketler_X7_Lib.Classes.Ketler_X7.ValuesParsedEventArgs e)
@@ -75,23 +83,11 @@ namespace Customer_App
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
-            lock (m_pValueList)
+            m_pNetworkClient.routeToServer(new Ketler_X7_Lib.Objects.Packet()
             {
-                m_pValueList.Add(e.Value);
-
-                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter pBinaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                using (System.IO.StreamWriter pStreamWriter = new System.IO.StreamWriter("data.dat", false))
-                {
-                    try
-                    {
-                        pBinaryFormatter.Serialize(pStreamWriter.BaseStream, m_pValueList);
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
+                Flag = Ketler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
+                Data = e.Value
+            });
         }
     }
 }

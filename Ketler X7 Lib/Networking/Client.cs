@@ -73,7 +73,7 @@ namespace Ketler_X7_Lib.Networking
         /// <param name="nClientFlag"></param>
         /// <param name="strUsername"></param>
         /// <param name="strPassword"></param>
-        public void authenticate(Objects.Client.ClientFlag nClientFlag, string strUsername, string strPassword)
+        private void authenticate(Objects.Client.ClientFlag nClientFlag, string strUsername, string strPassword)
         {
             routeToServer(new Objects.Packet()
             {
