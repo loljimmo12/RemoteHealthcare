@@ -46,6 +46,11 @@ namespace Ketler_X7_Lib.Networking
         public event onClientConnected ClientConnected;
 
         /// <summary>
+        /// The data received event
+        /// </summary>
+        public event onDataReceived DataReceived;
+
+        /// <summary>
         /// The delegate for our ClientConnected event
         /// </summary>
         /// <param name="sender"></param>
@@ -152,7 +157,10 @@ namespace Ketler_X7_Lib.Networking
         /// <param name="e"></param>
         void pClient_DataReceived(object sender, Server.DataReceivedEventArgs e)
         {
-            Console.WriteLine("Got data from client ?!");
+            if (DataReceived != null)
+            {
+                DataReceived(sender, e);
+            }
         }
     }
 }

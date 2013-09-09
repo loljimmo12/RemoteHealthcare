@@ -72,7 +72,7 @@ namespace Customer_App
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
-            /*lock (m_pValueList)
+            lock (m_pValueList)
             {
                 m_pValueList.Add(e.Value);
 
@@ -88,13 +88,7 @@ namespace Customer_App
                     {
                     }
                 }
-            }*/
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            m_pKetlerX7.sendCommand(Ketler_X7_Lib.Classes.Ketler_X7.Command.TAKE_CONTROL);
-            m_pKetlerX7.sendCommand(Ketler_X7_Lib.Classes.Ketler_X7.Command.CHANGE_FORCE, textBox1.Text);
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Server_App
         {
             Ketler_X7_Lib.Networking.Server pServer = new Ketler_X7_Lib.Networking.Server();
             pServer.ClientConnected += pServer_ClientConnected;
+            pServer.DataReceived += pServer_DataReceived;
 
             if (!pServer.bind(Ketler_X7_Lib.Classes.Global.TCPSERVER_PORT))
             {
@@ -60,7 +61,17 @@ namespace Server_App
             {
                 pClient.routeToServer(new Ketler_X7_Lib.Objects.Packet()
                 {
-                    Data = null,
+                    Data = new Ketler_X7_Lib.Objects.Value()
+                    {
+                        ActualPower = 0,
+                        Distance = 0,
+                        Energy = 100,
+                        Pulse = 10,
+                        RequestedPower = 400,
+                        RPM = 20,
+                        Speed = 20,
+                        Time = new TimeSpan(0, 3, 3)
+                    },
                     Flag = Ketler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_HANDSHAKE
                 });
 
@@ -71,6 +82,11 @@ namespace Server_App
             pKetlerX7.connect("COM14");
             //pKetlerX7.startReceivingValues(1000);
             pKetlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
+        }
+
+        static void pServer_DataReceived(object sender, Ketler_X7_Lib.Networking.Server.DataReceivedEventArgs e)
+        {
+            Console.WriteLine("Got data!");
         }
 
         static void pKetlerX7_ValuesParsed(object sender, Ketler_X7_Lib.Classes.Ketler_X7.ValuesParsedEventArgs e)

@@ -78,7 +78,7 @@ namespace Ketler_X7_Lib.Objects
             }
 
             return true;
-        }
+        } 
 
         /// <summary>
         /// The workerthread

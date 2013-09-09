@@ -100,7 +100,7 @@ namespace Ketler_X7_Lib.Networking
 
             try
             {
-                pBinaryFormatter.Serialize(m_pTcpClient.GetStream(), pPacket);
+                pBinaryFormatter.Serialize(m_pSslStream, pPacket);
             }
             catch
             {
