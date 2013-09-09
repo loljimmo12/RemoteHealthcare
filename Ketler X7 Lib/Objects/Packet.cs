@@ -14,7 +14,8 @@ namespace Ketler_X7_Lib.Objects
         /// </summary>
         public enum PacketFlag
         {
-            PACKETFLAG_HANDSHAKE,
+            PACKETFLAG_REQUEST_HANDSHAKE,
+            PACKETFLAG_RESPONSE_HANDSHAKE,
             PACKETFLAG_VALUES
         }
 

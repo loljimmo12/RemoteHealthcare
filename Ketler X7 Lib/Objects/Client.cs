@@ -60,6 +60,15 @@ namespace Ketler_X7_Lib.Objects
         }
 
         /// <summary>
+        /// Sets the client flag for this client
+        /// </summary>
+        /// <param name="nClientFlag"></param>
+        public void setClientFlag(ClientFlag nClientFlag)
+        {
+            m_nClientFlag = nClientFlag;
+        }
+
+        /// <summary>
         /// Attempts to route packet to client. Data should NOT be serialized
         /// </summary>
         /// <param name="pData"></param>

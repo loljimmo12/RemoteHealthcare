@@ -27,7 +27,7 @@ namespace Server_App
 
             pClient.DataReceived += pClient_DataReceived;
 
-            if (!pClient.connect("127.0.0.1", Ketler_X7_Lib.Classes.Global.TCPSERVER_PORT))
+            if (!pClient.connect("127.0.0.1", Ketler_X7_Lib.Classes.Global.TCPSERVER_PORT, Ketler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP))
             {
                 Console.WriteLine("Failed to connect to server");
             }
@@ -57,7 +57,7 @@ namespace Server_App
 
                 System.Threading.Thread.Sleep(5000);
             }*/
-            for (; ; )
+           /* for (; ; )
             {
                 pClient.routeToServer(new Ketler_X7_Lib.Objects.Packet()
                 {
@@ -76,7 +76,7 @@ namespace Server_App
                 });
 
                 System.Threading.Thread.Sleep(1000);
-            }
+            }*/
 
             Ketler_X7_Lib.Classes.Ketler_X7 pKetlerX7 = new Ketler_X7_Lib.Classes.Ketler_X7();
             pKetlerX7.connect("COM14");

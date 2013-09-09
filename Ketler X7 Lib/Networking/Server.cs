@@ -157,6 +157,30 @@ namespace Ketler_X7_Lib.Networking
         /// <param name="e"></param>
         void pClient_DataReceived(object sender, Server.DataReceivedEventArgs e)
         {
+            // Verify packet data
+            if (!(e.PacketData is Objects.Packet))
+            {
+                return;
+            }
+
+            // TO DO: verify packet data with reflection
+
+            bool bHandled = false;
+            Objects.Packet pPacket = (Objects.Packet)e.PacketData;
+
+            switch (pPacket.Flag)
+            {
+                case Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
+                    ((Objects.Client)sender).setClientFlag(((Objects.Handshake)pPacket.Data).ClientFlag);
+                    bHandled = true;
+                    break;
+            }
+
+            if (bHandled)
+            {
+                return;
+            }
+
             if (DataReceived != null)
             {
                 DataReceived(sender, e);

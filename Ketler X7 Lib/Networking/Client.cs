@@ -34,7 +34,7 @@ namespace Ketler_X7_Lib.Networking
         /// <param name="strIPAddress"></param>
         /// <param name="nPort"></param>
         /// <returns></returns>
-        public bool connect(string strIPAddress, int nPort)
+        public bool connect(string strIPAddress, int nPort, Objects.Client.ClientFlag nClientFlag)
         {
             m_pTcpClient = new System.Net.Sockets.TcpClient();
 
@@ -62,7 +62,29 @@ namespace Ketler_X7_Lib.Networking
             m_pWorkerThread = new System.Threading.Thread(workerThread);
             m_pWorkerThread.Start();
 
+            authenticate(nClientFlag, null, null);
+
             return true;
+        }
+
+        /// <summary>
+        /// Authenticates client to server
+        /// </summary>
+        /// <param name="nClientFlag"></param>
+        /// <param name="strUsername"></param>
+        /// <param name="strPassword"></param>
+        public void authenticate(Objects.Client.ClientFlag nClientFlag, string strUsername, string strPassword)
+        {
+            routeToServer(new Objects.Packet()
+            {
+                Flag = Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE,
+                Data = new Objects.Handshake()
+                {
+                    ClientFlag = nClientFlag,
+                    Username = strUsername,
+                    Password = strPassword
+                }
+            });
         }
 
         /// <summary>
@@ -106,7 +128,7 @@ namespace Ketler_X7_Lib.Networking
             {
                 return false;
             }
-
+            
             return true;
         }
 

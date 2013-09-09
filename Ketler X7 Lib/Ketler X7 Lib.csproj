@@ -52,6 +52,7 @@
     <Compile Include="Networking\Encryption.cs" />
     <Compile Include="Objects\Client.cs" />
     <Compile Include="Networking\Server.cs" />
+    <Compile Include="Objects\Handshake.cs" />
     <Compile Include="Objects\Packet.cs" />
     <Compile Include="Objects\Value.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

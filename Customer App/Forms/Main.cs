@@ -13,17 +13,20 @@ namespace Customer_App
     public partial class Form1 : Form
     {
         private Ketler_X7_Lib.Classes.Ketler_X7 m_pKetlerX7;
+        private Ketler_X7_Lib.Networking.Client m_pNetworkClient;
         private List<Ketler_X7_Lib.Objects.Value> m_pValueList;
 
         public Form1()
         {
             m_pValueList = new List<Ketler_X7_Lib.Objects.Value>();
+            m_pKetlerX7 = new Ketler_X7_Lib.Classes.Ketler_X7();
+            m_pNetworkClient = new Ketler_X7_Lib.Networking.Client();
+
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            m_pKetlerX7 = new Ketler_X7_Lib.Classes.Ketler_X7();
             m_pKetlerX7.connect("COM14");
             m_pKetlerX7.startParsingValues(1000);
 
