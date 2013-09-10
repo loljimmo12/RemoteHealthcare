@@ -13,6 +13,7 @@ namespace Server.Controller
     class ServerModel
     {
         private static String logFileName = "logData.bin";
+        private static String clientFile  = "clientFile.bin";
         List<Log> logs;
 
         // initalization of a Model object.
@@ -23,12 +24,13 @@ namespace Server.Controller
 
         // WiP
         // Reads the specified File and returns a List of Objects from the file.
-        public List<Object> readBikeData(String clientFile)
+        public List<Value> readBikeData(String client)
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                List<Object> clientData = (List<Object>)serializer.Deserialize(stream);
+                Dictionary<String,List<Value>> allClients = (Dictionary<String,List<Value>>)serializer.Deserialize(stream);
+                List<Value> clientData = allClients[client];
                 return clientData;
             }
         }
