@@ -24,6 +24,20 @@ namespace Server.Controller
             allClients = readAllClientData();
         }
 
+        // Writes the data from a Value into the Dictionary
+        // and overwrites the file with the new Dictionary.
+        public void writeBikeData(String client, Value data)
+        {
+            if (allClients.ContainsKey(client))
+                allClients[client].Add(data);
+            else
+            {
+                List<Value> clientData = new List<Value>();
+                clientData.Add(data);
+                allClients.Add(client, clientData);
+            }
+        }
+
         // Reads the fiel containing all client data and returns the Dictionary.
         public Dictionary<String, List<Value>> readAllClientData()
         {
