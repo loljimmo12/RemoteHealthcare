@@ -40,17 +40,17 @@ namespace Server.Controller
     }
 
     [Serializable]
-    struct Log 
+    class Log 
     {
         String clientName { get; set; }
         DateTime startSession { get; set; }
         DateTime endSession { get; set; }
 
-        public Log(String clientName, DateTime startSession, DateTime endSession)
+        public Log(String name, DateTime start, DateTime end)
         {
-            this.clientName = clientName;
-            this.startSession = startSession;
-            this.endSession = endSession;
+            clientName = name;
+            startSession = start;
+            endSession = end;
         }
     }
 }
