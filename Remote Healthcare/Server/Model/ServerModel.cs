@@ -14,25 +14,31 @@ namespace Server.Controller
     {
         private static String logFileName = "logData.bin";
         private static String clientFile  = "clientFile.bin";
-        List<Log> logs;
+        List<Log> logs { get; set; }
+        Dictionary<String, List<Value>> allClients { get; set; }
 
         // initalization of a Model object.
         public ServerModel()
         {
             logs = readLogData();
+            allClients = readAllClientData();
         }
 
-        // WiP
-        // Reads the specified File and returns a List of Objects from the file.
-        public List<Value> readBikeData(String client)
+        // Reads the fiel containing all client data and returns the Dictionary.
+        public Dictionary<String, List<Value>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                Dictionary<String,List<Value>> allClients = (Dictionary<String,List<Value>>)serializer.Deserialize(stream);
-                List<Value> clientData = allClients[client];
-                return clientData;
+                Dictionary<String, List<Value>> allClients = (Dictionary<String, List<Value>>)serializer.Deserialize(stream);
+                return allClients;
             }
+        }
+
+        // Returns the list to the specified client, because normal getters are boring.
+        public List<Value> readBikeData(String client)
+        {
+            return allClients[client];
         }
 
         // Reads the logFile and puts the data in the List.
