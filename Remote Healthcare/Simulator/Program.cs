@@ -41,10 +41,36 @@ namespace Simulator
 
         static void Main(string[] args)
         {
+            simulate sim = new simulate();
+            sim.startingValues();
         }
 
+        void startingValues()
+        {
+            powerBreak = 25;
+            heartBeat = 70;
+            revolutionsPerMinute = 0;
+            versionNumber = 1337;
+            kiloJoules = 0;
+            distance = 0;
+            timeSeconds = 0;
+        }
 
-
+        void setBreak(int powerBreak)
+        {
+            this.powerBreak = powerBreak;
+        }
         
+        void setHeartBeat(int heartBeat)
+        {
+            this.heartBeat = heartBeat;
+        }
+        
+        void setVersionNumber(int version)
+        {
+            this.versionNumber = version;
+        }
+
+        void setKiloJoules
     }
 }
