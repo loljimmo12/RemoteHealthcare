@@ -11,22 +11,36 @@ namespace Server.Controller
     class ServerModel
     {
         private static String logFileName = "logData.bin";
+        List<Log> logs;
 
         public ServerModel()
         {
+            logs = readLogData();
+        }
+
+        private List<Log> readLogData()
+        {
+            BinaryFormatter serializer = new BinaryFormatter();
+            using (FileStream stream = File.OpenRead(logFileName))
+            {
+                List<Log> logData = (List<Log>)serializer.Deserialize(stream);
+                return logData;
+            }
         }
 
         public void saveLog(Log log)
         {
-            using (FileStream filestream = new FileStream(logFileName, FileMode.Append, FileAccess.Write))
+            logs.Add(log);
+            BinaryFormatter serializer = new BinaryFormatter();
+            using (FileStream stream = File.OpenWrite(logFileName))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(filestream, log);
+                serializer.Serialize(stream, logs);
             }
         }
     }
 
-    struct Log
+    [Serializable]
+    struct Log 
     {
         String clientName { get; set; }
         DateTime startSession { get; set; }
