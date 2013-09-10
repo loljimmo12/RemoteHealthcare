@@ -1,5 +1,6 @@
 ﻿using Server.View;
 using System;
+using System.Collections;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -22,14 +23,14 @@ namespace Server.Controller
             for (; ; )
             {
 
-                //try
-                //{
-                //    new Server.Model.Client(tcpListener.AcceptTcpClient());
-                //}
-                //catch (Exception)
-                //{
-                //    throw;
-                //}
+                try
+                {
+                    new Server.Model.Client(tcpListener.AcceptTcpClient());
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
                 ServerView.writeToConsole("bla");
                 Thread.Sleep(10);
