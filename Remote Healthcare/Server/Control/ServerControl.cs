@@ -1,47 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Server.View;
+using System;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Server.Controller
 {
     class ServerControl
     {
         private TcpListener tcpListener;
-        private Thread listenThread;
 
         public ServerControl()
         {
-            this.tcpListener = new TcpListener(System.Net.IPAddress.Broadcast, 80);
-            this.listenThread = new Thread(new ThreadStart(listenForClients));
-            this.listenThread.Start();
+            this.tcpListener = new TcpListener(System.Net.IPAddress.Parse("127.0.0.1"), 31337);
+            listenForClients();
         }
 
         public void listenForClients()
         {
-            this.tcpListener.Start();
+            tcpListener.Start();
 
             for (; ; )
             {
-                TcpClient client = this.tcpListener.AcceptTcpClient();
-                Thread clientThread = new Thread(new ParameterizedThreadStart(handleAClient));
-                clientThread.Start(client);
+
+                //try
+                //{
+                //    new Server.Model.Client(tcpListener.AcceptTcpClient());
+                //}
+                //catch (Exception)
+                //{
+                //    throw;
+                //}
+
+                ServerView.writeToConsole("bla");
+                Thread.Sleep(10);
             }
         }
 
         public void handleAClient(Object client)
         {
-            TcpClient tcpClient = (TcpClient)client;
-            NetworkStream clientStream = tcpClient.GetStream();
-            bool clientExited = false;
-
-            for (; ; )
-            {
-                if (clientExited) tcpClient.Close();
-            }
 
         }
 
