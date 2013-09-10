@@ -8,5 +8,9 @@ namespace Server.View
 {
     class ServerView
     {
+        public static void writeToConsole(String s)
+        {
+            Console.WriteLine(s);
+        }
     }
 }
