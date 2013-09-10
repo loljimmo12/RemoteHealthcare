@@ -42,13 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\ServerControl.cs" />
-<<<<<<< HEAD
-    <Compile Include="Model\Client.cs" />
-=======
+    <Compile Include="Control\Client.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Packet.cs" />
     <Compile Include="Model\Value.cs" />
->>>>>>> 80a48c5de4d62fe4cb56716b42b488e1a09c6e2c
     <Compile Include="Model\ServerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
