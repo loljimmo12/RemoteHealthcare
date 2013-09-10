@@ -81,5 +81,21 @@ namespace Simulator
             tcpClient.Close();
         }
 
+        }
+    }
+
+    class simulate
+    {
+        private int powerBreak { get; set; }
+        private int heartBeat { get; set; }
+        private int revolutionsPerMinute;
+        private int versionNumber { get; set; }
+        private int kiloJoules { get; set; }
+        private int distance { get; set; }
+        private int timeSeconds { get; set; }
+
+        static void Main(string[] args)
+        {
+        }
     }
 }
