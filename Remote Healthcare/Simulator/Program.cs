@@ -16,11 +16,6 @@ namespace Simulator
         private TcpListener tcpListener;
         private Thread listenThread;
 
-        static void Main(string[] args)
-        {
-            Program p = new Program();
-        }
-
         public Program()
         {
           this.tcpListener = new TcpListener(IPAddress.Any, 3000);
@@ -28,6 +23,13 @@ namespace Simulator
           this.listenThread.Start();
           Console.WriteLine("Server start");
         }
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+        }
+
+        
 
         private void ListenForClients()
         {
@@ -52,7 +54,8 @@ namespace Simulator
 
             byte[] message = new byte[4096];
             int bytesRead;
-
+            simulate sim = new simulate();
+            sim.startingValues();
             while (true)
             {
                 bytesRead = 0;
@@ -75,7 +78,10 @@ namespace Simulator
                 }
 
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                System.Diagnostics.Debug.WriteLine(encoder.GetString(message, 0, bytesRead));
+                string cm = encoder.GetString(message, 0, bytesRead);
+                Console.WriteLine("Client said: " + cm);
+                byte[] myWriteBuffer = Encoding.ASCII.GetBytes(sim.HandleCommand(cm));
+                clientStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);
             }
 
             tcpClient.Close();
@@ -93,14 +99,14 @@ namespace Simulator
         private int kiloJoules { get; set; }
         private int distance { get; set; }
         private int timeSeconds { get; set; }
+        private int deviceID { get; set; }
+        private bool locked { get; set; }
+        private bool commandMode;
+        public static string notImplemented = "NOTIMP";
+        public static string acknowledged = "ACK";
+        public static string error = "ERR";
 
-        static void Main(string[] args)
-        {
-            simulate sim = new simulate();
-            sim.startingValues();
-        }
-
-        void startingValues()
+        public void startingValues()
         {
             powerBreak = 25;
             heartBeat = 70;
@@ -109,22 +115,76 @@ namespace Simulator
             kiloJoules = 0;
             distance = 0;
             timeSeconds = 0;
+            revolutionsPerMinute = 0;
+            deviceID = 12345;
+            locked = false;
+            commandMode = false;
+        }
+       
+        public string HandleCommand(string command)
+        {
+            switch (command.Replace("\n", "").Split(' ')[0])
+            {
+                case "CM":
+                    commandMode = true;
+                    return acknowledged;
+                case "ID":
+                    return versionNumber.ToString();
+                case "KI":
+                    return deviceID.ToString(); 
+                case "RD":
+                    return notImplemented;
+                case "OP":
+                    return notImplemented;
+                case "RS":
+                    startingValues();
+                    return acknowledged;
+                case "PW":
+                    if (commandMode && command.Contains(" "))
+                    {
+                        powerBreak = int.Parse(command.Split(' ')[1]);
+                        return acknowledged;
+                    }
+                    return error;
+                case "PT":
+                    if (commandMode && command.Contains(" "))
+                    {
+                        timeSeconds = int.Parse(command.Split(' ')[1]);
+                        return acknowledged;
+                    }
+                    return error;
+                case "PE":
+                    if (commandMode && command.Contains(" "))
+                    {
+                        kiloJoules = int.Parse(command.Split(' ')[1]);
+                        return acknowledged;
+                    }
+                    return error;
+                case "PD":
+                    if (commandMode && command.Contains(" "))
+                    {
+                        distance = int.Parse(command.Split(' ')[1]);
+                        return acknowledged;
+                    }
+                    return error;
+                case "VS":
+                    if (commandMode && command.Contains(" "))
+                    {
+                        powerBreak = int.Parse(command.Split(' ')[1]);
+                        return acknowledged;
+                    }
+                    return error;
+                case "TR":
+                    return DateTime.Now.ToString("h:mm tt");
+                case "LB":
+                    locked = true;
+                    return acknowledged;
+                default:
+                    return error;
+            }
         }
 
-        void setBreak(int powerBreak)
-        {
-            this.powerBreak = powerBreak;
-        }
+
         
-        void setHeartBeat(int heartBeat)
-        {
-            this.heartBeat = heartBeat;
-        }
-        
-        void setVersionNumber(int version)
-        {
-            this.versionNumber = version;
-        }
 
     }
-}
