@@ -30,14 +30,14 @@ namespace Server.Control
         {
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            Object pack = null;
+            Server.Model.Packet pack = null;
             Server.Model.ServerModel sModel = new Server.Model.ServerModel();
             for (; ; )
             {
-                pack = formatter.Deserialize(clientStream);
-                if (pack is Server.Model.Value)
+                pack = (Server.Model.Packet)formatter.Deserialize(clientStream);
+                if (pack.Data is Server.Model.Value)
                 {
-                    sModel.writeBikeData(tcpClient.ToString(), pack);
+                    sModel.writeBikeData(tcpClient.ToString(), pack.Data);
                 }
                 if (serverIsListening)
                 if (serverIsSending)
@@ -47,7 +47,6 @@ namespace Server.Control
                     //thread aborten
                 }
             }
-
         }
     }
 }
