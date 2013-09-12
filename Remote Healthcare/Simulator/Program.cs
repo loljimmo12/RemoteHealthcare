@@ -100,11 +100,13 @@ namespace Simulator
         private int distance { get; set; }
         private int timeSeconds { get; set; }
         private int deviceID { get; set; }
+        private int velocity { get; set; }
+        private string power { get; set; }
         private bool locked { get; set; }
         private bool commandMode;
         public static string notImplemented = "NOTIMP";
         public static string acknowledged = "ACK";
-        public static string error = "ERR";
+        public static string error = "ERROR";
 
         public void startingValues()
         {
@@ -116,6 +118,7 @@ namespace Simulator
             distance = 0;
             timeSeconds = 0;
             revolutionsPerMinute = 0;
+            velocity = 0;
             deviceID = 12345;
             locked = false;
             commandMode = false;
@@ -179,6 +182,13 @@ namespace Simulator
                 case "LB":
                     locked = true;
                     return acknowledged;
+                case "ST":
+                    if(powerBreak < 100) power = "0" + powerBreak.ToString();
+                        else power = powerBreak.ToString();
+                    int seconds = timeSeconds % 60;
+                    int minutes = timeSeconds / 60;
+                    string time = minutes + ":" + seconds;
+                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + time + "\t" + powerBreak.ToString();
                 default:
                     return error;
             }
