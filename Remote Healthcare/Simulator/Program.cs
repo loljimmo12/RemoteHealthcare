@@ -123,7 +123,12 @@ namespace Simulator
             locked = false;
             commandMode = false;
         }
-       
+        private string timeStamp()
+        {
+            int seconds = timeSeconds % 60;
+            int minutes = timeSeconds / 60;
+            return minutes + ":" + seconds;
+        }
         public string HandleCommand(string command)
         {
             switch (command.Replace("\n", "").Split(' ')[0])
@@ -145,7 +150,9 @@ namespace Simulator
                 case "PW":
                     if (commandMode && command.Contains(" "))
                     {
-                        powerBreak = int.Parse(command.Split(' ')[1]);
+                        if(int.Parse(command.Split(' ')[1]) > 400) powerBreak = 400;
+                        if (int.Parse(command.Split(' ')[1]) < 25) powerBreak = 25;
+                        if(int.Parse(command.Split(' ')[1]) <= 400 && int.Parse(command.Split(' ')[1]) >=25) powerBreak = int.Parse(command.Split(' ')[1]);
                         return acknowledged;
                     }
                     return error;
@@ -167,14 +174,22 @@ namespace Simulator
                     if (commandMode && command.Contains(" "))
                     {
                         distance = int.Parse(command.Split(' ')[1]);
-                        return acknowledged;
+                        if (powerBreak < 100) power = "0" + powerBreak.ToString();
+                        else power = powerBreak.ToString();
+                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
                     }
                     return error;
+                case "EE":
+                    return acknowledged;
+                case "SP":
+                    return notImplemented;
+                case "RF":
+                    return notImplemented;
                 case "VS":
                     if (commandMode && command.Contains(" "))
                     {
                         powerBreak = int.Parse(command.Split(' ')[1]);
-                        return acknowledged;
+                        return revolutionsPerMinute.ToString();
                     }
                     return error;
                 case "TR":
@@ -185,10 +200,7 @@ namespace Simulator
                 case "ST":
                     if(powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                    int seconds = timeSeconds % 60;
-                    int minutes = timeSeconds / 60;
-                    string time = minutes + ":" + seconds;
-                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + time + "\t" + powerBreak.ToString();
+                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + timeStamp() + "\t" + powerBreak.ToString();
                 default:
                     return error;
             }
