@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Controller
+namespace Server.Model
 {
     // The base class for the Model.
     class ServerModel
@@ -15,7 +15,7 @@ namespace Server.Controller
         private static String logFileName = "logData.bin";
         private static String clientFile  = "clientFile.bin";
         List<Log> logs { get; set; }
-        Dictionary<String, List<Value>> allClients { get; set; }
+        Dictionary<String, List<Object>> allClients { get; set; }
 
         // initalization of a Model object.
         public ServerModel()
@@ -26,31 +26,31 @@ namespace Server.Controller
 
         // Writes the data from a Value into the Dictionary
         // and overwrites the file with the new Dictionary.
-        public void writeBikeData(String client, Value data)
+        public void writeBikeData(String client, Object data)
         {
             if (allClients.ContainsKey(client))
                 allClients[client].Add(data);
             else
             {
-                List<Value> clientData = new List<Value>();
+                List<Object> clientData = new List<Object>();
                 clientData.Add(data);
                 allClients.Add(client, clientData);
             }
         }
 
         // Reads the fiel containing all client data and returns the Dictionary.
-        public Dictionary<String, List<Value>> readAllClientData()
+        public Dictionary<String, List<Object>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                Dictionary<String, List<Value>> allClients = (Dictionary<String, List<Value>>)serializer.Deserialize(stream);
+                Dictionary<String, List<Object>> allClients = (Dictionary<String, List<Object>>)serializer.Deserialize(stream);
                 return allClients;
             }
         }
 
         // Returns the list to the specified client, because normal getters are boring.
-        public List<Value> readBikeData(String client)
+        public List<Object> readBikeData(String client)
         {
             return allClients[client];
         }

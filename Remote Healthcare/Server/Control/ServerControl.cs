@@ -4,7 +4,7 @@ using System.Collections;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Server.Controller
+namespace Server.Control
 {
     class ServerControl
     {
@@ -25,7 +25,7 @@ namespace Server.Controller
 
                 try
                 {
-                    new Server.Model.Client(tcpListener.AcceptTcpClient());
+                    new Server.Control.Client(tcpListener.AcceptTcpClient());
                 }
                 catch (Exception)
                 {

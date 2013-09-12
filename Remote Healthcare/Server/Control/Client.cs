@@ -1,4 +1,6 @@
-﻿using System;
+﻿//using Server.Model;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -6,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Server.Model
+namespace Server.Control
 {
     class Client
     {
@@ -27,9 +29,16 @@ namespace Server.Model
         public void handler()
         {
             NetworkStream clientStream = tcpClient.GetStream();
-
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            Object pack = null;
+            Server.Model.ServerModel sModel = new Server.Model.ServerModel();
             for (; ; )
             {
+                pack = formatter.Deserialize(clientStream);
+                if (pack is Server.Model.Value)
+                {
+                    sModel.writeBikeData(tcpClient.ToString(), pack);
+                }
                 if (serverIsListening)
                 if (serverIsSending)
                 if (clientExited)
