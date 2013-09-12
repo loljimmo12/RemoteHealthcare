@@ -22,6 +22,8 @@ namespace Simulator
           this.listenThread = new Thread(new ThreadStart(ListenForClients));
           this.listenThread.Start();
           Console.WriteLine("Server start");
+          //simulate simu = new simulate();
+          //simu.simulateUser();
         }
 
         static void Main(string[] args)
@@ -96,14 +98,16 @@ namespace Simulator
         private int heartBeat { get; set; }
         private int revolutionsPerMinute;
         private int versionNumber { get; set; }
-        private int kiloJoules { get; set; }
         private int distance { get; set; }
         private int timeSeconds { get; set; }
         private int deviceID { get; set; }
-        private int velocity { get; set; }
+        private double velocity { get; set; }
+        private double kiloJoules { get; set; }
         private string power { get; set; }
         private bool locked { get; set; }
         private bool commandMode;
+        private bool timeCountdown;
+        private bool energyCountdown;
         public static string notImplemented = "NOTIMP";
         public static string acknowledged = "ACK";
         public static string error = "ERROR";
@@ -122,6 +126,7 @@ namespace Simulator
             deviceID = 12345;
             locked = false;
             commandMode = false;
+            timeCountdown = false;
         }
         private string timeStamp()
         {
@@ -160,6 +165,7 @@ namespace Simulator
                     if (commandMode && command.Contains(" "))
                     {
                         timeSeconds = int.Parse(command.Split(' ')[1]);
+                        energyCountdown = true;
                         return acknowledged;
                     }
                     return error;
@@ -167,6 +173,7 @@ namespace Simulator
                     if (commandMode && command.Contains(" "))
                     {
                         kiloJoules = int.Parse(command.Split(' ')[1]);
+                        timeCountdown = true;
                         return acknowledged;
                     }
                     return error;
@@ -176,7 +183,7 @@ namespace Simulator
                         distance = int.Parse(command.Split(' ')[1]);
                         if (powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
+                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) / 10).ToString("0.#") + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
                     }
                     return error;
                 case "EE":
@@ -200,7 +207,7 @@ namespace Simulator
                 case "ST":
                     if(powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (velocity * 10).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + kiloJoules.ToString() + "\t" + timeStamp() + "\t" + powerBreak.ToString();
+                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) / 10).ToString("0.#") + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
                 default:
                     return error;
             }
@@ -208,8 +215,22 @@ namespace Simulator
         }
 
 
-        private void simulateUser()
+        public void simulateUser()
         {
+            var random = new Random();
+            int rand = random.Next(10) - 5;
+            if (powerBreak <= 200)
+                revolutionsPerMinute = 90 + rand;
+            if (powerBreak <= 300 && powerBreak > 200)
+                revolutionsPerMinute = 70 + rand;
+            else revolutionsPerMinute = 50 + rand;
+            velocity = revolutionsPerMinute * 0.36;
+            timeSeconds++;
+            if (timeSeconds % 3 == 0)
+                kiloJoules = kiloJoules + powerBreak/25;
+            heartBeat = heartBeat + powerBreak / (heartBeat/2);
+            distance = distance + Convert.ToInt32(velocity);
+
 
         }
         
