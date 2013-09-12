@@ -204,9 +204,14 @@ namespace Simulator
                 default:
                     return error;
             }
+
         }
 
 
+        private void simulateUser()
+        {
+
+        }
         
 
     }
