@@ -58,6 +58,8 @@ namespace Simulator
             int bytesRead;
             simulate sim = new simulate();
             sim.startingValues();
+            Thread simulationThread = new Thread(new ParameterizedThreadStart(SimulateTime));
+            simulationThread.Start(sim);
             while (true)
             {
                 bytesRead = 0;
@@ -88,8 +90,20 @@ namespace Simulator
 
             tcpClient.Close();
         }
+        private void SimulateTime(object Simulator)
+        {
+            simulate sim = (simulate)Simulator;
+            while (true)
+            {
+                sim.simulateUser();
+                Thread.Sleep(1000);
+            }
+        }
 
         }
+
+        
+
     }
 
     class simulate
