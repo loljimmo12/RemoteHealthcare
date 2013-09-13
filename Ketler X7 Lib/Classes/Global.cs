@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ketler_X7_Lib.Classes
+namespace Kettler_X7_Lib.Classes
 {
     public class Global
     {

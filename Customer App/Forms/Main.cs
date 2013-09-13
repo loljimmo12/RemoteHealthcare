@@ -12,82 +12,165 @@ namespace Customer_App
 {
     public partial class Form1 : Form
     {
-        private Ketler_X7_Lib.Classes.Ketler_X7 m_pKetlerX7;
-        private Ketler_X7_Lib.Networking.Client m_pNetworkClient;
-        private List<Ketler_X7_Lib.Objects.Value> m_pValueList;
+        /// <summary>
+        /// The kettler input device class
+        /// </summary>
+        private Kettler_X7_Lib.Classes.Kettler_X7 m_pKettlerX7;
+
+        /// <summary>
+        /// The networking client that connects to the server
+        /// </summary>
+        private Kettler_X7_Lib.Networking.Client m_pNetworkClient;
+
+        /// <summary>
+        /// The list of values that were received from the bike
+        /// </summary>
+        private List<Kettler_X7_Lib.Objects.Value> m_pValueList;
+
+        /// <summary>
+        /// The data class used for saving and receiving data from the server
+        /// </summary>
+        private Classes.Data m_pData;
 
         public Form1()
         {
-            m_pValueList = new List<Ketler_X7_Lib.Objects.Value>();
-            m_pKetlerX7 = new Ketler_X7_Lib.Classes.Ketler_X7();
-            m_pNetworkClient = new Ketler_X7_Lib.Networking.Client();
+            m_pValueList = new List<Kettler_X7_Lib.Objects.Value>();
+            m_pKettlerX7 = new Kettler_X7_Lib.Classes.Kettler_X7();
+            m_pNetworkClient = new Kettler_X7_Lib.Networking.Client();
+            m_pData = new Classes.Data();
 
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Returns the networking client
+        /// </summary>
+        /// <returns></returns>
+        public Kettler_X7_Lib.Networking.Client getClient()
+        {
+            return m_pNetworkClient;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            m_pNetworkClient.connect("127.0.0.1", Ketler_X7_Lib.Classes.Global.TCPSERVER_PORT, Ketler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP);
+            // Initialize networking client
+            m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT);
             m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
 
-            m_pKetlerX7.connect("COM14");
-            m_pKetlerX7.startParsingValues(1000);
+            // Initialize bike
+            if (!m_pKettlerX7.connect("COM14"))
+            {
+                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
+            }
 
-            m_pKetlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
+            m_pKettlerX7.startParsingValues(1000);
+
+            m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
+
+            // Populate listbox with commands
+            foreach (Kettler_X7_Lib.Classes.Kettler_X7.Command nCommand in Enum.GetValues(typeof(Kettler_X7_Lib.Classes.Kettler_X7.Command)))
+            {
+                lstCommands.Items.Add(nCommand);
+            }
         }
 
-        void m_pNetworkClient_DataReceived(object sender, Ketler_X7_Lib.Networking.Server.DataReceivedEventArgs e)
+        void m_pNetworkClient_DataReceived(object sender, Kettler_X7_Lib.Networking.Server.DataReceivedEventArgs e)
         {
-            
+            // Data from server
         }
 
-        void pKetlerX7_ValuesParsed(object sender, Ketler_X7_Lib.Classes.Ketler_X7.ValuesParsedEventArgs e)
+        void pKetlerX7_ValuesParsed(object sender, Kettler_X7_Lib.Classes.Kettler_X7.ValuesParsedEventArgs e)
         {
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblPulseValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblPulseValue, delegate
             {
                 lblPulseValue.Text = e.Value.Pulse.ToString();
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblRPMValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblRPMValue, delegate
             {
                 lblRPMValue.Text = e.Value.RPM.ToString();
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblSpeedValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblSpeedValue, delegate
             {
                 lblSpeedValue.Text = (e.Value.Speed / 10) + " km/h";
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblDistanceValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblDistanceValue, delegate
             {
-                lblDistanceValue.Text = (e.Value.Distance * 100) + " meter";
+                lblDistanceValue.Text = ((double)e.Value.Distance / 10) + " kilometer";
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblReqPowerValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblReqPowerValue, delegate
             {
                 lblReqPowerValue.Text = e.Value.RequestedPower.ToString();
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblActPowerValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblActPowerValue, delegate
             {
                 lblActPowerValue.Text = e.Value.ActualPower.ToString();
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblEnergyValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblEnergyValue, delegate
             {
                 lblEnergyValue.Text = e.Value.Energy + " Kj";
             });
 
-            Ketler_X7_Lib.Classes.GUI.safelyUpdateControl(lblTimeValue, delegate
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblTimeValue, delegate
             {
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
-            m_pNetworkClient.routeToServer(new Ketler_X7_Lib.Objects.Packet()
+            m_pData.addData(e.Value);
+        }
+        
+        /// <summary>
+        /// When this form is closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            m_pKettlerX7.onClose();
+        }
+
+        /// <summary>
+        /// When the user wants to send a command to the bike
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSendCommand_Click(object sender, EventArgs e)
+        {
+            if (lstCommands.SelectedItem == null || !(lstCommands.SelectedItem is Kettler_X7_Lib.Classes.Kettler_X7.Command))
             {
-                Flag = Ketler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
-                Data = e.Value
-            });
+                Kettler_X7_Lib.Classes.GUI.throwError("Incorrecte waarde geselecteerd!");
+                return;
+            }
+
+            Kettler_X7_Lib.Classes.Kettler_X7.Command nCommand = (Kettler_X7_Lib.Classes.Kettler_X7.Command)lstCommands.SelectedItem;
+
+            if (nCommand.ToString().StartsWith("CHANGE") && txtCommand.TextLength == 0)
+            {
+                Kettler_X7_Lib.Classes.GUI.throwError("Geen waarde opgegeven, dit commando vereist een waarde!");
+                return;
+            }
+
+            // If there is a return value, we should display it
+            if (nCommand.ToString().StartsWith("RETURN"))
+            {
+                System.Diagnostics.Debug.WriteLine(m_pKettlerX7.sendReturnCommand(nCommand, (txtCommand.TextLength == 0 ? null : txtCommand.Text)));
+                return;   
+            }
+
+            if (!m_pKettlerX7.sendCommand(nCommand, (txtCommand.TextLength == 0 ? null : txtCommand.Text)))
+            {
+                Kettler_X7_Lib.Classes.GUI.throwError("Kon commando niet verzenden!");
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_pData.sendData();
         }
     }
 }

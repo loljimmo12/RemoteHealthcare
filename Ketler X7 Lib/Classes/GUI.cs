@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ketler_X7_Lib.Classes
+namespace Kettler_X7_Lib.Classes
 {
     public class GUI
     {
@@ -27,6 +27,15 @@ namespace Ketler_X7_Lib.Classes
             }
 
             pAction();
+        }
+
+        /// <summary>
+        /// Shows error to user
+        /// </summary>
+        /// <param name="strMessage"></param>
+        public static void throwError(string strMessage)
+        {
+            System.Windows.Forms.MessageBox.Show(strMessage, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
         }
     }
 }

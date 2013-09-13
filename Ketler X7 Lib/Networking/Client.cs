@@ -4,10 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ketler_X7_Lib.Networking
+namespace Kettler_X7_Lib.Networking
 {
     public class Client
-    { 
+    {
+        /// <summary>
+        /// The type that specifies what the client is meant to receive / send
+        /// </summary>
+        public enum ClientType
+        {
+            CLIENTTYPE_STRING,
+            CLIENTTYPE_SERIALIZEDOBJECT
+        }
+
+        /// <summary>
+        /// The DataReceived event
+        /// </summary>
+        public event Server.onDataReceived DataReceived;
+
         /// <summary>
         /// The TCP client
         /// </summary>
@@ -24,19 +38,33 @@ namespace Ketler_X7_Lib.Networking
         private System.Net.Security.SslStream m_pSslStream;
 
         /// <summary>
-        /// The DataReceived event
+        /// Whether or not SSL is enabled for this client
         /// </summary>
-        public event Server.onDataReceived DataReceived;
+        private bool m_bSslEnabled;
+
+        /// <summary>
+        /// The type that specifies what the client is about to receive / send
+        /// </summary>
+        private ClientType m_nClientType;
+
+        /// <summary>
+        /// Object that handles the incoming and outgoing data, can be StreamReader or BinaryFormatter depending on the client type
+        /// </summary>
+        private object m_pInHandlerObj, m_pOutHandlerObj;
 
         /// <summary>
         /// Attempts to connect to given server
         /// </summary>
         /// <param name="strIPAddress"></param>
         /// <param name="nPort"></param>
+        /// <param name="bSslEnabled"></param>
+        /// <param name="nClientRecvType"></param>
         /// <returns></returns>
-        public bool connect(string strIPAddress, int nPort, Objects.Client.ClientFlag nClientFlag)
+        public bool connect(string strIPAddress, int nPort, bool bSslEnabled = true, ClientType nClientType = ClientType.CLIENTTYPE_SERIALIZEDOBJECT)
         {
             m_pTcpClient = new System.Net.Sockets.TcpClient();
+            m_bSslEnabled = bSslEnabled;
+            m_nClientType = nClientType;
 
             try
             {
@@ -47,22 +75,40 @@ namespace Ketler_X7_Lib.Networking
                 return false;
             }
 
-            // Initialize SSL
-            m_pSslStream = new System.Net.Security.SslStream(m_pTcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(validateServerCertificate), null);
+            if (m_bSslEnabled)
+            {
+                // Initialize SSL
+                m_pSslStream = new System.Net.Security.SslStream(m_pTcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(validateServerCertificate), null);
 
-            try
-            {
-                m_pSslStream.AuthenticateAsClient(strIPAddress);
+                try
+                {
+                    m_pSslStream.AuthenticateAsClient(strIPAddress);
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            catch
+
+            // Initialize handler object
+            switch (m_nClientType)
             {
-                return false;
+                case ClientType.CLIENTTYPE_SERIALIZEDOBJECT:
+
+                    m_pInHandlerObj = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                    m_pOutHandlerObj = m_pInHandlerObj;
+
+                    break;
+                case ClientType.CLIENTTYPE_STRING:
+
+                    m_pInHandlerObj = new System.IO.StreamReader(getStream());
+                    m_pOutHandlerObj = new System.IO.StreamWriter(getStream());
+
+                    break;
             }
 
             m_pWorkerThread = new System.Threading.Thread(workerThread);
             m_pWorkerThread.Start();
-
-            authenticate(nClientFlag, null, null);
 
             return true;
         }
@@ -73,7 +119,7 @@ namespace Ketler_X7_Lib.Networking
         /// <param name="nClientFlag"></param>
         /// <param name="strUsername"></param>
         /// <param name="strPassword"></param>
-        private void authenticate(Objects.Client.ClientFlag nClientFlag, string strUsername, string strPassword)
+        public void authenticate(Objects.Client.ClientFlag nClientFlag, string strUsername, string strPassword)
         {
             routeToServer(new Objects.Packet()
             {
@@ -112,23 +158,47 @@ namespace Ketler_X7_Lib.Networking
         }
 
         /// <summary>
-        /// Attempts to send object to server. Data should NOT be serialized
+        /// Returns the stream for this client
+        /// </summary>
+        /// <returns></returns>
+        private System.IO.Stream getStream()
+        {
+            if (m_bSslEnabled && m_pSslStream != null)
+            {
+                return m_pSslStream;
+            }
+
+            return m_pTcpClient.GetStream();
+        }
+
+        /// <summary>
+        /// Attempts to send object to server
         /// </summary>
         /// <param name="pPacket"></param>
         /// <returns></returns>
-        public bool routeToServer(Objects.Packet pPacket)
+        public bool routeToServer(object pData)
         {
-            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter pBinaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
             try
             {
-                pBinaryFormatter.Serialize(m_pSslStream, pPacket);
+                switch (m_nClientType)
+                {
+                    case ClientType.CLIENTTYPE_SERIALIZEDOBJECT:
+
+                        ((System.Runtime.Serialization.Formatters.Binary.BinaryFormatter)m_pOutHandlerObj).Serialize(getStream(), pData);
+
+                        break;
+                    case ClientType.CLIENTTYPE_STRING:
+
+                        ((System.IO.StreamWriter)m_pOutHandlerObj).WriteLine(pData);
+
+                        break;
+                }
             }
             catch
             {
                 return false;
             }
-            
+
             return true;
         }
 
@@ -139,19 +209,33 @@ namespace Ketler_X7_Lib.Networking
         {
             while (true)
             {
-                if (m_pSslStream.CanRead)
+                System.IO.Stream pStream = getStream();
+
+                if (pStream.CanRead)
                 {
                     object pData = null;
-                    System.Runtime.Serialization.Formatters.Binary.BinaryFormatter pBinaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
+                    // Handle data according to client type
                     try
                     {
-                        pData = pBinaryFormatter.Deserialize(m_pSslStream);
+                        switch (m_nClientType)
+                        {
+                            case ClientType.CLIENTTYPE_SERIALIZEDOBJECT:
+
+                                pData = ((System.Runtime.Serialization.Formatters.Binary.BinaryFormatter)m_pInHandlerObj).Deserialize(pStream);
+
+                                break;
+                            case ClientType.CLIENTTYPE_STRING:
+
+                                pData = ((System.IO.StreamReader)m_pInHandlerObj).ReadToEnd();
+
+                                break;
+                        }
                     }
                     catch
                     {
                     }
-
+                    
                     if (pData != null && DataReceived != null)
                     {
                         DataReceived(this, new Server.DataReceivedEventArgs()

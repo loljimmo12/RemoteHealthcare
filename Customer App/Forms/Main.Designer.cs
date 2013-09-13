@@ -45,7 +45,17 @@
             this.lblRPMText = new System.Windows.Forms.Label();
             this.lblPulseValue = new System.Windows.Forms.Label();
             this.lblPulseText = new System.Windows.Forms.Label();
+            this.lblSendCommand = new System.Windows.Forms.Label();
+            this.lstCommands = new System.Windows.Forms.ListBox();
+            this.btnSendCommand = new System.Windows.Forms.Button();
+            this.txtCommand = new System.Windows.Forms.TextBox();
+            this.lblSendValue = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpCurrentStats.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tpCurrentStats
@@ -69,7 +79,7 @@
             this.tpCurrentStats.Controls.Add(this.lblRPMText, 0, 1);
             this.tpCurrentStats.Controls.Add(this.lblPulseValue, 1, 0);
             this.tpCurrentStats.Controls.Add(this.lblPulseText, 0, 0);
-            this.tpCurrentStats.Location = new System.Drawing.Point(13, 13);
+            this.tpCurrentStats.Location = new System.Drawing.Point(12, 30);
             this.tpCurrentStats.Name = "tpCurrentStats";
             this.tpCurrentStats.RowCount = 8;
             this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -219,18 +229,104 @@
             this.lblPulseText.TabIndex = 0;
             this.lblPulseText.Text = "Hartslag";
             // 
+            // lblSendCommand
+            // 
+            this.lblSendCommand.AutoSize = true;
+            this.lblSendCommand.Location = new System.Drawing.Point(12, 198);
+            this.lblSendCommand.Name = "lblSendCommand";
+            this.lblSendCommand.Size = new System.Drawing.Size(171, 13);
+            this.lblSendCommand.TabIndex = 1;
+            this.lblSendCommand.Text = "Commando naar de fiets versturen:";
+            // 
+            // lstCommands
+            // 
+            this.lstCommands.FormattingEnabled = true;
+            this.lstCommands.Location = new System.Drawing.Point(15, 214);
+            this.lstCommands.Name = "lstCommands";
+            this.lstCommands.Size = new System.Drawing.Size(257, 303);
+            this.lstCommands.TabIndex = 2;
+            // 
+            // btnSendCommand
+            // 
+            this.btnSendCommand.Location = new System.Drawing.Point(279, 493);
+            this.btnSendCommand.Name = "btnSendCommand";
+            this.btnSendCommand.Size = new System.Drawing.Size(75, 23);
+            this.btnSendCommand.TabIndex = 3;
+            this.btnSendCommand.Text = "Versturen";
+            this.btnSendCommand.UseVisualStyleBackColor = true;
+            this.btnSendCommand.Click += new System.EventHandler(this.btnSendCommand_Click);
+            // 
+            // txtCommand
+            // 
+            this.txtCommand.Location = new System.Drawing.Point(279, 467);
+            this.txtCommand.Name = "txtCommand";
+            this.txtCommand.Size = new System.Drawing.Size(192, 20);
+            this.txtCommand.TabIndex = 4;
+            // 
+            // lblSendValue
+            // 
+            this.lblSendValue.AutoSize = true;
+            this.lblSendValue.Location = new System.Drawing.Point(276, 451);
+            this.lblSendValue.Name = "lblSendValue";
+            this.lblSendValue.Size = new System.Drawing.Size(48, 13);
+            this.lblSendValue.TabIndex = 5;
+            this.lblSendValue.Text = "Waarde:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1003, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 536);
+            this.Controls.Add(this.lblSendValue);
+            this.Controls.Add(this.txtCommand);
+            this.Controls.Add(this.btnSendCommand);
+            this.Controls.Add(this.lstCommands);
+            this.Controls.Add(this.lblSendCommand);
             this.Controls.Add(this.tpCurrentStats);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Customer App";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tpCurrentStats.ResumeLayout(false);
             this.tpCurrentStats.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -253,6 +349,15 @@
         private System.Windows.Forms.Label lblRPMText;
         private System.Windows.Forms.Label lblPulseValue;
         private System.Windows.Forms.Label lblPulseText;
+        private System.Windows.Forms.Label lblSendCommand;
+        private System.Windows.Forms.ListBox lstCommands;
+        private System.Windows.Forms.Button btnSendCommand;
+        private System.Windows.Forms.TextBox txtCommand;
+        private System.Windows.Forms.Label lblSendValue;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
 
     }
 }

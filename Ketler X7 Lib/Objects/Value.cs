@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ketler_X7_Lib.Objects
+namespace Kettler_X7_Lib.Objects
 {
     [Serializable]
     public class Value
