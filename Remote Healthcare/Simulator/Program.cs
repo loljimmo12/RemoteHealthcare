@@ -125,6 +125,7 @@ namespace Simulator
         public static string notImplemented = "NOTIMP";
         public static string acknowledged = "ACK";
         public static string error = "ERROR";
+        private int prevbreak;
 
         public void startingValues()
         {
@@ -141,6 +142,7 @@ namespace Simulator
             locked = false;
             commandMode = false;
             timeCountdown = false;
+            prevbreak = 0;
         }
         private string timeStamp()
         {
@@ -240,9 +242,14 @@ namespace Simulator
             else revolutionsPerMinute = 50 + rand;
             velocity = revolutionsPerMinute * 0.36;
             timeSeconds++;
+            
             if (timeSeconds % 3 == 0)
                 kiloJoules = kiloJoules + powerBreak/25;
-            heartBeat = heartBeat + powerBreak / (heartBeat/2);
+            if (heartBeat <= 150) heartBeat = heartBeat + ((prevbreak > powerBreak)?-(powerBreak / 25 / 2):(powerBreak / 25 / 2));
+            if (heartBeat >= 70) heartBeat = heartBeat + ((rand<0)?rand*2:rand);
+            if (heartBeat < 70) heartBeat = 70;
+            if (heartBeat > 150) heartBeat = 150;
+            prevbreak = powerBreak; 
             distance = distance + Convert.ToInt32(velocity);
 
 
