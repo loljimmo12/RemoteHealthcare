@@ -22,7 +22,6 @@ namespace Server.Control
 
             for (; ; )
             {
-
                 try
                 {
                     new Server.Control.Client(tcpListener.AcceptTcpClient());

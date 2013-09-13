@@ -30,12 +30,12 @@ namespace Server.Control
         {
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            Server.Model.Packet pack = null;
+            Kettler_X7_Lib.Objects.Packet pack = null;
             Server.Model.ServerModel sModel = new Server.Model.ServerModel();
             for (; ; )
             {
-                pack = (Server.Model.Packet)formatter.Deserialize(clientStream);
-                if (pack.Data is Server.Model.Value)
+                pack = (Kettler_X7_Lib.Objects.Packet)formatter.Deserialize(clientStream);
+                if (pack.Flag == Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES)
                 {
                     sModel.writeBikeData(tcpClient.ToString(), pack.Data);
                 }
