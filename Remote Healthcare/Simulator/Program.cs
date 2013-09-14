@@ -148,7 +148,10 @@ namespace Simulator
         {
             int seconds = timeSeconds % 60;
             int minutes = timeSeconds / 60;
-            return minutes + ":" + seconds;
+            if (minutes<10 && seconds>10) return "0"+ minutes + ":" + seconds;
+            else if (minutes < 10 && seconds < 10) return "0" + minutes + ":" + "0"+seconds;
+            else if (minutes > 10 && seconds < 10) return minutes + ":" + "0"+seconds;
+            else return minutes + ":" + seconds;
         }
         public string HandleCommand(string command)
         {
