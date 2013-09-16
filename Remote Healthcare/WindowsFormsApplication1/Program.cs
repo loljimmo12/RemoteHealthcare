@@ -71,7 +71,7 @@ namespace WindowsFormsApplication1
 
             }
 
-            tcpClient.Close();
+            //tcpClient.Close();
         }
 
 
