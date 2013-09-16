@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -52,40 +53,60 @@ namespace Simulator
         private void HandleClientComm(object client)
         {
             TcpClient tcpClient = (TcpClient)client;
-            NetworkStream clientStream = tcpClient.GetStream();
+            //NetworkStream clientStream = tcpClient.GetStream();
 
-            byte[] message = new byte[4096];
-            int bytesRead;
+            //byte[] message = new byte[4096];
+            //int bytesRead;
             simulate sim = new simulate();
             sim.startingValues();
             Thread simulationThread = new Thread(new ParameterizedThreadStart(SimulateTime));
             simulationThread.Start(sim);
-            while (true)
+            StreamReader reader = new StreamReader(tcpClient.GetStream());
+            string cm;
+            StreamWriter writer = new StreamWriter(tcpClient.GetStream());
+            string receive = null;
+
+            while ((receive=reader.ReadLine())!=null)
             {
-                bytesRead = 0;
-
-                try
+                if (receive.Length > 0)
                 {
+                    //Console.WriteLine(reader.ReadLine());
+                    cm = reader.ReadLine();
+                    if (cm == null)
+                    {
+                        Console.WriteLine("Client lost");
+                        tcpClient.Close();
+                        break;
+                    }
+                    Console.WriteLine("Client said: " + cm);
+                    //byte[] myWriteBuffer = Encoding.ASCII.GetBytes(sim.HandleCommand(cm));
+                    writer.WriteLine(sim.HandleCommand(cm));
+                }
+                Thread.Sleep(10);
+                
+                //Console.WriteLine(tcpClient.GetStream().DataAvailable);
+                //bytesRead = 0;
+
+                //try
+                //{
                     //block until read
-                    bytesRead = clientStream.Read(message, 0, 4096);
-                }
-                catch
-                {
+                //    bytesRead = clientStream.Read(message, 0, 4096);
+                //}
+                //catch
+                //{
                     //connection broke/interrupted
-                    break;
-                }
+                 //   break;
+                //}
 
-                if (bytesRead == 0)
-                {
+                //if (bytesRead == 0)
+                //{
                     //disconnect
-                    break;
-                }
+                //    break;
+                //}
 
-                ASCIIEncoding encoder = new ASCIIEncoding();
-                string cm = encoder.GetString(message, 0, bytesRead);
-                Console.WriteLine("Client said: " + cm);
-                byte[] myWriteBuffer = Encoding.ASCII.GetBytes(sim.HandleCommand(cm));
-                clientStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);
+                //ASCIIEncoding encoder = new ASCIIEncoding();
+                //string cm = encoder.GetString(message, 0, bytesRead);
+               
             }
 
             tcpClient.Close();
