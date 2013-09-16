@@ -16,14 +16,15 @@ namespace WindowsFormsApplication1
         public Form2()
         {
             InitializeComponent();
-            connect = new Connection();
+            Program.connect = new Connection();
+            connect = Program.connect;
         }
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                connect.Login(textBox1.Text, textBox2.Text);
+                connect.Login(textBox1.Text, textBox2.Text, textBox3.Text);
             }
         }
 

@@ -14,23 +14,26 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
-        static Form1 form1;
-        static Form2 form2;
+        public static Form1 form1;
+        public static Form2 form2;
+        public static Connection connect;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            form2 = new Form2();
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            form2 = new Form2();
             Application.Run(form2);
         }
     }
 
     class Connection
     {
+        private TcpClient tcpClient;
 
         public void Login(string login, string password, string ip)
         {
@@ -43,11 +46,13 @@ namespace WindowsFormsApplication1
                 Password = password
 
             };
-            TcpClient tcpClient = new TcpClient(ip, 3000);
+            /*tcpClient = new TcpClient(ip, 3000);
             BinaryFormatter format = new BinaryFormatter();
             format.Serialize(tcpClient.GetStream(), Pack);
             Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
-            Comm.Start(tcpClient);
+            Comm.Start(tcpClient);*/
+            //temp code for testing without server
+            Program.form2.Close();
            // clientStream.Write(), 0, );
         }
 
@@ -60,6 +65,7 @@ namespace WindowsFormsApplication1
             {
                 if (tcpClient.GetStream().DataAvailable)
                 {
+                    //analyze packet type and handle
                     reader.ReadToEnd();
                 }
 
@@ -67,6 +73,12 @@ namespace WindowsFormsApplication1
 
             tcpClient.Close();
         }
- 
+
+
+        public void sendMessage(string message)
+        {
+            StreamWriter write = new StreamWriter(tcpClient.GetStream());
+            write.WriteLine(message);
+        }
     }
 }

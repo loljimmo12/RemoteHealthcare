@@ -12,9 +12,11 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        private Connection connect;
         public Form1()
         {
             InitializeComponent();
+            connect = Program.connect;
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -55,6 +57,20 @@ namespace WindowsFormsApplication1
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                connect.sendMessage(textBox1.Text);
+                textBox1.ResetText();
+            }
         }
     }
 }
