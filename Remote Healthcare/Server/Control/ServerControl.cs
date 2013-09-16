@@ -34,14 +34,13 @@ namespace Server.Control
                     serverView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
                     handleAClient(tempClient);
+                    addClientToList(tempClient);
                     serverView.writeToConsole("Connected.");
                 }
                 catch (Exception)
                 {
-                    throw;
                 }
-
-                addClientToList(tempClient);
+     
 
                 Thread.Sleep(10);
             }
