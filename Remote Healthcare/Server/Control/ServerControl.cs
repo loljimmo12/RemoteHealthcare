@@ -49,7 +49,7 @@ namespace Server.Control
 
         public void addClientToList(TcpClient client)
         {
-            serverModel.writeBikeData(client.ToString(), null);
+            serverModel.writeBikeData("blatest", null);
         }
 
         public void handleAClient(TcpClient client)

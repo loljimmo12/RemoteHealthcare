@@ -38,24 +38,17 @@ namespace Server.Control
 
             for (; ; )
             {
-                pack = (Kettler_X7_Lib.Objects.Packet)formatter.Deserialize(clientStream);
+                //pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
 
-                if (pack.Flag == Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES)
-                {
-                   sModel.writeBikeData(tcpClient.ToString(), pack.Data);
-                }
-                if (serverIsListening)
-                {
-                    
-                }
-                if (serverIsSending)
-                if (clientExited)
-                {
-                    sModel.finalizeData();
-                    tcpClient.Close();
-                    listenThread.Abort();
-                }
+                //if (pack.Flag == Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES)
+                //{
+                //   sModel.writeBikeData(tcpClient.ToString(), pack.Data);
+                //}
 
+                sModel.finalizeData();
+                tcpClient.Close();
+                listenThread.Abort();
+                
                 Thread.Sleep(100);
             }
         }
