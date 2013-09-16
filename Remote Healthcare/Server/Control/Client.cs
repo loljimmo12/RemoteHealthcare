@@ -13,6 +13,7 @@ namespace Server.Control
     {
         private Thread listenThread;
         private TcpClient tcpClient;
+        private String clientName;
 
         bool serverIsListening = false;
 
@@ -21,6 +22,7 @@ namespace Server.Control
             this.tcpClient = client;
             this.listenThread = new Thread(new ThreadStart(handler));
             this.listenThread.Start();
+            this.clientName = tcpClient.ToString();
         }
 
         public void handler()
@@ -40,8 +42,8 @@ namespace Server.Control
 
                     switch(pack.Flag)
                     {
-                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:             
-                            sModel.writeBikeData(tcpClient.ToString(), pack.Data);
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
+                            sModel.writeBikeData(clientName, pack.Data);
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -53,7 +55,7 @@ namespace Server.Control
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
-
+                            
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
