@@ -38,6 +38,7 @@ namespace Server.Model
                 logs = new List<Log>();
                 File.Create(logFileName);
             }
+            finalizeData();
         }
 
         // Writes the data from a Value into the Dictionary
@@ -51,11 +52,6 @@ namespace Server.Model
                 List<Object> clientData = new List<Object>();
                 clientData.Add(data);
                 allClients.Add(client, clientData);
-            }
-            using (FileStream stream = File.Open(clientFile, FileMode.Append))
-            {
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(stream, allClients);
             }
         }
 
@@ -93,9 +89,18 @@ namespace Server.Model
         public void saveLog(Log log)
         {
             logs.Add(log);
-            BinaryFormatter serializer = new BinaryFormatter();
-            using (FileStream stream = File.OpenWrite(logFileName))
+        }
+
+        public void finalizeData()
+        {
+            using (FileStream stream = File.Open(clientFile, FileMode.Append))
             {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(stream, allClients);
+            }
+            using (FileStream stream = File.Open(logFileName, FileMode.Append))
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
                 serializer.Serialize(stream, logs);
             }
         }

@@ -51,6 +51,7 @@ namespace Server.Control
                 if (serverIsSending)
                 if (clientExited)
                 {
+                    sModel.finalizeData();
                     tcpClient.Close();
                     listenThread.Abort();
                 }
