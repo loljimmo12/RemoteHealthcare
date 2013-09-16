@@ -27,34 +27,39 @@ namespace Server.Control
 
             for (; ; )
             {
-                //serverView.writeToConsole(serverModel.readAllClientData().ToString());
-
                 try
                 {
                     serverView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
-                    handleAClient(tempClient);
-                    addClientToList(tempClient);
+                    acceptAClient(tempClient);
                     serverView.writeToConsole("Connected.");
                 }
                 catch (Exception)
                 {
-                }
-     
+                }    
 
                 Thread.Sleep(10);
             }
         }
-
-        public void addClientToList(TcpClient client)
+        
+        public void acceptAClient(TcpClient client)
         {
-            serverModel.writeBikeData("blatest", null);
+            new Server.Control.Client(client, this);
         }
 
-        public void handleAClient(TcpClient client)
+        public void addClientToList(String clientName)
         {
-            new Server.Control.Client(client);
+            serverModel.writeBikeData(clientName, null);
         }
 
+        public void writeToModel(String clientName, Object data)
+        {
+            serverModel.writeBikeData(clientName, data);
+        }
+
+        public void finalizeClient()
+        {
+            serverModel.finalizeData();
+        }
     }
 }

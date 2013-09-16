@@ -13,16 +13,19 @@ namespace Server.Control
     {
         private Thread listenThread;
         private TcpClient tcpClient;
-        private String clientName;
+        private String userName;
+        private ServerControl serverControl;
 
         bool serverIsListening = false;
+        bool isDoctor = false;
 
-        public Client(TcpClient client)
+        public Client(TcpClient client, ServerControl sControl)
         {
+            this.serverControl = sControl;
             this.tcpClient = client;
             this.listenThread = new Thread(new ThreadStart(handler));
             this.listenThread.Start();
-            this.clientName = tcpClient.ToString();
+            this.userName = tcpClient.ToString();
         }
 
         public void handler()
@@ -30,8 +33,7 @@ namespace Server.Control
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
-            Server.Model.ServerModel sModel = new Server.Model.ServerModel();
-
+            
             serverIsListening = true;
 
             for (; ; )
@@ -43,7 +45,7 @@ namespace Server.Control
                     switch(pack.Flag)
                     {
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                            sModel.writeBikeData(clientName, pack.Data);
+                            serverControl.writeToModel(userName, pack.Data);
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -55,12 +57,14 @@ namespace Server.Control
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
-                            
+                            userName = ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username;
                             break;
 
                         case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
-
+                            serverControl.addClientToList(userName);
                             break;
+
+                        //case Doctorcontrols
 
                         default:
                             break;
@@ -71,13 +75,14 @@ namespace Server.Control
                 }
                 finally
                 {
-                    sModel.finalizeData();
+                    serverControl.finalizeClient();
                     tcpClient.Close();
                     listenThread.Abort();
                 }
                 
                 Thread.Sleep(100);
             }
+
 
 
         }
