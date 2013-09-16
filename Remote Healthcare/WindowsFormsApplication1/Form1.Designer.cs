@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.clientChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -49,7 +49,7 @@
             this.textBoxSetDistance = new System.Windows.Forms.TextBox();
             this.textBoxSetEnergy = new System.Windows.Forms.TextBox();
             this.textBoxSetTime = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPower = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,14 +76,14 @@
             // 
             // clientChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.clientChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.clientChart.ChartAreas.Add(chartArea1);
             this.clientChart.Location = new System.Drawing.Point(105, 12);
             this.clientChart.Name = "clientChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Name = "Series1";
-            this.clientChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.clientChart.Series.Add(series1);
             this.clientChart.Size = new System.Drawing.Size(283, 157);
             this.clientChart.TabIndex = 2;
             this.clientChart.Text = "Client";
@@ -170,6 +170,7 @@
             this.buttonSetDistance.TabIndex = 10;
             this.buttonSetDistance.Text = "Set distance";
             this.buttonSetDistance.UseVisualStyleBackColor = true;
+            this.buttonSetDistance.Click += new System.EventHandler(this.buttonSetDistance_Click);
             // 
             // buttonSetEnergy
             // 
@@ -179,6 +180,7 @@
             this.buttonSetEnergy.TabIndex = 11;
             this.buttonSetEnergy.Text = "Set energy";
             this.buttonSetEnergy.UseVisualStyleBackColor = true;
+            this.buttonSetEnergy.Click += new System.EventHandler(this.buttonSetEnergy_Click);
             // 
             // buttonSetTime
             // 
@@ -198,6 +200,7 @@
             this.buttonSetPower.TabIndex = 13;
             this.buttonSetPower.Text = "Set resistance";
             this.buttonSetPower.UseVisualStyleBackColor = true;
+            this.buttonSetPower.Click += new System.EventHandler(this.buttonSetPower_Click);
             // 
             // buttonReset
             // 
@@ -207,6 +210,7 @@
             this.buttonReset.TabIndex = 14;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // textBoxSetDistance
             // 
@@ -215,6 +219,7 @@
             this.textBoxSetDistance.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetDistance.TabIndex = 15;
             this.textBoxSetDistance.Text = "In hectometers";
+            this.textBoxSetDistance.Click += new System.EventHandler(this.textBoxSetDistance_Click);
             // 
             // textBoxSetEnergy
             // 
@@ -223,7 +228,7 @@
             this.textBoxSetEnergy.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetEnergy.TabIndex = 16;
             this.textBoxSetEnergy.Text = "In kJ";
-            this.textBoxSetEnergy.TextChanged += new System.EventHandler(this.textBoxSetEnergy_TextChanged);
+            this.textBoxSetEnergy.Click += new System.EventHandler(this.textBoxSetEnergy_Click);
             // 
             // textBoxSetTime
             // 
@@ -232,11 +237,12 @@
             this.textBoxSetTime.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetTime.TabIndex = 17;
             this.textBoxSetTime.Text = "In seconds";
+            this.textBoxSetTime.Click += new System.EventHandler(this.textBoxSetTime_Click);
             // 
-            // comboBox1
+            // comboBoxPower
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxPower.FormattingEnabled = true;
+            this.comboBoxPower.Items.AddRange(new object[] {
             "25 Power",
             "50 Power",
             "75 Power",
@@ -253,19 +259,19 @@
             "350 Power",
             "375 Power",
             "400 Power"});
-            this.comboBox1.Location = new System.Drawing.Point(394, 102);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(81, 21);
-            this.comboBox1.TabIndex = 18;
-            this.comboBox1.Text = "25 Power";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxPower.Location = new System.Drawing.Point(394, 102);
+            this.comboBoxPower.Name = "comboBoxPower";
+            this.comboBoxPower.Size = new System.Drawing.Size(81, 21);
+            this.comboBoxPower.TabIndex = 18;
+            this.comboBoxPower.Text = "25 Power";
+            this.comboBoxPower.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxPower);
             this.Controls.Add(this.textBoxSetTime);
             this.Controls.Add(this.textBoxSetEnergy);
             this.Controls.Add(this.textBoxSetDistance);
@@ -314,7 +320,7 @@
         private System.Windows.Forms.TextBox textBoxSetDistance;
         private System.Windows.Forms.TextBox textBoxSetEnergy;
         private System.Windows.Forms.TextBox textBoxSetTime;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxPower;
 
     }
 }

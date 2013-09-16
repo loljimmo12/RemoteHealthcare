@@ -80,5 +80,11 @@ namespace WindowsFormsApplication1
             StreamWriter write = new StreamWriter(tcpClient.GetStream());
             write.WriteLine(message);
         }
+
+        public void sendCommand(string command)
+        {
+            StreamWriter write = new StreamWriter(tcpClient.GetStream());
+            write.WriteLine(command);
+        }
     }
 }

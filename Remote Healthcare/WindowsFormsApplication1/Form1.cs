@@ -34,20 +34,14 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void toolTipSetDistance_Popup(object sender, PopupEventArgs e)
         {
 
         }
 
-        private void textBoxSetEnergy_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void textBoxSetPower_TextChanged(object sender, EventArgs e)
         {
@@ -72,5 +66,61 @@ namespace WindowsFormsApplication1
                 textBox1.ResetText();
             }
         }
+
+        private void buttonSetDistance_Click(object sender, EventArgs e)
+        {
+            if(textBoxSetDistance != null)
+            {
+                connect.sendCommand("PD"+textBoxSetDistance.Text);
+            }
+        }
+
+        private void buttonSetEnergy_Click(object sender, EventArgs e)
+        {
+            if(textBoxSetEnergy != null)
+            {
+                connect.sendCommand("PE"+textBoxSetEnergy.Text);
+            }
+        
+        }
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(textBoxSetTime != null)
+            {
+                connect.sendCommand("PT"+textBoxSetTime.Text);
+            }
+        }
+
+        private void buttonSetPower_Click(object sender, EventArgs e)
+        {
+            if(textBoxSetTime != null)
+            {
+                connect.sendCommand("PW" + comboBoxPower.Text);
+            }
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            connect.sendCommand("RS");
+        }
+
+        private void textBoxSetDistance_Click(object sender, EventArgs e)
+        {
+            textBoxSetDistance.Clear();
+        }
+
+        private void textBoxSetEnergy_Click(object sender, EventArgs e)
+        {
+            textBoxSetEnergy.Clear();
+        }
+
+        private void textBoxSetTime_Click(object sender, EventArgs e)
+        {
+            textBoxSetTime.Clear();
+        }
+
+        
+
     }
 }
