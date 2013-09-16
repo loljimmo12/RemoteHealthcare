@@ -15,13 +15,29 @@ namespace Server.Model
         private static String logFileName = "logData.bin";
         private static String clientFile  = "clientFile.bin";
         List<Log> logs { get; set; }
-        Dictionary<String, List<Object>> allClients { get; set; }
+        Dictionary<string, List<object>> allClients { get; set; }
 
         // initalization of a Model object.
         public ServerModel()
         {
-            logs = readLogData();
-            allClients = readAllClientData();
+            if (File.Exists(clientFile))
+            {
+                allClients = readAllClientData();
+            }
+            else
+            {
+                allClients = new Dictionary<string, List<object>>();
+                File.Create(clientFile);
+            }
+            if (File.Exists(logFileName))
+            {
+                logs = readLogData();
+            }
+            else
+            {
+                logs = new List<Log>();
+                File.Create(logFileName);
+            }
         }
 
         // Writes the data from a Value into the Dictionary
@@ -35,6 +51,11 @@ namespace Server.Model
                 List<Object> clientData = new List<Object>();
                 clientData.Add(data);
                 allClients.Add(client, clientData);
+            }
+            using (FileStream stream = File.Open(clientFile, FileMode.Append))
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(stream, allClients);
             }
         }
 
