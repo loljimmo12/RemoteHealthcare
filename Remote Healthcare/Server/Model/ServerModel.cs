@@ -27,7 +27,6 @@ namespace Server.Model
             else
             {
                 allClients = new Dictionary<string, List<object>>();
-                File.Create(clientFile);
             }
             if (File.Exists(logFileName))
             {
@@ -36,9 +35,7 @@ namespace Server.Model
             else
             {
                 logs = new List<Log>();
-                File.Create(logFileName);
             }
-            finalizeData();
         }
 
         // Writes the data from a Value into the Dictionary
