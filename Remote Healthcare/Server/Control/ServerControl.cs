@@ -44,7 +44,7 @@ namespace Server.Control
         
         public void acceptAClient(TcpClient client)
         {
-            new Server.Control.Client(client, this);
+            new Client(client, this);
         }
 
         public void addClientToList(String clientName)
