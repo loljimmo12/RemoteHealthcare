@@ -12,7 +12,7 @@ namespace Server.Control
 
         public ServerControl()
         {
-            this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
+            this.tcpListener = new TcpListener(System.Net.IPAddress.Parse("127.0.0.1"), 31337);
             listenForClients();
         }
 
@@ -24,21 +24,21 @@ namespace Server.Control
             {
                 try
                 {
-                    new Server.Control.Client(tcpListener.AcceptTcpClient());
+                    Server.View.ServerView.writeToConsole("Listening..");
+                    handleAClient(tcpListener.AcceptTcpClient());
                 }
                 catch (Exception)
                 {
                     throw;
                 }
 
-                Console.WriteLine("hello, test!");
                 Thread.Sleep(10);
             }
         }
 
-        public void handleAClient(Object client)
+        public void handleAClient(TcpClient client)
         {
-
+            new Server.Control.Client(client);
         }
 
     }
