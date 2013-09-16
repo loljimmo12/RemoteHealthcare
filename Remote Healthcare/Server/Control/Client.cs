@@ -37,9 +37,31 @@ namespace Server.Control
                 try
                 {
                     pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
-                    if (pack.Flag == Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES)
+
+                    switch(pack.Flag)
                     {
-                        sModel.writeBikeData(tcpClient.ToString(), pack.Data);
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:             
+                            sModel.writeBikeData(tcpClient.ToString(), pack.Data);
+                            break;
+
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
+
+                            break;
+
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
+
+                            break;
+
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
+
+                            break;
+
+                        case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
+
+                            break;
+
+                        default:
+                            break;
                     }
                 }
                 catch (IOException)

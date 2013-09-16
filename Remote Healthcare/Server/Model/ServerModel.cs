@@ -39,7 +39,6 @@ namespace Server.Model
         }
 
         // Writes the data from a Value into the Dictionary
-        // and overwrites the file with the new Dictionary.
         public void writeBikeData(String client, Object data)
         {
             if (allClients.ContainsKey(client))
