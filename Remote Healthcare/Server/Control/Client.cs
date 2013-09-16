@@ -35,7 +35,6 @@ namespace Server.Control
             Server.Model.ServerModel sModel = new Server.Model.ServerModel();
 
             serverIsListening = true;
-            Server.View.ServerView.writeToConsole("Connected.");
 
             for (; ; )
             {

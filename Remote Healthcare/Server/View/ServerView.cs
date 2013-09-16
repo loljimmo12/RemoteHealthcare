@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace Server.View
 {
     class ServerView
     {
-        public static void writeToConsole(String s)
+        private ServerModel serverModel = new ServerModel();
+
+        public void writeToConsole(String s)
         {
             Console.WriteLine(s);
         }
