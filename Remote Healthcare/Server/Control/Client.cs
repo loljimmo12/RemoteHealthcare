@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -32,20 +33,30 @@ namespace Server.Control
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
             Server.Model.ServerModel sModel = new Server.Model.ServerModel();
+
+            serverIsListening = true;
+            Server.View.ServerView.writeToConsole("Connected.");
+
             for (; ; )
             {
                 pack = (Kettler_X7_Lib.Objects.Packet)formatter.Deserialize(clientStream);
+
                 if (pack.Flag == Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES)
                 {
-                    sModel.writeBikeData(tcpClient.ToString(), pack.Data);
+                   sModel.writeBikeData(tcpClient.ToString(), pack.Data);
                 }
                 if (serverIsListening)
+                {
+                    
+                }
                 if (serverIsSending)
                 if (clientExited)
                 {
                     tcpClient.Close();
-                    //thread aborten
+                    listenThread.Abort();
                 }
+
+                Thread.Sleep(100);
             }
         }
     }
