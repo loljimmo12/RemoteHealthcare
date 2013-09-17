@@ -54,7 +54,7 @@ namespace Customer_App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Initialize networking client
+            // Initialize networking  client
             if (!m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT))
                 {
                     Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");

@@ -13,3 +13,6 @@ C:\Users\Peter\Desktop\Healtcare SVN\trunk\Customer App\obj\Debug\Customer App.p
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Customer App.exe.config
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.exe
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.pdb
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Customer App\bin\Debug\Customer App.exe.config
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Customer App\obj\Debug\Customer App.exe
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Customer App\obj\Debug\Customer App.pdb
