@@ -18,10 +18,11 @@ namespace Server.Control
         private ServerControl serverControl;
 
         bool serverIsListening = false;
-        bool isDoctor = false;
+        public bool isDoctor { get; set; }
 
         public Client(TcpClient client, ServerControl sControl)
         {
+            this.isDoctor = false;
             this.serverControl = sControl;
             this.tcpClient = client;
             this.listenThread = new Thread(new ThreadStart(handler));
