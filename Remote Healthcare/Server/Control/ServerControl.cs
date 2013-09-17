@@ -62,7 +62,7 @@ namespace Server.Control
 
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
         {
-            Kettler_X7_Lib.Objects.ÇhatMessage message = (Kettler_X7_Lib.Objects.ÇhatMessage)pack.Data;
+            Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
         }
 
         public void writeToModel(Client client, Object data)
