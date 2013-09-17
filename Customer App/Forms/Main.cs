@@ -55,17 +55,17 @@ namespace Customer_App
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize networking client
-            /*if (!m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT))
+            if (!m_pNetworkClient.connect("145.102.70.28", 31337, false))
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
             }
             else
             {
                 m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
-            }*/
+            }
             
             // Initialize bike
-            bool bConnected = false;
+            /*bool bConnected = false;
 
             if (!m_pKettlerX7.connect("COM11"))
             {
@@ -89,7 +89,7 @@ namespace Customer_App
             {
                 m_pKettlerX7.startParsingValues(1000);
                 m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
-            }
+            }*/
         }
 
         /// <summary>
