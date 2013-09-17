@@ -1,0 +1,6 @@
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\bin\Release\Resources\Certificate.cer
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\bin\Release\Kettler X7 Lib.dll.config
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\bin\Release\Kettler X7 Lib.dll
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\bin\Release\Kettler X7 Lib.pdb
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\obj\Release\Kettler X7 Lib.dll
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Ketler X7 Lib\obj\Release\Kettler X7 Lib.pdb

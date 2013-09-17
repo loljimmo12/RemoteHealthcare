@@ -1,0 +1,259 @@
+﻿namespace Customer_App
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.tpCurrentStats = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTimeValue = new System.Windows.Forms.Label();
+            this.lblTimeText = new System.Windows.Forms.Label();
+            this.lblEnergyValue = new System.Windows.Forms.Label();
+            this.lblEnergyText = new System.Windows.Forms.Label();
+            this.lblActPowerValue = new System.Windows.Forms.Label();
+            this.lblActPowerText = new System.Windows.Forms.Label();
+            this.lblReqPowerValue = new System.Windows.Forms.Label();
+            this.lblReqPowerText = new System.Windows.Forms.Label();
+            this.lblDistanceValue = new System.Windows.Forms.Label();
+            this.lblDistanceText = new System.Windows.Forms.Label();
+            this.lblSpeedValue = new System.Windows.Forms.Label();
+            this.lblSpeedText = new System.Windows.Forms.Label();
+            this.lblRPMValue = new System.Windows.Forms.Label();
+            this.lblRPMText = new System.Windows.Forms.Label();
+            this.lblPulseValue = new System.Windows.Forms.Label();
+            this.lblPulseText = new System.Windows.Forms.Label();
+            this.tpCurrentStats.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tpCurrentStats
+            // 
+            this.tpCurrentStats.ColumnCount = 2;
+            this.tpCurrentStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.61637F));
+            this.tpCurrentStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.38363F));
+            this.tpCurrentStats.Controls.Add(this.lblTimeValue, 1, 7);
+            this.tpCurrentStats.Controls.Add(this.lblTimeText, 0, 7);
+            this.tpCurrentStats.Controls.Add(this.lblEnergyValue, 1, 6);
+            this.tpCurrentStats.Controls.Add(this.lblEnergyText, 0, 6);
+            this.tpCurrentStats.Controls.Add(this.lblActPowerValue, 1, 5);
+            this.tpCurrentStats.Controls.Add(this.lblActPowerText, 0, 5);
+            this.tpCurrentStats.Controls.Add(this.lblReqPowerValue, 1, 4);
+            this.tpCurrentStats.Controls.Add(this.lblReqPowerText, 0, 4);
+            this.tpCurrentStats.Controls.Add(this.lblDistanceValue, 1, 3);
+            this.tpCurrentStats.Controls.Add(this.lblDistanceText, 0, 3);
+            this.tpCurrentStats.Controls.Add(this.lblSpeedValue, 1, 2);
+            this.tpCurrentStats.Controls.Add(this.lblSpeedText, 0, 2);
+            this.tpCurrentStats.Controls.Add(this.lblRPMValue, 1, 1);
+            this.tpCurrentStats.Controls.Add(this.lblRPMText, 0, 1);
+            this.tpCurrentStats.Controls.Add(this.lblPulseValue, 1, 0);
+            this.tpCurrentStats.Controls.Add(this.lblPulseText, 0, 0);
+            this.tpCurrentStats.Location = new System.Drawing.Point(13, 13);
+            this.tpCurrentStats.Name = "tpCurrentStats";
+            this.tpCurrentStats.RowCount = 8;
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tpCurrentStats.Size = new System.Drawing.Size(391, 165);
+            this.tpCurrentStats.TabIndex = 0;
+            // 
+            // lblTimeValue
+            // 
+            this.lblTimeValue.AutoSize = true;
+            this.lblTimeValue.Location = new System.Drawing.Point(197, 144);
+            this.lblTimeValue.Name = "lblTimeValue";
+            this.lblTimeValue.Size = new System.Drawing.Size(0, 13);
+            this.lblTimeValue.TabIndex = 15;
+            // 
+            // lblTimeText
+            // 
+            this.lblTimeText.AutoSize = true;
+            this.lblTimeText.Location = new System.Drawing.Point(3, 144);
+            this.lblTimeText.Name = "lblTimeText";
+            this.lblTimeText.Size = new System.Drawing.Size(24, 13);
+            this.lblTimeText.TabIndex = 14;
+            this.lblTimeText.Text = "Tijd";
+            // 
+            // lblEnergyValue
+            // 
+            this.lblEnergyValue.AutoSize = true;
+            this.lblEnergyValue.Location = new System.Drawing.Point(197, 124);
+            this.lblEnergyValue.Name = "lblEnergyValue";
+            this.lblEnergyValue.Size = new System.Drawing.Size(0, 13);
+            this.lblEnergyValue.TabIndex = 13;
+            // 
+            // lblEnergyText
+            // 
+            this.lblEnergyText.AutoSize = true;
+            this.lblEnergyText.Location = new System.Drawing.Point(3, 124);
+            this.lblEnergyText.Name = "lblEnergyText";
+            this.lblEnergyText.Size = new System.Drawing.Size(43, 13);
+            this.lblEnergyText.TabIndex = 12;
+            this.lblEnergyText.Text = "Energie";
+            // 
+            // lblActPowerValue
+            // 
+            this.lblActPowerValue.AutoSize = true;
+            this.lblActPowerValue.Location = new System.Drawing.Point(197, 104);
+            this.lblActPowerValue.Name = "lblActPowerValue";
+            this.lblActPowerValue.Size = new System.Drawing.Size(0, 13);
+            this.lblActPowerValue.TabIndex = 11;
+            // 
+            // lblActPowerText
+            // 
+            this.lblActPowerText.AutoSize = true;
+            this.lblActPowerText.Location = new System.Drawing.Point(3, 104);
+            this.lblActPowerText.Name = "lblActPowerText";
+            this.lblActPowerText.Size = new System.Drawing.Size(89, 13);
+            this.lblActPowerText.TabIndex = 10;
+            this.lblActPowerText.Text = "Geleverde kracht";
+            // 
+            // lblReqPowerValue
+            // 
+            this.lblReqPowerValue.AutoSize = true;
+            this.lblReqPowerValue.Location = new System.Drawing.Point(197, 84);
+            this.lblReqPowerValue.Name = "lblReqPowerValue";
+            this.lblReqPowerValue.Size = new System.Drawing.Size(0, 13);
+            this.lblReqPowerValue.TabIndex = 9;
+            // 
+            // lblReqPowerText
+            // 
+            this.lblReqPowerText.AutoSize = true;
+            this.lblReqPowerText.Location = new System.Drawing.Point(3, 84);
+            this.lblReqPowerText.Name = "lblReqPowerText";
+            this.lblReqPowerText.Size = new System.Drawing.Size(93, 13);
+            this.lblReqPowerText.TabIndex = 8;
+            this.lblReqPowerText.Text = "Gevraagde kracht";
+            // 
+            // lblDistanceValue
+            // 
+            this.lblDistanceValue.AutoSize = true;
+            this.lblDistanceValue.Location = new System.Drawing.Point(197, 64);
+            this.lblDistanceValue.Name = "lblDistanceValue";
+            this.lblDistanceValue.Size = new System.Drawing.Size(0, 13);
+            this.lblDistanceValue.TabIndex = 7;
+            // 
+            // lblDistanceText
+            // 
+            this.lblDistanceText.AutoSize = true;
+            this.lblDistanceText.Location = new System.Drawing.Point(3, 64);
+            this.lblDistanceText.Name = "lblDistanceText";
+            this.lblDistanceText.Size = new System.Drawing.Size(43, 13);
+            this.lblDistanceText.TabIndex = 6;
+            this.lblDistanceText.Text = "Afstand";
+            // 
+            // lblSpeedValue
+            // 
+            this.lblSpeedValue.AutoSize = true;
+            this.lblSpeedValue.Location = new System.Drawing.Point(197, 44);
+            this.lblSpeedValue.Name = "lblSpeedValue";
+            this.lblSpeedValue.Size = new System.Drawing.Size(0, 13);
+            this.lblSpeedValue.TabIndex = 5;
+            // 
+            // lblSpeedText
+            // 
+            this.lblSpeedText.AutoSize = true;
+            this.lblSpeedText.Location = new System.Drawing.Point(3, 44);
+            this.lblSpeedText.Name = "lblSpeedText";
+            this.lblSpeedText.Size = new System.Drawing.Size(48, 13);
+            this.lblSpeedText.TabIndex = 4;
+            this.lblSpeedText.Text = "Snelheid";
+            // 
+            // lblRPMValue
+            // 
+            this.lblRPMValue.AutoSize = true;
+            this.lblRPMValue.Location = new System.Drawing.Point(197, 22);
+            this.lblRPMValue.Name = "lblRPMValue";
+            this.lblRPMValue.Size = new System.Drawing.Size(0, 13);
+            this.lblRPMValue.TabIndex = 3;
+            // 
+            // lblRPMText
+            // 
+            this.lblRPMText.AutoSize = true;
+            this.lblRPMText.Location = new System.Drawing.Point(3, 22);
+            this.lblRPMText.Name = "lblRPMText";
+            this.lblRPMText.Size = new System.Drawing.Size(31, 13);
+            this.lblRPMText.TabIndex = 2;
+            this.lblRPMText.Text = "RPM";
+            // 
+            // lblPulseValue
+            // 
+            this.lblPulseValue.AutoSize = true;
+            this.lblPulseValue.Location = new System.Drawing.Point(197, 0);
+            this.lblPulseValue.Name = "lblPulseValue";
+            this.lblPulseValue.Size = new System.Drawing.Size(0, 13);
+            this.lblPulseValue.TabIndex = 1;
+            // 
+            // lblPulseText
+            // 
+            this.lblPulseText.AutoSize = true;
+            this.lblPulseText.Location = new System.Drawing.Point(3, 0);
+            this.lblPulseText.Name = "lblPulseText";
+            this.lblPulseText.Size = new System.Drawing.Size(46, 13);
+            this.lblPulseText.TabIndex = 0;
+            this.lblPulseText.Text = "Hartslag";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1003, 536);
+            this.Controls.Add(this.tpCurrentStats);
+            this.Name = "Form1";
+            this.Text = "Customer App";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.tpCurrentStats.ResumeLayout(false);
+            this.tpCurrentStats.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tpCurrentStats;
+        private System.Windows.Forms.Label lblTimeValue;
+        private System.Windows.Forms.Label lblTimeText;
+        private System.Windows.Forms.Label lblEnergyValue;
+        private System.Windows.Forms.Label lblEnergyText;
+        private System.Windows.Forms.Label lblActPowerValue;
+        private System.Windows.Forms.Label lblActPowerText;
+        private System.Windows.Forms.Label lblReqPowerValue;
+        private System.Windows.Forms.Label lblReqPowerText;
+        private System.Windows.Forms.Label lblDistanceValue;
+        private System.Windows.Forms.Label lblDistanceText;
+        private System.Windows.Forms.Label lblSpeedValue;
+        private System.Windows.Forms.Label lblSpeedText;
+        private System.Windows.Forms.Label lblRPMValue;
+        private System.Windows.Forms.Label lblRPMText;
+        private System.Windows.Forms.Label lblPulseValue;
+        private System.Windows.Forms.Label lblPulseText;
+
+    }
+}
+

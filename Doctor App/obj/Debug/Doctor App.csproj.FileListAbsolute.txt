@@ -1,0 +1,9 @@
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Debug\Doctor App.exe.config
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Debug\Doctor App.exe
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Debug\Doctor App.pdb
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor App.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor_App.Form1.resources
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor_App.Properties.Resources.resources
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor App.csproj.GenerateResource.Cache
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor App.exe
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Debug\Doctor App.pdb

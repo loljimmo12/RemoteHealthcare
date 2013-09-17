@@ -1,0 +1,9 @@
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Resources\Certificate.cer
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Server App.exe.config
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Server App.exe
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Server App.pdb
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Kettler X7 Lib.dll
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\bin\Release\Kettler X7 Lib.pdb
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\obj\Release\Server App.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\obj\Release\Server App.exe
+C:\Users\Peter\Desktop\Healtcare SVN\trunk\Server App\obj\Release\Server App.pdb
