@@ -11,11 +11,12 @@ namespace Customer_App.Classes
         private List<Kettler_X7_Lib.Objects.Value> valueList;
         private Kettler_X7_Lib.Networking.Client client;
 
-        public Data()
+        public Data( Kettler_X7_Lib.Networking.Client client)
         {
             valueList = new List<Kettler_X7_Lib.Objects.Value>();
-            client = ((Form1)System.Windows.Forms.Application.OpenForms[0]).getClient();
-            client.DataReceived += client_DataReceived;
+
+            this.client = client;
+            this.client.DataReceived += client_DataReceived;
         }
 
         void client_DataReceived(object sender, Kettler_X7_Lib.Networking.Server.DataReceivedEventArgs e)

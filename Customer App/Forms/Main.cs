@@ -34,12 +34,13 @@ namespace Customer_App
 
         public Form1()
         {
+            InitializeComponent();
+
+            // Initialize stuff
             m_pValueList = new List<Kettler_X7_Lib.Objects.Value>();
             m_pKettlerX7 = new Kettler_X7_Lib.Classes.Kettler_X7();
             m_pNetworkClient = new Kettler_X7_Lib.Networking.Client();
-            m_pData = new Classes.Data();
-
-            InitializeComponent();
+            m_pData = new Classes.Data(m_pNetworkClient);
         }
 
         /// <summary>
@@ -54,31 +55,55 @@ namespace Customer_App
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize networking client
-            m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT);
-            m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
+            if (!m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT))
+                {
+                    Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
+                }
+            else
+            {
+                m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
+            }
+            
 
             // Initialize bike
-            if (!m_pKettlerX7.connect("COM14"))
+            if (!m_pKettlerX7.connect("COM11"))
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
             }
-
-            m_pKettlerX7.startParsingValues(1000);
-
-            m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
-
-            // Populate listbox with commands
-            foreach (Kettler_X7_Lib.Classes.Kettler_X7.Command nCommand in Enum.GetValues(typeof(Kettler_X7_Lib.Classes.Kettler_X7.Command)))
+            else if (!m_pKettlerX7.connect(null, "145.102.64.111", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
             {
-                lstCommands.Items.Add(nCommand);
+                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
+            }
+            else
+            {
+                m_pKettlerX7.startParsingValues(1000);
+
+                m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
             }
         }
 
+        /// <summary>
+        /// On data received rom server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void m_pNetworkClient_DataReceived(object sender, Kettler_X7_Lib.Networking.Server.DataReceivedEventArgs e)
         {
-            // Data from server
+            Kettler_X7_Lib.Objects.Packet pPacket = ((Kettler_X7_Lib.Objects.Packet)e.PacketData);
+
+            switch (pPacket.Flag)
+            {
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
+                    txtChat.AppendText(((Kettler_X7_Lib.Objects.ÇhatMessage)pPacket.Data).Message);
+                    break;
+            }
         }
 
+        /// <summary>
+        /// On values from bike or simulator parsed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void pKetlerX7_ValuesParsed(object sender, Kettler_X7_Lib.Classes.Kettler_X7.ValuesParsedEventArgs e)
         {
             Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(lblPulseValue, delegate
@@ -135,42 +160,25 @@ namespace Customer_App
         }
 
         /// <summary>
-        /// When the user wants to send a command to the bike
+        /// Triggered when user wants to send a message
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSendCommand_Click(object sender, EventArgs e)
+        private void btnSendMessage_Click(object sender, EventArgs e)
         {
-            if (lstCommands.SelectedItem == null || !(lstCommands.SelectedItem is Kettler_X7_Lib.Classes.Kettler_X7.Command))
+            if (txtChatMessage.TextLength < 1)
             {
-                Kettler_X7_Lib.Classes.GUI.throwError("Incorrecte waarde geselecteerd!");
                 return;
             }
 
-            Kettler_X7_Lib.Classes.Kettler_X7.Command nCommand = (Kettler_X7_Lib.Classes.Kettler_X7.Command)lstCommands.SelectedItem;
-
-            if (nCommand.ToString().StartsWith("CHANGE") && txtCommand.TextLength == 0)
+            m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
             {
-                Kettler_X7_Lib.Classes.GUI.throwError("Geen waarde opgegeven, dit commando vereist een waarde!");
-                return;
-            }
-
-            // If there is a return value, we should display it
-            if (nCommand.ToString().StartsWith("RETURN"))
-            {
-                System.Diagnostics.Debug.WriteLine(m_pKettlerX7.sendReturnCommand(nCommand, (txtCommand.TextLength == 0 ? null : txtCommand.Text)));
-                return;   
-            }
-
-            if (!m_pKettlerX7.sendCommand(nCommand, (txtCommand.TextLength == 0 ? null : txtCommand.Text)))
-            {
-                Kettler_X7_Lib.Classes.GUI.throwError("Kon commando niet verzenden!");
-            }
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            m_pData.sendData();
+                Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT,
+                Data = new Kettler_X7_Lib.Objects.ÇhatMessage()
+                {
+                    Message = txtChatMessage.Text
+                }
+            });
         }
     }
 }

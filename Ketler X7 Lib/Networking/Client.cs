@@ -227,6 +227,12 @@ namespace Kettler_X7_Lib.Networking
                                 break;
                             case ClientType.CLIENTTYPE_STRING:
 
+                                // If not data available, streamreader would still return an empty stream
+                                if (!((System.Net.Sockets.NetworkStream)pStream).DataAvailable)
+                                {
+                                    continue;
+                                }
+
                                 pData = ((System.IO.StreamReader)m_pInHandlerObj).ReadToEnd();
 
                                 break;

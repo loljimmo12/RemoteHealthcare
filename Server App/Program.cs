@@ -23,7 +23,7 @@ namespace Server_App
                 Console.WriteLine("Bound to port");
             }
 
-            Kettler_X7_Lib.Networking.Client pClient = new Kettler_X7_Lib.Networking.Client();
+            /*Kettler_X7_Lib.Networking.Client pClient = new Kettler_X7_Lib.Networking.Client();
 
             pClient.DataReceived += pClient_DataReceived;
 
@@ -34,7 +34,7 @@ namespace Server_App
             else
             {
                 Console.WriteLine("Connected to server, SSL initialized");
-            }
+            }*/
 
             /*for (; ; )
             {
@@ -78,10 +78,10 @@ namespace Server_App
                 System.Threading.Thread.Sleep(1000);
             }*/
 
-            Kettler_X7_Lib.Classes.Kettler_X7 pKetlerX7 = new Kettler_X7_Lib.Classes.Kettler_X7();
-            pKetlerX7.connect("COM14");
+            //Kettler_X7_Lib.Classes.Kettler_X7 pKetlerX7 = new Kettler_X7_Lib.Classes.Kettler_X7();
+            //pKetlerX7.connect("COM14");
             //pKetlerX7.startReceivingValues(1000);
-            pKetlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
+            //pKetlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
         }
 
         static void pServer_DataReceived(object sender, Kettler_X7_Lib.Networking.Server.DataReceivedEventArgs e)

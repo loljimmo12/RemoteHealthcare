@@ -139,6 +139,11 @@ namespace Kettler_X7_Lib.Networking
 
                     if (ClientConnected != null)
                     {
+                        using (System.IO.StreamWriter pStreamWriter = new System.IO.StreamWriter(pTcpClient.GetStream()))
+                        {
+                            pStreamWriter.WriteLine("XXXXXX");
+                        }
+
                         ClientConnected(this, new ClientConnectedEventArgs()
                         {
                             Client = pClient

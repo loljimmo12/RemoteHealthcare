@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Kettler_X7_Lib.Objects
 {
     [Serializable]
-    class Handshake
+    public class Handshake
     {
         /// <summary>
         /// The client flag

@@ -122,7 +122,12 @@ namespace Kettler_X7_Lib.Classes
                     case Source.SOURCE_SIMULATOR:
 
                         m_pHandler = new Networking.Client();
-                        ((Networking.Client)m_pHandler).connect(strIPAddress, nPort);
+
+                        if (!((Networking.Client)m_pHandler).connect(strIPAddress, nPort, false, Networking.Client.ClientType.CLIENTTYPE_STRING))
+                        {
+                            throw new Exception("Could not create TCP connection.");
+                        }
+
                         ((Networking.Client)m_pHandler).DataReceived += Kettler_X7_DataReceived;
 
                         break;
@@ -160,11 +165,6 @@ namespace Kettler_X7_Lib.Classes
         /// <param name="nInterval"></param>
         public void startParsingValues(int nInterval)
         {
-            if (m_nSource != Source.SOURCE_SIMULATOR)
-            {
-                return;
-            }
-
             m_pWorkerThread = new System.Threading.Thread(workerThread);
             m_pWorkerThread.Start();
         }
@@ -272,7 +272,14 @@ namespace Kettler_X7_Lib.Classes
                 return null;
             }
 
-            return ((System.IO.Ports.SerialPort)m_pHandler).ReadLine();
+			// Return straight in case of serialport
+			if (m_nSource == Source.SOURCE_SERIALPORT)
+            {
+				return ((System.IO.Ports.SerialPort)m_pHandler).ReadLine();
+			}
+			
+			// Otherwise, nothing we can do
+			return null;
         }
 
         /// <summary>

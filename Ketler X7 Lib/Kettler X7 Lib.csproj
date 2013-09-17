@@ -49,11 +49,13 @@
     <Compile Include="Classes\GUI.cs" />
     <Compile Include="Classes\Kettler X7.cs" />
     <Compile Include="Networking\Client.cs" />
+    <Compile Include="Objects\BikeControl.cs" />
     <Compile Include="Objects\Client.cs" />
     <Compile Include="Networking\Server.cs" />
     <Compile Include="Objects\Handshake.cs" />
     <Compile Include="Objects\Packet.cs" />
     <Compile Include="Objects\Value.cs" />
+    <Compile Include="Objects\ÇhatMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

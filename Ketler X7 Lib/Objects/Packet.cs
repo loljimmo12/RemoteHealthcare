@@ -16,6 +16,8 @@ namespace Kettler_X7_Lib.Objects
         {
             PACKETFLAG_REQUEST_HANDSHAKE,
             PACKETFLAG_RESPONSE_HANDSHAKE,
+            PACKETFLAG_CHAT,
+            PACKETFLAG_BIKECONTROL,
             PACKETFLAG_VALUES
         }
 
