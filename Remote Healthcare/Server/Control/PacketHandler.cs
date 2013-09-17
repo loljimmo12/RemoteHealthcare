@@ -29,7 +29,7 @@ namespace Server.Control
                     serverControl.addClientToList(client);
                     break;
                     
-                //case Doctorcontrols
+                //Flag DoctorControls, Flag OnlineClientsListUpdate
 
                 default:
                     break;

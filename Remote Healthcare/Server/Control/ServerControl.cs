@@ -35,15 +35,12 @@ namespace Server.Control
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
                     serverView.writeToConsole("Connected.");
+                    serverView.writeToConsole("Online clients in list: " + serverModel.onlineClients.Count.ToString());
                 }
                 catch (Exception)
                 {
                 }
-                finally
-                {
-                    serverView.writeToConsole("Online clients in list: " + serverModel.onlineClients.Count.ToString());
-                }
-
+               
                 Thread.Sleep(10);
             }
         }
@@ -66,6 +63,9 @@ namespace Server.Control
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
+
+            serverView.writeToConsole(message.Message);
+
             foreach ( Client client in serverModel.onlineClients)
             {
                 if (client.userName == message.Receiver)
