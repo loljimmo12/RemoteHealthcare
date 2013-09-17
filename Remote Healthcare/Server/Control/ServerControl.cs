@@ -31,6 +31,7 @@ namespace Server.Control
             {
                 try
                 {
+                    serverView.writeToConsole("Online clients in list: "+serverModel.onlineClients.Count.ToString());
                     serverView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
@@ -52,6 +53,11 @@ namespace Server.Control
         public void addClientToList(String clientName)
         {
             serverModel.writeBikeData(clientName, null);
+        }
+
+        public void changeClientStatus(Client client, String status)
+        {
+            serverModel.changeClientStatus(client, status);
         }
 
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
