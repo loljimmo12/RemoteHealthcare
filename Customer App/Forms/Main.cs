@@ -104,7 +104,7 @@ namespace Customer_App
             switch (pPacket.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
-                    txtChat.AppendText(((Kettler_X7_Lib.Objects.ÇhatMessage)pPacket.Data).Message);
+                    txtChat.AppendText(((Kettler_X7_Lib.Objects.ChatMessage)pPacket.Data).Message);
                     break;
             }
         }
@@ -184,7 +184,7 @@ namespace Customer_App
             m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
             {
                 Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT,
-                Data = new Kettler_X7_Lib.Objects.ÇhatMessage()
+                Data = new Kettler_X7_Lib.Objects.ChatMessage()
                 {
                     Message = txtChatMessage.Text
                 }

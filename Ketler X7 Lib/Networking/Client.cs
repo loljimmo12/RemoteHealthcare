@@ -218,7 +218,7 @@ namespace Kettler_X7_Lib.Networking
             {
                 System.IO.Stream pStream = getStream();
 
-                if (pStream.CanRead)
+                if (pStream != null && pStream.CanRead)
                 {
                     object pData = null;
 

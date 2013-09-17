@@ -55,7 +55,7 @@
     <Compile Include="Objects\Handshake.cs" />
     <Compile Include="Objects\Packet.cs" />
     <Compile Include="Objects\Value.cs" />
-    <Compile Include="Objects\ÇhatMessage.cs" />
+    <Compile Include="Objects\ChatMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
