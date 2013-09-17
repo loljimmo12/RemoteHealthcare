@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,11 +42,10 @@ namespace Server.Control
                 try
                 {
                     pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
-                    PacketHandler.getPacket(serverControl, this, pack);                    
+                    PacketHandler.getPacket(serverControl, this, pack);
                 }
-                catch (IOException)
-                {
-                }
+                catch (SerializationException) { }
+                catch (IOException) { }
                 finally
                 {
                     serverControl.changeClientStatus(this, "offline");
@@ -58,16 +58,16 @@ namespace Server.Control
             }
         }
 
-        public void chatHandler(Kettler_X7_Lib.Objects.Packet pack)
-        {
-            NetworkStream clientStream = tcpClient.GetStream();
-            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+        //public void chatHandler(Kettler_X7_Lib.Objects.Packet pack)
+        //{
+        //    NetworkStream clientStream = tcpClient.GetStream();
+        //    System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-            try
-            {
+        //    try
+        //    {
                 
-            }
-        }
+        //    }
+        //}
 
         public void setUsernamePassword(String userName, String password)
         {

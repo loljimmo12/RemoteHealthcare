@@ -17,6 +17,7 @@ namespace Server.Control
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
+                    Console.WriteLine("bla");
                     forwardChat(serverControl, client, pack);
                     break;
 
