@@ -86,7 +86,6 @@ namespace Simulator
                 ASCIIEncoding encoder = new ASCIIEncoding();
                 string cm = encoder.GetString(message, 0, bytesRead);
                 Console.WriteLine("Client said: " + cm);
-
                 writer.WriteLine(sim.HandleCommand(cm));
             }
 
@@ -204,7 +203,7 @@ namespace Simulator
                         distance = int.Parse(command.Split(' ')[1]);
                         if (powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) ).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
+                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (int)velocity*10 + "\t" + (distance).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
                     }
                     return error;
                 case "EE":
@@ -228,7 +227,7 @@ namespace Simulator
                 case "ST":
                     if(powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10)).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
+                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + ((int)velocity)*10 + "\t" + (distance).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
                 default:
                     return error;
             }
@@ -242,7 +241,7 @@ namespace Simulator
             int rand = random.Next(10) - 5;
             if (powerBreak <= 200)
                 revolutionsPerMinute = 90 + rand;
-            if (powerBreak <= 300 && powerBreak > 200)
+            else if (powerBreak <= 300 && powerBreak > 200)
                 revolutionsPerMinute = 70 + rand;
             else revolutionsPerMinute = 50 + rand;
             velocity = revolutionsPerMinute * 0.36;
@@ -255,7 +254,7 @@ namespace Simulator
             if (heartBeat < 70) heartBeat = 70;
             if (heartBeat > 150) heartBeat = 150;
             prevbreak = powerBreak; 
-            distance = distance + Convert.ToInt32(velocity);
+            distance = distance + ((int)velocity / 3 /10 );
 
 
         }
