@@ -13,7 +13,7 @@ namespace Server.Control
     {
         private Thread listenThread;
         private TcpClient tcpClient;
-        private String userName;
+        public String userName { get; set; }
         private String password;
         private ServerControl serverControl;
 

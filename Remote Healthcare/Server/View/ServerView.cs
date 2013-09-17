@@ -9,7 +9,12 @@ namespace Server.View
 {
     class ServerView
     {
-        private ServerModel serverModel = new ServerModel();
+        private ServerModel serverModel;
+
+        public ServerView(ServerModel serverModel)
+        {
+            this.serverModel = serverModel;
+        }
 
         public void writeToConsole(String s)
         {

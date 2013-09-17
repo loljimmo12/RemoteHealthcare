@@ -9,13 +9,15 @@ namespace Server.Control
 {
     class ServerControl
     {
-        private ServerModel serverModel = new ServerModel();
-        private ServerView serverView = new ServerView();
+        private ServerModel serverModel;
+        private ServerView serverView;
 
         private TcpListener tcpListener;
 
         public ServerControl()
         {
+            serverModel = new ServerModel();
+            serverView = new ServerView(serverModel);
             this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
         }

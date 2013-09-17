@@ -8,12 +8,12 @@ namespace Server.Control
 {
     class PacketHandler
     {
-        static void getPacket(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        static void getPacket(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             switch (pack.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                    serverControl.writeToModel(userName, pack.Data);
+                    serverControl.writeToModel(client.userName, pack.Data);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -29,7 +29,7 @@ namespace Server.Control
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
-                    serverControl.addClientToList(userName);
+                    serverControl.addClientToList(client.userName);
                     break;
 
                 //case Doctorcontrols
@@ -37,11 +37,6 @@ namespace Server.Control
                 default:
                     break;
             }
-        }
-
-        static void getValues(Client client, Kettler_X7_Lib.Objects.Packet pack)
-        {
-
         }
 
         static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
