@@ -1,4 +1,5 @@
-﻿using Server.Model;
+﻿using Server.Control;
+using Server.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,12 +15,15 @@ namespace Server.Model
     {
         private static String logFileName = "logData.bin";
         private static String clientFile  = "clientFile.bin";
+        List<Client> onlineClients;
         List<Log> logs { get; set; }
         Dictionary<string, List<object>> allClients { get; set; }
 
         // initalization of a Model object.
         public ServerModel()
         {
+            onlineClients = new List<Client>();
+
             if (File.Exists(clientFile))
             {
                 allClients = readAllClientData();
@@ -42,7 +46,9 @@ namespace Server.Model
         public void writeBikeData(String client, Object data)
         {
             if (allClients.ContainsKey(client))
+            {
                 allClients[client].Add(data);
+            }
             else
             {
                 List<Object> clientData = new List<Object>();
@@ -85,6 +91,18 @@ namespace Server.Model
         public void saveLog(Log log)
         {
             logs.Add(log);
+        }
+
+        public void changeClientStatus(Client client, String status)
+        {
+            if (status == "online")
+            {
+                onlineClients.Add(client);
+            }
+            if (status == "offline")
+            {
+                onlineClients.Remove(client);
+            }
         }
 
         public void finalizeData()

@@ -54,6 +54,11 @@ namespace Server.Control
             serverModel.writeBikeData(clientName, null);
         }
 
+        public void changeClientStatus(Client client, String status)
+        {
+            serverModel.changeClientStatus(client, status);
+        }
+
         public void chatWithClient()
         {
 

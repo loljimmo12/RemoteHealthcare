@@ -17,7 +17,6 @@ namespace Server.Control
         private String password;
         private ServerControl serverControl;
 
-        bool serverIsListening = false;
         public bool isDoctor { get; set; }
 
         public Client(TcpClient client, ServerControl sControl)
@@ -34,8 +33,8 @@ namespace Server.Control
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
-            
-            serverIsListening = true;
+            serverControl.changeClientStatus(this, "online");
+           
 
             for (; ; )
             {
@@ -49,6 +48,7 @@ namespace Server.Control
                 }
                 finally
                 {
+                    serverControl.changeClientStatus(this, "offline");
                     serverControl.finalizeClient();
                     tcpClient.Close();
                     listenThread.Abort();
