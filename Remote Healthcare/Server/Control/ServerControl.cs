@@ -52,6 +52,11 @@ namespace Server.Control
             serverModel.writeBikeData(clientName, null);
         }
 
+        public void chatWithClient()
+        {
+
+        }
+
         public void writeToModel(String clientName, Object data)
         {
             serverModel.writeBikeData(clientName, data);

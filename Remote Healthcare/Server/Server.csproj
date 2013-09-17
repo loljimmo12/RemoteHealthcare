@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\PacketHandler.cs" />
     <Compile Include="Control\ServerControl.cs" />
     <Compile Include="Control\Client.cs" />
     <Compile Include="Model\Log.cs" />
