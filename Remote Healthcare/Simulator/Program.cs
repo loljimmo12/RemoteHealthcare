@@ -11,8 +11,6 @@ namespace Simulator
 {
     class Program
     {
-
-
         private TcpListener tcpListener;
         private Thread listenThread;
 
@@ -60,10 +58,14 @@ namespace Simulator
             sim.startingValues();
             Thread simulationThread = new Thread(new ParameterizedThreadStart(SimulateTime));
             simulationThread.Start(sim);
+
+            System.IO.StreamWriter writer = new System.IO.StreamWriter(tcpClient.GetStream());
+            writer.AutoFlush = true;
+
             while (true)
             {
                 bytesRead = 0;
-
+                
                 try
                 {
                     //block until read
@@ -84,8 +86,8 @@ namespace Simulator
                 ASCIIEncoding encoder = new ASCIIEncoding();
                 string cm = encoder.GetString(message, 0, bytesRead);
                 Console.WriteLine("Client said: " + cm);
-                byte[] myWriteBuffer = Encoding.ASCII.GetBytes(sim.HandleCommand(cm));
-                clientStream.Write(myWriteBuffer, 0, myWriteBuffer.Length);
+
+                writer.WriteLine(sim.HandleCommand(cm));
             }
 
             tcpClient.Close();
