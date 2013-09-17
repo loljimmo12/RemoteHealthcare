@@ -13,3 +13,12 @@ C:\Users\Peter\Desktop\Healtcare SVN\trunk\Customer App\obj\Debug\Customer App.p
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Customer App.exe.config
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.exe
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.pdb
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Resources\Certificate.cer
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Customer App.exe
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Customer App.pdb
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Kettler X7 Lib.dll
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\Kettler X7 Lib.pdb
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer_App.Form1.resources
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer_App.Properties.Resources.resources
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.csproj.GenerateResource.Cache

@@ -55,29 +55,39 @@ namespace Customer_App
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize networking client
-            if (!m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT))
-                {
-                    Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
-                }
+            /*if (!m_pNetworkClient.connect("127.0.0.1", Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT))
+            {
+                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
+            }
             else
             {
                 m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
-            }
+            }*/
             
-
             // Initialize bike
+            bool bConnected = false;
+
             if (!m_pKettlerX7.connect("COM11"))
             {
-                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
-            }
-            else if (!m_pKettlerX7.connect(null, "145.102.64.111", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
-            {
-                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
+                //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
+
+                if (!m_pKettlerX7.connect(null, "127.0.0.1", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
+                {
+                    //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
+                }
+                else
+                {
+                    bConnected = true;
+                }
             }
             else
             {
-                m_pKettlerX7.startParsingValues(1000);
+                bConnected = true;
+            }
 
+            if (bConnected)
+            {
+                m_pKettlerX7.startParsingValues(1000);
                 m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
             }
         }

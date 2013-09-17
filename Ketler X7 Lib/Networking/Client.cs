@@ -104,6 +104,8 @@ namespace Kettler_X7_Lib.Networking
                     m_pInHandlerObj = new System.IO.StreamReader(getStream());
                     m_pOutHandlerObj = new System.IO.StreamWriter(getStream());
 
+                    ((System.IO.StreamWriter)m_pOutHandlerObj).AutoFlush = true;
+
                     break;
             }
 
@@ -189,7 +191,7 @@ namespace Kettler_X7_Lib.Networking
                         break;
                     case ClientType.CLIENTTYPE_STRING:
 
-                        ((System.IO.StreamWriter)m_pOutHandlerObj).WriteLine(pData);
+                        ((System.IO.StreamWriter)m_pOutHandlerObj).Write(pData);
 
                         break;
                 }
@@ -233,7 +235,7 @@ namespace Kettler_X7_Lib.Networking
                                     continue;
                                 }
 
-                                pData = ((System.IO.StreamReader)m_pInHandlerObj).ReadToEnd();
+                                pData = ((System.IO.StreamReader)m_pInHandlerObj).ReadLine();
 
                                 break;
                         }
