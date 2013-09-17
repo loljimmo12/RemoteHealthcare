@@ -50,9 +50,9 @@ namespace Server.Control
             new Client(client, this);
         }
 
-        public void addClientToList(String clientName)
+        public void addClientToList(Client client)
         {
-            serverModel.writeBikeData(clientName, null);
+            serverModel.writeBikeData(client, null);
         }
 
         public void changeClientStatus(Client client, String status)
@@ -65,9 +65,9 @@ namespace Server.Control
             Kettler_X7_Lib.Objects.ÇhatMessage message = (Kettler_X7_Lib.Objects.ÇhatMessage)pack.Data;
         }
 
-        public void writeToModel(String clientName, Object data)
+        public void writeToModel(Client client, Object data)
         {
-            serverModel.writeBikeData(clientName, data);
+            serverModel.writeBikeData(client, data);
         }
 
         public void finalizeClient()

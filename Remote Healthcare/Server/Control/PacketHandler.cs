@@ -13,7 +13,7 @@ namespace Server.Control
             switch (pack.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                    serverControl.writeToModel(client.userName, pack.Data);
+                    serverControl.writeToModel(client, pack.Data);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -26,10 +26,11 @@ namespace Server.Control
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
                     setUsernamePassword(client, pack);
+                    serverControl.addClientToList(client);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
-                    serverControl.addClientToList(client.userName);
+                    
                     break;
 
                 //case Doctorcontrols

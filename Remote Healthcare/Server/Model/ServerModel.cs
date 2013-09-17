@@ -43,17 +43,17 @@ namespace Server.Model
         }
 
         // Writes the data from a Value into the Dictionary
-        public void writeBikeData(String client, Object data)
+        public void writeBikeData(Client client, Object data)
         {
-            if (allClients.ContainsKey(client))
+            if (allClients.ContainsKey(client.userName))
             {
-                allClients[client].Add(data);
+                allClients[client.userName].Add(data);
             }
             else
             {
                 List<Object> clientData = new List<Object>();
                 clientData.Add(data);
-                allClients.Add(client, clientData);
+                allClients.Add(client.userName, clientData);
             }
         }
 
@@ -69,9 +69,9 @@ namespace Server.Model
         }
 
         // Returns the list to the specified client, because normal getters are boring.
-        public List<Object> readBikeData(String client)
+        public List<Object> readBikeData(Client client)
         {
-            return allClients[client];
+            return allClients[client.userName];
         }
 
         // Reads the logFile and puts the data in the List.
