@@ -31,6 +31,7 @@ namespace Server.Control
             {
                 try
                 {
+                    serverView.writeToConsole("Online clients in list: "+serverModel.onlineClients.Count.ToString());
                     serverView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
