@@ -170,6 +170,11 @@ namespace Kettler_X7_Lib.Networking
                 return m_pSslStream;
             }
 
+            if (!m_pTcpClient.Connected)
+            {
+                return null;
+            }
+
             return m_pTcpClient.GetStream();
         }
 

@@ -150,8 +150,6 @@ namespace Kettler_X7_Lib.Classes
         /// <param name="e"></param>
         void Kettler_X7_DataReceived(object sender, Networking.Server.DataReceivedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Server said " + e.PacketData.ToString());
-
             Objects.Value pValue = parseValues(e.PacketData.ToString());
 
             if (pValue != null && ValuesParsed != null)
