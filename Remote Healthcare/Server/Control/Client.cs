@@ -40,7 +40,8 @@ namespace Server.Control
             {
                 try
                 {
-                    pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;                 
+                    pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
+                    PacketHandler.getPacket(serverControl, this, pack);
                     
                 }
                 catch (IOException)

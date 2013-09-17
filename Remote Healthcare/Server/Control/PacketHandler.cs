@@ -8,7 +8,7 @@ namespace Server.Control
 {
     class PacketHandler
     {
-        static void getPacket(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
+        public static void getPacket(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             switch (pack.Flag)
             {
@@ -39,12 +39,12 @@ namespace Server.Control
             }
         }
 
-        static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        public static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password); 
         }
 
-        static void forwardChat(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        public static void forwardChat(Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             if (client.isDoctor)
             {
