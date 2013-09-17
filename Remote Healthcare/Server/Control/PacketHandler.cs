@@ -17,8 +17,7 @@ namespace Server.Control
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
-                    Console.WriteLine("bla");
-                    forwardChat(serverControl, client, pack);
+                    serverControl.forwardMessage(pack);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
@@ -44,11 +43,6 @@ namespace Server.Control
         public static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password); 
-        }
-
-        public static void forwardChat(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
-        {
-            serverControl.forwardMessage(pack);
         }
     }
 }

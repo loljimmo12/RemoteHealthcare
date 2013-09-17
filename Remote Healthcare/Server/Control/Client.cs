@@ -58,7 +58,7 @@ namespace Server.Control
             }
         }
 
-        public void chatHandler(Kettler_X7_Lib.Objects.Packet pack)
+        public void sendHandler(Kettler_X7_Lib.Objects.Packet pack)
         {
             using (NetworkStream clientStream = tcpClient.GetStream())
             {
