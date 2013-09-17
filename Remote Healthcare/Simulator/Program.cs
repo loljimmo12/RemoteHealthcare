@@ -202,7 +202,7 @@ namespace Simulator
                         distance = int.Parse(command.Split(' ')[1]);
                         if (powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) / 10).ToString("0.#") + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
+                        return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) ).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();    
                     }
                     return error;
                 case "EE":
@@ -226,7 +226,7 @@ namespace Simulator
                 case "ST":
                     if(powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
-                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10) / 10).ToString("0.#") + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
+                    return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (Math.Floor(velocity * 10)).ToString() + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
                 default:
                     return error;
             }
