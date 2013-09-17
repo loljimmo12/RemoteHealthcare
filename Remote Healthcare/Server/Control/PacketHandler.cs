@@ -21,18 +21,14 @@ namespace Server.Control
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
-
+                    serverControl.forwardBikeCommand(pack);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
                     setUsernamePassword(client, pack);
                     serverControl.addClientToList(client);
                     break;
-
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
                     
-                    break;
-
                 //case Doctorcontrols
 
                 default:

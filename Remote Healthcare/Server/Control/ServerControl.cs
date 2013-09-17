@@ -77,14 +77,14 @@ namespace Server.Control
 
         public void forwardBikeCommand(Kettler_X7_Lib.Objects.Packet pack)
         {
-            Kettler_X7_Lib.Objects.BikeControl bikeControl = (Kettler_X7_Lib.Objects.BikeControl) pack.Data;
-            foreach (Client client in serverModel.onlineClients)
-            {
-                if (client.userName == bikeControl.Receiver)
-                {
-                    client.sendHandler(pack);
-                }
-            }
+            //Kettler_X7_Lib.Objects.BikeControl bikeControl = (Kettler_X7_Lib.Objects.BikeControl) pack.Data;
+            //foreach (Client client in serverModel.onlineClients)
+            //{
+            //    if (client.userName == bikeControl.Receiver)
+            //    {
+            //        client.sendHandler(pack);
+            //   }
+            //}
         }
 
         public void writeToModel(Client client, Object data)
