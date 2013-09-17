@@ -66,7 +66,15 @@ namespace Server.Control
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
+            foreach ( Client client in serverModel.onlineClients)
+            {
+                if (client.userName == message.Receiver)
+                {
+                    client.chatHandler(pack);
+                }
+            }
         }
+
 
         public void writeToModel(Client client, Object data)
         {
