@@ -60,9 +60,10 @@ namespace Server.Control
             serverModel.changeClientStatus(client, status);
         }
 
-        public void chatWithClient()
+        public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
         {
-
+            Kettler_X7_Lib.Objects.ÇhatMessage message = (Kettler_X7_Lib.Objects.ÇhatMessage)pack.Data;
+            
         }
 
         public void writeToModel(String clientName, Object data)
