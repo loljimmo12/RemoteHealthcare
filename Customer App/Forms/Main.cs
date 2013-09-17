@@ -71,7 +71,7 @@ namespace Customer_App
             {
                 //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
 
-                if (!m_pKettlerX7.connect(null, "127.0.0.1", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
+                if (!m_pKettlerX7.connect(null, "145.102.64.111", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
                 {
                     //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
                 }
