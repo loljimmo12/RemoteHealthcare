@@ -59,6 +59,17 @@ namespace Server.Control
             }
         }
 
+        public void chatHandler(Kettler_X7_Lib.Objects.Packet pack)
+        {
+            NetworkStream clientStream = tcpClient.GetStream();
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+            try
+            {
+                
+            }
+        }
+
         public void setUsernamePassword(String userName, String password)
         {
             this.userName = userName;
