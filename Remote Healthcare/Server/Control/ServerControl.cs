@@ -31,7 +31,6 @@ namespace Server.Control
             {
                 try
                 {
-                    serverView.writeToConsole("Online clients in list: "+serverModel.onlineClients.Count.ToString());
                     serverView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
@@ -39,7 +38,11 @@ namespace Server.Control
                 }
                 catch (Exception)
                 {
-                }    
+                }
+                finally
+                {
+                    serverView.writeToConsole("Online clients in list: " + serverModel.onlineClients.Count.ToString());
+                }
 
                 Thread.Sleep(10);
             }
@@ -71,6 +74,7 @@ namespace Server.Control
                 }
             }
         }
+
 
         public void writeToModel(Client client, Object data)
         {
