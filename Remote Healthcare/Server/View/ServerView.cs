@@ -15,7 +15,10 @@ namespace Server.View
         {
             this.serverModel = serverModel;
         }
-
+         
+        ///<summary>
+        ///Append text to console.
+        ///</summary>
         public void writeToConsole(String s)
         {
             Console.WriteLine(s);

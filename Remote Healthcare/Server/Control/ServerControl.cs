@@ -22,6 +22,9 @@ namespace Server.Control
             listenForClients();
         }
 
+        ///<summary>
+        ///Start listening for connecting TcpClients.
+        ///</summary>
         public void listenForClients()
         {
             tcpListener.Start();
@@ -44,22 +47,34 @@ namespace Server.Control
                 Thread.Sleep(10);
             }
         }
-        
+
+        ///<summary>
+        ///Instantiate a Clientobject for a connected TcpClient.
+        ///</summary>
         public void acceptAClient(TcpClient client)
         {
             new Client(client, this);
         }
 
+        ///<summary>
+        ///Forward client to servermodel's dictionary.
+        ///</summary>
         public void addClientToList(Client client)
         {
             serverModel.writeBikeData(client, null);
         }
 
+        ///<summary>
+        ///Change desired online/offline status for a client.
+        ///</summary>
         public void changeClientStatus(Client client, String status)
         {
             serverModel.changeClientStatus(client, status);
         }
 
+        ///<summary>
+        ///Forward chatmessage received from client to servermodel.
+        ///</summary>
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
@@ -75,6 +90,9 @@ namespace Server.Control
             }
         }
 
+        ///<summary>
+        ///Forward bikecommand received from client to servermodel.
+        ///</summary>
         public void forwardBikeCommand(Kettler_X7_Lib.Objects.Packet pack)
         {
             //Kettler_X7_Lib.Objects.BikeControl bikeControl = (Kettler_X7_Lib.Objects.BikeControl) pack.Data;
@@ -87,11 +105,17 @@ namespace Server.Control
             //}
         }
 
+        ///<summary>
+        ///Forward client data to servermodel.
+        ///</summary>
         public void writeToModel(Client client, Object data)
         {
             serverModel.writeBikeData(client, data);
         }
 
+        ///<summary>
+        ///Tell servermodel to finalize data after a client has disconnected.
+        ///</summary>
         public void finalizeClient()
         {
             serverModel.finalizeData();
