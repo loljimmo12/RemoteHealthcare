@@ -7,11 +7,13 @@ using System.Threading;
 
 namespace Server.Control
 {
+    ///<summary>
+    ///The base class for the Control.
+    ///</summary>
     class ServerControl
     {
         private ServerModel serverModel;
         private ServerView serverView;
-
         private TcpListener tcpListener;
 
         public ServerControl()

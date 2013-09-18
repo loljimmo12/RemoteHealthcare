@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Server.Model
 {
-    // The base class for the Model.
+    ///<summary>
+    ///The base class for the Model.
+    ///</summary>
     class ServerModel
     {
         private static String logFileName = "logData.bin";
@@ -19,7 +21,9 @@ namespace Server.Model
         List<Log> logs { get; set; }
         Dictionary<string, List<object>> allClients { get; set; }
 
-        // initalization of a Model object.
+        ///<summary>
+        ///initalization of a Model object.
+        ///</summary>
         public ServerModel()
         {
             onlineClients = new List<Client>();
@@ -41,8 +45,9 @@ namespace Server.Model
                 logs = new List<Log>();
             }
         }
-
-        // Writes the data from a Value into the Dictionary
+        ///<summary>
+        ///Writes the data from a Value into the Dictionary
+        ///</summary>
         public void writeBikeData(Client client, Object data)
         {
             if (allClients.ContainsKey(client.userName))
@@ -57,7 +62,9 @@ namespace Server.Model
             }
         }
 
-        // Reads the fiel containing all client data and returns the Dictionary.
+        ///<summary>
+        ///Reads the field containing all client data and returns the Dictionary.
+        ///<summary>
         public Dictionary<String, List<Object>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
@@ -67,15 +74,18 @@ namespace Server.Model
                 return allClients;
             }
         }
-
-        // Returns the list to the specified client, because normal getters are boring.
+        ///<summary>
+        ///Returns the list to the specified client, because normal getters are boring.
+        ///</summary>
         public List<Object> readBikeData(Client client)
         {
             return allClients[client.userName];
         }
 
-        // Reads the logFile and puts the data in the List.
-        // returns the created List.
+        ///<summary>
+        ///Reads the logFile and puts the data in the List.
+        ///returns the created List.
+        ///</summary>
         private List<Log> readLogData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
@@ -86,13 +96,18 @@ namespace Server.Model
             }
         }
 
-        // The method to add a single Log object to the List.
-        // The old logFile will be overwritten with the new List.
+        ///<summary>
+        ///The method to add a single Log object to the List.
+        ///The old logFile will be overwritten with the new List.
+        ///</summary>
         public void saveLog(Log log)
         {
             logs.Add(log);
         }
 
+        ///<summary>
+        ///Adds online or removes offline clients form onlineClients list. 
+        ///</summary>
         public void changeClientStatus(Client client, String status)
         {
             if (status == "online")
@@ -105,6 +120,9 @@ namespace Server.Model
             }
         }
 
+        ///<summary>
+        ///
+        ///</summary>
         public void finalizeData()
         {
             using (FileStream stream = File.Open(clientFile, FileMode.Append))

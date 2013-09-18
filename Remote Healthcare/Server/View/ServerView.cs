@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.View
 {
+    ///<summary>
+    ///The base class for the Control.
+    ///</summary>
     class ServerView
     {
         private ServerModel serverModel;

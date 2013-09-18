@@ -29,13 +29,15 @@ namespace Server.Control
             this.listenThread.Start();
         }
 
+        ///<summary>
+        ///Forwards incoming clientdata to PacketHandler.
+        ///</summary>
         public void handler()
         {
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
-            serverControl.changeClientStatus(this, "online");
-           
+            serverControl.changeClientStatus(this, "online");           
 
             for (; ; )
             {
@@ -58,6 +60,9 @@ namespace Server.Control
             }
         }
 
+        ///<summary>
+        ///Handles outgoing clientdata.
+        ///</summary>
         public void sendHandler(Kettler_X7_Lib.Objects.Packet pack)
         {
             using (NetworkStream clientStream = tcpClient.GetStream())
@@ -67,6 +72,9 @@ namespace Server.Control
             }
         }
 
+        ///<summary>
+        ///Sets client-credentials.
+        ///</summary>
         public void setUsernamePassword(String userName, String password)
         {
             this.userName = userName;

@@ -8,6 +8,9 @@ namespace Server.Control
 {
     class PacketHandler
     {
+        ///<summary>
+        ///Handles datapackets received by clients.
+        ///</summary>
         public static void getPacket(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             switch (pack.Flag)
@@ -36,6 +39,9 @@ namespace Server.Control
             }
         }
 
+        ///<summary>
+        ///Forwards client-credentials.
+        ///</summary>
         public static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
             client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password); 
