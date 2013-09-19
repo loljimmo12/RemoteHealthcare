@@ -46,11 +46,11 @@ namespace WindowsFormsApplication1
                 Password = password
 
             };
-            /*tcpClient = new TcpClient(ip, 3000);
+            tcpClient = new TcpClient(ip, 3000);
             BinaryFormatter format = new BinaryFormatter();
             format.Serialize(tcpClient.GetStream(), Pack);
             Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
-            Comm.Start(tcpClient);*/
+            Comm.Start(tcpClient);
             //temp code for testing without server
             Program.form2.Close();
            // clientStream.Write(), 0, );
@@ -75,16 +75,30 @@ namespace WindowsFormsApplication1
         }
 
 
-        public void sendMessage(string message)
+        public void sendMessage(string message, string reciever)
         {
-            StreamWriter write = new StreamWriter(tcpClient.GetStream());
-            write.WriteLine(message);
+            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
+            Pack.Flag = Packet.PacketFlag.PACKETFLAG_CHAT;
+            Pack.Data = new Kettler_X7_Lib.Objects.ChatMessage()
+            {
+                Receiver = reciever,
+                Sender = "anon",
+                Message = message
+            };
+            BinaryFormatter format = new BinaryFormatter();
+            format.Serialize(tcpClient.GetStream(), Pack);
         }
 
         public void sendCommand(string command)
         {
-            StreamWriter write = new StreamWriter(tcpClient.GetStream());
-            write.WriteLine(command);
+            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
+            Pack.Flag = Packet.PacketFlag.PACKETFLAG_BIKECONTROL;
+            Pack.Data = new Kettler_X7_Lib.Objects.BikeControl()
+            {
+               Command = command 
+            };
+            BinaryFormatter format = new BinaryFormatter();
+            format.Serialize(tcpClient.GetStream(), Pack);
         }
     }
 }
