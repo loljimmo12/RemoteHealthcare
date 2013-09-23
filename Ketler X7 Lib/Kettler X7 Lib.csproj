@@ -54,6 +54,8 @@
     <Compile Include="Networking\Server.cs" />
     <Compile Include="Objects\Handshake.cs" />
     <Compile Include="Objects\Packet.cs" />
+    <Compile Include="Objects\RequestValue.cs" />
+    <Compile Include="Objects\ResponseValue.cs" />
     <Compile Include="Objects\Value.cs" />
     <Compile Include="Objects\ChatMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

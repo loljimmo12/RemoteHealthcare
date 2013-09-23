@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace Kettler_X7_Lib.Objects
 {
-    [Serializable]
-    public class BikeControl
+    public class RequestValue
     {
         /// <summary>
-        /// The receiver of the packet
+        /// The start of the requested values
         /// </summary>
-        public string Receiver { get; set; }
+        public DateTime Start { get; set; }
 
         /// <summary>
-        /// The command to be executed on the bike
+        /// The end of the requested values
         /// </summary>
-        public string Command { get; set; }
+        public DateTime End { get; set; }
     }
 }
