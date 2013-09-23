@@ -15,6 +15,11 @@ namespace Kettler_X7_Lib.Objects
         public string Sender { get; set; }
 
         /// <summary>
+        /// The receiver of the packet
+        /// </summary>
+        public string Receiver { get; set; }
+
+        /// <summary>
         /// The chat message
         /// </summary>
         public string Message { get; set; }
