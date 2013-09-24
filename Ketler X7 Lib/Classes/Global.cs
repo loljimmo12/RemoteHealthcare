@@ -8,6 +8,24 @@ namespace Kettler_X7_Lib.Classes
 {
     public class Global
     {
-        public const int TCPSERVER_PORT = 49326;
+        /// <summary>
+        /// The simulator's IP address
+        /// </summary>
+        public const string SIMULATOR_IP = "";
+
+        /// <summary>
+        /// The simulator's port
+        /// </summary>
+        public const int SIMULATOR_PORT = 3000;
+
+        /// <summary>
+        /// The server's IP address
+        /// </summary>
+        public const string TCPSERVER_IP = "";
+
+        /// <summary>
+        /// The server's port
+        /// </summary>
+        public const int TCPSERVER_PORT = 31337;
     }
 }

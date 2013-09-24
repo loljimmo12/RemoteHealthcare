@@ -71,10 +71,15 @@ namespace Customer_App
             });
         }
 
+        /// <summary>
+        /// On form load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize networking client
-            if (!m_pNetworkClient.connect("145.102.70.28", 31337, false))
+            if (!m_pNetworkClient.connect(Kettler_X7_Lib.Classes.Global.TCPSERVER_IP, Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT, false))
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
             }
@@ -85,14 +90,15 @@ namespace Customer_App
             }
 
             // Initialize bike
-            /*bool bConnected = false;
+            bool bConnected = false;
+            
             if (!m_pKettlerX7.connect("COM11"))
             {
-                //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
+                Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
 
-                if (!m_pKettlerX7.connect(null, "145.102.64.111", 3000, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
+                if (!m_pKettlerX7.connect(null, Kettler_X7_Lib.Classes.Global.SIMULATOR_IP, Kettler_X7_Lib.Classes.Global.SIMULATOR_PORT, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
                 {
-                    //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
+                    Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
                 }
                 else
                 {
@@ -108,7 +114,7 @@ namespace Customer_App
             {
                 m_pKettlerX7.startParsingValues(1000);
                 m_pKettlerX7.ValuesParsed += pKetlerX7_ValuesParsed;
-            }*/
+            }
         }
 
         /// <summary>
