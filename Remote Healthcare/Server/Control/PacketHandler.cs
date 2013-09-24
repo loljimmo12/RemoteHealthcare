@@ -29,8 +29,7 @@ namespace Server.Control
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
                     setUsernamePassword(client, pack);
-                    serverControl.addClientToList(client);
-                    //TODO: send a Response_Handshake
+                    serverControl.handshakeResponse(client, (Kettler_X7_Lib.Objects.Handshake)pack.Data);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:

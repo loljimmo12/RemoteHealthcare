@@ -48,6 +48,7 @@
     <Compile Include="Control\PacketHandler.cs" />
     <Compile Include="Control\ServerControl.cs" />
     <Compile Include="Control\Client.cs" />
+    <Compile Include="Model\DoctorCredentials.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\ServerModel.cs" />
     <Compile Include="Program.cs" />
