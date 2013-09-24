@@ -84,7 +84,35 @@ namespace WindowsFormsApplication1
 
         private void handlePacket(Packet packet)
         {
-            throw new NotImplementedException();
+            switch (packet.Flag)
+            {
+                case Packet.PacketFlag.PACKETFLAG_CHAT:
+                    break;
+                case Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
+                    break;
+                case Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
+                    ResponseHandshake handshake = (ResponseHandshake)packet.Data;
+
+                switch (handshake.Result)
+                    {
+                        case ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED:
+                            break;
+                        case ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS:
+                            break;
+                        case ResponseHandshake.ResultType.RESULTTYPE_OK:
+                            Program.form2.Dispose();
+                            Program.form1.Activate();
+                            break;
+                    }
+                    break;
+                
+                case Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
+                    break;
+                case Packet.PacketFlag.PACKETFLAG_VALUES:
+                    break;
+                default:
+                    break;
+            }
         }
 
 
