@@ -46,14 +46,16 @@ namespace WindowsFormsApplication1
                 Password = password
 
             };
-            tcpClient = new TcpClient(ip, 3000);
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
-            Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
-            Comm.Start(tcpClient);
+             tcpClient = new TcpClient(ip, 3000);
+             BinaryFormatter format = new BinaryFormatter();
+             format.Serialize(tcpClient.GetStream(), Pack);
+             Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
+             Comm.Start(tcpClient);
+             
             //temp code for testing without server
+            //Program.form2.denied(2);
             Program.form2.Close();
-           // clientStream.Write(), 0, );
+            //clientStream.Write(), 0, );
         }
 
         public void HandleCommunication(object tcp)
@@ -87,6 +89,8 @@ namespace WindowsFormsApplication1
             switch (packet.Flag)
             {
                 case Packet.PacketFlag.PACKETFLAG_CHAT:
+                    ChatMessage chatMess = (ChatMessage)packet.Data;
+                    chatMess.Sender.ToString();
                     break;
                 case Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
                     break;
@@ -96,8 +100,10 @@ namespace WindowsFormsApplication1
                 switch (handshake.Result)
                     {
                         case ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED:
+                            Program.form2.denied(1);
                             break;
                         case ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS:
+                            Program.form2.denied(2);
                             break;
                         case ResponseHandshake.ResultType.RESULTTYPE_OK:
                             Program.form2.Dispose();
@@ -142,4 +148,5 @@ namespace WindowsFormsApplication1
             format.Serialize(tcpClient.GetStream(), Pack);
         }
     }
+
 }

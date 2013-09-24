@@ -62,7 +62,7 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyCode == Keys.Enter)
             {
-                connect.sendMessage(textBox1.Text);
+                connect.sendMessage(textBox1.Text, listBox1.SelectedItem.ToString());
                 textBox1.ResetText();
             }
         }

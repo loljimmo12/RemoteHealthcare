@@ -37,5 +37,18 @@ namespace WindowsFormsApplication1
         {
 
         }
+
+        internal void denied(int errorCode)
+        {
+            switch (errorCode)
+            {
+                case 1:
+                    MessageBox.Show("Invalid username and/or password!", "Acces denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 2:
+                    MessageBox.Show("User already in use!", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+         }
     }
 }
