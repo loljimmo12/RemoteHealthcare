@@ -30,10 +30,11 @@ namespace Server.Control
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
                     setUsernamePassword(client, pack);
                     serverControl.addClientToList(client);
+                    //TODO: send a Response_Handshake
                     break;
-                    
-                //Flag DoctorControls, Flag OnlineClientsListUpdate
-
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:
+                    //TODO: look at the Request and send a Response Values pack.
+                    break;
                 default:
                     break;
             }
