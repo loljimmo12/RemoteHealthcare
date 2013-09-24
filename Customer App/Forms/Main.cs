@@ -129,6 +129,9 @@ namespace Customer_App
             switch (pPacket.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
+
+                    System.Diagnostics.Debug.WriteLine(((Kettler_X7_Lib.Objects.ResponseHandshake)e.PacketData).Result + " as a response to our handshake");
+
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
 
@@ -137,7 +140,7 @@ namespace Customer_App
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
 
-
+                    System.Diagnostics.Debug.WriteLine("Server sent values");
                     
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -201,7 +204,13 @@ namespace Customer_App
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
-            m_pData.addData(e.Value);
+            m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
+            {
+                Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
+                Data = e.Value
+            });
+
+            //m_pData.addData(e.Value);
         }
         
         /// <summary>

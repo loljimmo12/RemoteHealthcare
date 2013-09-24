@@ -20,7 +20,9 @@ namespace Kettler_X7_Lib.Objects
             PACKETFLAG_BIKECONTROL,
             PACKETFLAG_VALUES,
             PACKETFLAG_REQUEST_VALUES,
-            PACKETFLAG_RESPONSE_VALUES
+            PACKETFLAG_RESPONSE_VALUES,
+            PACKETFLAG_REQUEST_USERLIST,
+            PACKETFLAG_RESPONSE_USERLIST
         }
 
         /// <summary>
