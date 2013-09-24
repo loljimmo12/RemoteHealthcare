@@ -114,7 +114,7 @@ namespace Server.Control
         {
             Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
             pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES;
-            //pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientUsername, requestValue.Start, requestValue.End);
+            pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientName, requestValue.Start, requestValue.End);
             return pack;
         }
 
