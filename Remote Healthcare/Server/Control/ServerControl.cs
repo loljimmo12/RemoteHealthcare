@@ -2,6 +2,7 @@
 using Server.View;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -19,6 +20,10 @@ namespace Server.Control
         public ServerControl()
         {
             serverModel = new ServerModel();
+
+            //test doctor list:
+            serverModel.doctors = new List<DoctorCredentials> {new DoctorCredentials("Jim","Kanarie") };
+
             serverView = new ServerView(serverModel);
             this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
@@ -105,6 +110,76 @@ namespace Server.Control
                     client.sendHandler(pack);
                 }
             }
+        }
+
+        ///<summary>
+        ///Check the Handshake Request for login information and respond.
+        /// </summary>
+        public void handshakeResponse(Client client, Kettler_X7_Lib.Objects.Handshake shake)
+        {
+            Kettler_X7_Lib.Objects.ResponseHandshake response = new Kettler_X7_Lib.Objects.ResponseHandshake();
+            response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+
+            switch (shake.ClientFlag)
+            {
+                case Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_DOCTORAPP:
+                    DoctorCredentials doc = serverModel.doctors.Find(x => x.username == shake.Username);
+
+                    if (doc == null)
+                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                    else
+                    {
+                        if (doc.password == shake.Password)
+                            response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                        else
+                        {
+                            doc.logins.Add(new Log(DateTime.Now, false));
+                            if (doc.logins.Count > 5)
+                            {
+                                bool timeOutAccount = true;
+                                TimeSpan logSpan = new TimeSpan(1, 0, 0);
+                                for (int i = doc.logins.Count; i <= doc.logins.Count - 5; i--)
+                                {
+                                    if (!doc.logins[i].accepted)
+                                    {
+                                        if (DateTime.Now.Subtract(doc.logins[i].login) >= logSpan)
+                                            timeOutAccount = false;
+                                    }
+                                    else
+                                        timeOutAccount = false;
+                                }
+
+                                if (timeOutAccount)
+                                    response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+                                else
+                                    response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                            }
+                            else
+                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                        }
+                    }
+                    break;
+                case Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP:
+                    if (serverModel.onlineClients.Contains(client))
+                    {
+                        //is logged in already, send message back!
+                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                    }
+                    else
+                    {
+                        // everything's alright!
+                        addClientToList(client);
+                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            Kettler_X7_Lib.Objects.Packet responsePack = new Kettler_X7_Lib.Objects.Packet();
+            responsePack.Data = response;
+            responsePack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE;
+            client.sendHandler(responsePack);
         }
 
         ///<summary>

@@ -18,6 +18,7 @@ namespace Server.Model
         private static String logFileName = "logData.bin";
         private static String clientFile  = "clientFile.bin";
         public List<Client> onlineClients { get; set; }
+        public List<DoctorCredentials> doctors { get; set; }
         List<Log> logs { get; set; }
         Dictionary<string, List<object>> allClients { get; set; }
 

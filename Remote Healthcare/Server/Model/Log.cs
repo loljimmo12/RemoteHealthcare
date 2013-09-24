@@ -11,16 +11,14 @@ namespace Server.Model
     [Serializable]
     class Log
     {
-        String clientName { get; set; }
-        DateTime startSession { get; set; }
-        DateTime endSession { get; set; }
+        public DateTime login { get; set; }
+        public bool accepted { get; set; }
 
         // initalization of a Log object.
-        public Log(String name, DateTime start, DateTime end)
+        public Log(DateTime login, bool accepted)
         {
-            clientName = name;
-            startSession = start;
-            endSession = end;
+            this.login = login;
+            this.accepted = accepted;
         }
     }
 }
