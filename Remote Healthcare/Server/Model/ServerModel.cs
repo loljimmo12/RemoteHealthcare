@@ -19,7 +19,7 @@ namespace Server.Model
         private static String clientFile  = "clientFile.bin";
         public List<Client> onlineClients { get; set; }
         List<Log> logs { get; set; }
-        Dictionary<string, List<object>> allClients { get; set; }
+        Dictionary<string, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> allClients { get; set; }
 
         ///<summary>
         ///initalization of a Model object.
@@ -34,7 +34,7 @@ namespace Server.Model
             }
             else
             {
-                allClients = new Dictionary<string, List<object>>();
+                allClients = new Dictionary<string, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>>();
             }
             if (File.Exists(logFileName))
             {
@@ -48,16 +48,16 @@ namespace Server.Model
         ///<summary>
         ///Writes the data from a Value into the Dictionary
         ///</summary>
-        public void writeBikeData(Client client, Object data)
+        public void writeBikeData(Client client, Kettler_X7_Lib.Objects.Value values)
         {
             if (allClients.ContainsKey(client.userName))
             {
-                allClients[client.userName].Add(data);
+                allClients[client.userName].Add(System.DateTime.Now, values);
             }
             else
             {
-                List<Object> clientData = new List<Object>();
-                clientData.Add(data);
+                Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> clientData = new Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>();
+                clientData.Add(System.DateTime.Now, values);                
                 allClients.Add(client.userName, clientData);
             }
         }
@@ -65,21 +65,41 @@ namespace Server.Model
         ///<summary>
         ///Reads the field containing all client data and returns the Dictionary.
         ///<summary>
-        public Dictionary<String, List<Object>> readAllClientData()
+        public Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                Dictionary<String, List<Object>> allClients = (Dictionary<String, List<Object>>)serializer.Deserialize(stream);
+                Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> allClients = (Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>>)serializer.Deserialize(stream);
                 return allClients;
             }
         }
+
         ///<summary>
         ///Returns the list to the specified client, because normal getters are boring.
         ///</summary>
-        public List<Object> readBikeData(Client client)
+        public List<Kettler_X7_Lib.Objects.Value> readBikeData(Client client)
         {
-            return allClients[client.userName];
+            Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> allClientData = allClients[client.userName];
+            return allClientData.Values.ToList<Kettler_X7_Lib.Objects.Value>();
+        }
+
+        /// <summary>
+        ///Returns the requested datalist, between begintime and endtime for 1 specific client
+        /// </summary>
+        public List<Kettler_X7_Lib.Objects.Value> readSpecifiedBikeData(String clientUsername, System.DateTime beginTime, System.DateTime endTime)
+        {
+            Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> dataDict = allClients[clientUsername];
+            List<Kettler_X7_Lib.Objects.Value> dataList = null;
+          
+            foreach(KeyValuePair<System.DateTime, Kettler_X7_Lib.Objects.Value> entry in dataDict)
+            {
+                if (entry.Key.CompareTo(beginTime) >= 0 && entry.Key.CompareTo(endTime) <= 0)
+                {
+                    dataList.Add(entry.Value);
+                }
+            }
+            return dataList;
         }
 
         ///<summary>

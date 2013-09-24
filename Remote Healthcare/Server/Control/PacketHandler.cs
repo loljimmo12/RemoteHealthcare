@@ -16,7 +16,7 @@ namespace Server.Control
             switch (pack.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                    serverControl.writeToModel(client, pack.Data);
+                    serverControl.writeToModel(client, (Kettler_X7_Lib.Objects.Value)pack.Data);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -32,8 +32,9 @@ namespace Server.Control
                     serverControl.addClientToList(client);
                     //TODO: send a Response_Handshake
                     break;
+
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:
-                    //TODO: look at the Request and send a Response Values pack.
+                    client.sendHandler(serverControl.requestSpecifiedClientData((Kettler_X7_Lib.Objects.RequestValue)pack.Data));
                     break;
                 default:
                     break;

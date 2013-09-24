@@ -107,12 +107,23 @@ namespace Server.Control
             }
         }
 
+        /// <summary>
+        ///Returns a sendable packet based on requestvalue
+        /// </summary>
+        public Kettler_X7_Lib.Objects.Packet requestSpecifiedClientData(Kettler_X7_Lib.Objects.RequestValue requestValue)
+        {
+            Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
+            pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES;
+            pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientUsername, requestValue.Start, requestValue.End);
+            return pack;
+        }
+
         ///<summary>
         ///Forward client data to servermodel.
         ///</summary>
-        public void writeToModel(Client client, Object data)
+        public void writeToModel(Client client, Kettler_X7_Lib.Objects.Value values)
         {
-            serverModel.writeBikeData(client, data);
+            serverModel.writeBikeData(client, values);
         }
 
         ///<summary>
