@@ -16,3 +16,5 @@ C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\bin\Debug\Kett
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\obj\Debug\Server App.csprojResolveAssemblyReference.cache
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\obj\Debug\Server App.exe
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\obj\Debug\Server App.pdb
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\bin\Debug\NAudio.dll
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Server App\bin\Debug\NAudio.xml

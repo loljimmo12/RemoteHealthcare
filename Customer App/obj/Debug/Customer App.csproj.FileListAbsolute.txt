@@ -10,3 +10,5 @@ C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Cu
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.csproj.GenerateResource.Cache
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.exe
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\obj\Debug\Customer App.pdb
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\NAudio.dll
+C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Customer App\bin\Debug\NAudio.xml

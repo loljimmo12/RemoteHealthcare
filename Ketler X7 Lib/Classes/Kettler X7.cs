@@ -285,6 +285,25 @@ namespace Kettler_X7_Lib.Classes
         }
 
         /// <summary>
+        /// Sends raw command to bike, result is not parsed
+        /// </summary>
+        /// <param name="strCommand"></param>
+        public void sendRawCommand(string strCommand)
+        {
+            string strPreCommand = strCommand;
+
+            // Strip pre command in case of arguments
+            if (strCommand.Contains(' '))
+            {
+                strPreCommand = strCommand.Substring(0, (strCommand.IndexOf(' ') + 1));
+            }
+
+            Command nCommand = COMMAND_LIST.FirstOrDefault(x => (x.Value == strPreCommand)).Key;
+
+            System.Diagnostics.Debug.WriteLine(nCommand);
+        }
+
+        /// <summary>
         /// Parses the current values of the device into an object
         /// </summary>
         /// <returns></returns>

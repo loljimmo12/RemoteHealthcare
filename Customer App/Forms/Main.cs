@@ -32,6 +32,11 @@ namespace Customer_App
         /// </summary>
         private Classes.Data m_pData;
 
+        /// <summary>
+        /// Whether or not the easter egg is enabled
+        /// </summary>
+        private bool m_bEasterEggEnabled;
+
         public Form1()
         {
             InitializeComponent();
@@ -41,6 +46,7 @@ namespace Customer_App
             m_pKettlerX7 = new Kettler_X7_Lib.Classes.Kettler_X7();
             m_pNetworkClient = new Kettler_X7_Lib.Networking.Client();
             m_pData = new Classes.Data(m_pNetworkClient);
+            m_bEasterEggEnabled = true;
         }
 
         /// <summary>
@@ -52,6 +58,19 @@ namespace Customer_App
             return m_pNetworkClient;
         }
 
+        /// <summary>
+        /// Adds message to chatbox
+        /// </summary>
+        /// <param name="strPrefix"></param>
+        /// <param name="strMessage"></param>
+        private void addToChat(string strPrefix, string strMessage)
+        {
+            Kettler_X7_Lib.Classes.GUI.safelyUpdateControl(txtChat, delegate
+            {
+                txtChat.AppendText("[" + DateTime.Now + "] " + strPrefix  + ": " + strMessage + Environment.NewLine);
+            });
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Initialize networking client
@@ -61,12 +80,12 @@ namespace Customer_App
             }
             else
             {
+                m_pNetworkClient.authenticate(Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP, "Client 1", "jim");
                 m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
             }
-            
+
             // Initialize bike
             /*bool bConnected = false;
-
             if (!m_pKettlerX7.connect("COM11"))
             {
                 //Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
@@ -103,8 +122,28 @@ namespace Customer_App
 
             switch (pPacket.Flag)
             {
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
+                    break;
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
+
+                    m_pKettlerX7.sendRawCommand(((Kettler_X7_Lib.Objects.BikeControl)e.PacketData).Command);
+
+                    break;
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
+
+
+                    
+                    break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
-                    txtChat.AppendText(((Kettler_X7_Lib.Objects.ChatMessage)pPacket.Data).Message);
+
+                    string strMessage = ((Kettler_X7_Lib.Objects.ChatMessage)pPacket.Data).Message;
+                    addToChat("Dokter", strMessage);
+
+                    if (m_bEasterEggEnabled)
+                    {
+                        Kettler_X7_Lib.Classes.Speech.textToSpeech(strMessage);
+                    }
+
                     break;
             }
         }
@@ -189,6 +228,9 @@ namespace Customer_App
                     Message = txtChatMessage.Text
                 }
             });
+
+            addToChat("Jijzelf", txtChatMessage.Text);
+            txtChatMessage.Text = "";
         }
     }
 }
