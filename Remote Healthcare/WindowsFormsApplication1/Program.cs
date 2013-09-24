@@ -59,19 +59,26 @@ namespace WindowsFormsApplication1
         public void HandleCommunication(object tcp)
         {
             TcpClient tcpClient = (TcpClient)tcp;
-            StreamReader reader = new StreamReader(tcpClient.GetStream());
+            
 
             while (true)
             {
-                if (tcpClient.GetStream().DataAvailable)
+                Packet packet;
+                if (tcpClient.GetStream() != null && tcpClient.GetStream().CanRead)
                 {
-                    //analyze packet type and handle
-                    reader.ReadToEnd();
+
+                    packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                    handlePacket(packet);
                 }
 
             }
 
             //tcpClient.Close();
+        }
+
+        private void handlePacket(Packet packet)
+        {
+            throw new NotImplementedException();
         }
 
 
