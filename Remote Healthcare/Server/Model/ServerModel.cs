@@ -1,5 +1,6 @@
 ﻿using Server.Control;
 using Server.Model;
+using Server.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -139,6 +140,8 @@ namespace Server.Model
             {
                 onlineClients.Remove(client);
             }
+            ServerView.writeToConsole("Online clients in list: " + onlineClients.Count);
+            
         }
 
         ///<summary>

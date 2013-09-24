@@ -10,19 +10,13 @@ namespace Server.View
     ///<summary>
     ///The base class for the Control.
     ///</summary>
-    class ServerView
+    public static class ServerView
     {
-        private ServerModel serverModel;
-
-        public ServerView(ServerModel serverModel)
-        {
-            this.serverModel = serverModel;
-        }
-         
+       
         ///<summary>
         ///Append text to console.
         ///</summary>
-        public void writeToConsole(String s)
+        public static void writeToConsole(String s)
         {
             Console.WriteLine(s);
         }

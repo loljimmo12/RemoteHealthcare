@@ -14,17 +14,13 @@ namespace Server.Control
     class ServerControl
     {
         private ServerModel serverModel;
-        private ServerView serverView;
         private TcpListener tcpListener;
 
         public ServerControl()
         {
             serverModel = new ServerModel();
-
             //test doctor list:
             serverModel.doctors = new List<DoctorCredentials> {new DoctorCredentials("Jim","Kanarie") };
-
-            serverView = new ServerView(serverModel);
             this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
         }
@@ -41,11 +37,10 @@ namespace Server.Control
             {
                 try
                 {
-                    serverView.writeToConsole("Listening..");
+                    ServerView.writeToConsole("Listening..");
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
-                    serverView.writeToConsole("Connected.");
-                    serverView.writeToConsole("Online clients in list: " + serverModel.onlineClients.Count.ToString());
+                    ServerView.writeToConsole("Connected.");
                 }
                 catch (Exception)
                 {
@@ -86,7 +81,7 @@ namespace Server.Control
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
 
-            serverView.writeToConsole(message.Message);
+            ServerView.writeToConsole(message.Message);
 
             foreach ( Client client in serverModel.onlineClients)
             {
@@ -119,7 +114,7 @@ namespace Server.Control
         {
             Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
             pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES;
-            pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientUsername, requestValue.Start, requestValue.End);
+            //pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientUsername, requestValue.Start, requestValue.End);
             return pack;
         }
 
