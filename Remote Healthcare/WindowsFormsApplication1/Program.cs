@@ -66,9 +66,15 @@ namespace WindowsFormsApplication1
                 Packet packet;
                 if (tcpClient.GetStream() != null && tcpClient.GetStream().CanRead)
                 {
+                    try
+                    {
+                        packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                        handlePacket(packet);
+                    }
 
-                    packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
-                    handlePacket(packet);
+                    catch
+                    {
+                    }
                 }
 
             }
