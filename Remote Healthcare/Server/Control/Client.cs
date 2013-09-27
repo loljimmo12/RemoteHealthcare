@@ -56,7 +56,7 @@ namespace Server.Control
                     listenThread.Abort();
                 }
                 
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
 
@@ -65,11 +65,8 @@ namespace Server.Control
         ///</summary>
         public void sendHandler(Kettler_X7_Lib.Objects.Packet pack)
         {
-            using (NetworkStream clientStream = tcpClient.GetStream())
-            {
-                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                formatter.Serialize(clientStream, pack);
-            }
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            formatter.Serialize(tcpClient.GetStream(), pack);
         }
 
         ///<summary>
