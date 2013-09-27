@@ -36,6 +36,9 @@ namespace Server.Control
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:
                     client.sendHandler(serverControl.requestSpecifiedClientData((Kettler_X7_Lib.Objects.RequestValue)pack.Data));
                     break;
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST:
+                    client.sendHandler(serverControl.getOnlineClientListPacket());
+                    break;
                 default:
                     break;
             }

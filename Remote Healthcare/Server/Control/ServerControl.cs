@@ -66,6 +66,18 @@ namespace Server.Control
             serverModel.writeBikeData(client, null);
         }
 
+        public Kettler_X7_Lib.Objects.Packet getOnlineClientListPacket()
+        {
+            Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
+            pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST;
+
+            List<String> list = new List<string>();
+            foreach (Client client in serverModel.onlineClients)
+                list.Add(client.userName);
+            pack.Data = list;
+            return pack;
+        }
+
         ///<summary>
         ///Change desired online/offline status for a client.
         ///</summary>
