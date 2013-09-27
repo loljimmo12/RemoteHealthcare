@@ -17,6 +17,7 @@ namespace WindowsFormsApplication1
         public static Form1 form1;
         public static Form2 form2;
         public static Connection connect;
+        public static List<Client> clients;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -138,6 +139,7 @@ namespace WindowsFormsApplication1
                             Program.form2.Hide();
                             Thread Comm = new Thread(form2);
                             Comm.Start();
+                            Program.clients = new List<Client>();
                             requestUsers();
                             break;
                     }
@@ -190,5 +192,15 @@ namespace WindowsFormsApplication1
 
 
     }
+     class Client
+     {
+         protected string naam;
+         protected string chatLog;
+         
+         public Client(string naam)
+         {
+             this.naam = naam;
+         }
+     }
 
 }

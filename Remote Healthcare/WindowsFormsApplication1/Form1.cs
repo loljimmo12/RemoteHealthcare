@@ -131,10 +131,11 @@ namespace WindowsFormsApplication1
             foreach (String user in users)
             {
 
-                //if (!listBox1.Items.Contains(user))
-                //{
+                if (!listBox1.Items.Contains(user))
+                {
                     this.listBox1.Items.Add(user);
-                //}
+                    Program.clients.Add(new Client(user));
+                }
             }
         }
     }
