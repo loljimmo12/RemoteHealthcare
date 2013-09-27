@@ -46,18 +46,23 @@ namespace Server.Control
                     pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
                     PacketHandler.getPacket(serverControl, this, pack);
                 }
-                catch (SerializationException) { }
-                catch (IOException) { }
+                catch {
+                    disconnect();
+                }
                 finally
                 {
-                    serverControl.changeClientStatus(this, "offline");
-                    serverControl.finalizeClient();
-                    tcpClient.Close();
-                    listenThread.Abort();
                 }
                 
                 Thread.Sleep(10);
             }
+        }
+
+        private void disconnect()
+        {
+            serverControl.changeClientStatus(this, "offline");
+            serverControl.finalizeClient();
+            tcpClient.Close();
+            listenThread.Abort();
         }
 
         ///<summary>
