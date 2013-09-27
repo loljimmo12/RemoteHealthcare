@@ -119,6 +119,13 @@ namespace WindowsFormsApplication1
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
                     Kettler_X7_Lib.Objects.ChatMessage chatMess = (Kettler_X7_Lib.Objects.ChatMessage)packet.Data;
                     Console.WriteLine(chatMess.Sender.ToString());
+                    foreach (Client client in Program.clients)
+                    {
+                        if (client.getName().Equals(chatMess.Sender.ToString()))
+                        {
+                            client.recieveChat(chatMess.Message, chatMess.Sender.ToString());
+                        }
+                    }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
                     break;
@@ -169,7 +176,7 @@ namespace WindowsFormsApplication1
             Pack.Data = new Kettler_X7_Lib.Objects.ChatMessage()
             {
                 Receiver = reciever,
-                Sender = "anon",
+                Sender = "Jim",
                 Message = message
             };
             BinaryFormatter format = new BinaryFormatter();
@@ -209,6 +216,11 @@ namespace WindowsFormsApplication1
          public string getChat()
          {
              return chatLog;
+         }
+
+         public string getName()
+         {
+             return naam;
          }
      }
 
