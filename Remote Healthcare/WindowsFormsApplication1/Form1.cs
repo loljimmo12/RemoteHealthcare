@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         private Connection connect;
+        private int selectedReciever;
         public Form1()
         {
             InitializeComponent();
@@ -63,9 +64,11 @@ namespace WindowsFormsApplication1
             if (e.KeyCode == Keys.Enter)
 
             {
-                connect.sendMessage(textBox1.Text, "Jim");
-                textBox1.ResetText();
+                connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
+                Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
+                chatArea.Text = Program.clients[selectedReciever].getChat();
                 
+                textBox1.ResetText();
             }
         }
 
@@ -137,6 +140,12 @@ namespace WindowsFormsApplication1
                     Program.clients.Add(new Client(user));
                 }
             }
+        }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            selectedReciever = this.listBox1.SelectedIndex;
+            chatArea.Text = Program.clients[selectedReciever].getChat();
         }
     }
 }

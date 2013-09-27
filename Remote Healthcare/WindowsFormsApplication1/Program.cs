@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Kettler_X7_Lib.Classes;
-using Kettler_X7_Lib.Objects;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -39,11 +37,11 @@ namespace WindowsFormsApplication1
 
         public void Login(string login, string password, string ip)
         {
-            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
-            Pack.Flag = Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE;
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE;
             Pack.Data = new Kettler_X7_Lib.Objects.Handshake()
             {
-                ClientFlag = Client.ClientFlag.CLIENTFLAG_DOCTORAPP,
+                ClientFlag = Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_DOCTORAPP,
                 Username = login,
                 Password = password
 
@@ -72,14 +70,14 @@ namespace WindowsFormsApplication1
 
             while (true)
             {
-                Packet packet;
+                Kettler_X7_Lib.Objects.Packet packet;
                 if (tcpClient.GetStream() != null)
                 {
                     if (tcpClient.GetStream().CanRead)
                     {
                         try
                         {
-                            packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                            packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
                             handlePacket(packet);
                         }
 
@@ -106,11 +104,11 @@ namespace WindowsFormsApplication1
             //tcpClient.Close();
         }
 
-        private void handlePacket(Packet packet)
+        private void handlePacket(Kettler_X7_Lib.Objects.Packet packet)
         {
             switch (packet.Flag)
             {
-                case Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST:
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST:
                     List<String> users = (List<String>)packet.Data;
                     if (Program.form1.InvokeRequired)
                     {
@@ -118,24 +116,24 @@ namespace WindowsFormsApplication1
                     }
                     
                     break;
-                case Packet.PacketFlag.PACKETFLAG_CHAT:
-                    ChatMessage chatMess = (ChatMessage)packet.Data;
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
+                    Kettler_X7_Lib.Objects.ChatMessage chatMess = (Kettler_X7_Lib.Objects.ChatMessage)packet.Data;
                     Console.WriteLine(chatMess.Sender.ToString());
                     break;
-                case Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
                     break;
-                case Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
-                    ResponseHandshake handshake = (ResponseHandshake)packet.Data;
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
+                    Kettler_X7_Lib.Objects.ResponseHandshake handshake = (Kettler_X7_Lib.Objects.ResponseHandshake)packet.Data;
 
                 switch (handshake.Result)
                     {
-                        case ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED:
+                        case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED:
                             Program.form2.denied(1);
                             break;
-                        case ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS:
+                        case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS:
                             Program.form2.denied(2);
                             break;
-                        case ResponseHandshake.ResultType.RESULTTYPE_OK:
+                        case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK:
                             Program.form2.Hide();
                             Thread Comm = new Thread(form2);
                             Comm.Start();
@@ -144,10 +142,10 @@ namespace WindowsFormsApplication1
                             break;
                     }
                     break;
-                
-                case Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
+
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
                     break;
-                case Packet.PacketFlag.PACKETFLAG_VALUES:
+                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     break;
                 default:
                     Console.WriteLine("packet not recognized");
@@ -157,8 +155,8 @@ namespace WindowsFormsApplication1
 
         public void requestUsers()
         {
-            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
-            Pack.Flag = Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST;
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST;
             BinaryFormatter format = new BinaryFormatter();
             format.Serialize(tcpClient.GetStream(), Pack);
         }
@@ -166,8 +164,8 @@ namespace WindowsFormsApplication1
 
         public void sendMessage(string message, string reciever)
         {
-            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
-            Pack.Flag = Packet.PacketFlag.PACKETFLAG_CHAT;
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT;
             Pack.Data = new Kettler_X7_Lib.Objects.ChatMessage()
             {
                 Receiver = reciever,
@@ -180,8 +178,8 @@ namespace WindowsFormsApplication1
 
         public void sendCommand(string command)
         {
-            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
-            Pack.Flag = Packet.PacketFlag.PACKETFLAG_BIKECONTROL;
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL;
             Pack.Data = new Kettler_X7_Lib.Objects.BikeControl()
             {
                Command = command 
@@ -200,6 +198,17 @@ namespace WindowsFormsApplication1
          public Client(string naam)
          {
              this.naam = naam;
+             chatLog = "";
+         }
+
+         public void recieveChat(string message, string sender)
+         {
+             this.chatLog += "[" + DateTime.Now.ToShortTimeString() + "] " + sender + ": "+ message + "\n";
+         }
+
+         public string getChat()
+         {
+             return chatLog;
          }
      }
 
