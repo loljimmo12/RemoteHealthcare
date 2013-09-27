@@ -38,6 +38,7 @@ namespace Server.Control
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST:
                     client.sendHandler(serverControl.getOnlineClientListPacket());
+                    Console.WriteLine("send a list of online users!");
                     break;
                 default:
                     break;
