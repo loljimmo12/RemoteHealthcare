@@ -70,6 +70,7 @@ namespace Server.Control
         ///</summary>
         public void sendHandler(Kettler_X7_Lib.Objects.Packet pack)
         {
+            Console.WriteLine("flag {0}", pack.Flag);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             formatter.Serialize(tcpClient.GetStream(), pack);
         }
