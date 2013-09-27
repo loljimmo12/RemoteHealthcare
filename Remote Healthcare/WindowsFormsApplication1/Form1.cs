@@ -63,7 +63,7 @@ namespace WindowsFormsApplication1
             if (e.KeyCode == Keys.Enter)
 
             {
-                connect.sendMessage(textBox1.Text, "niemand");
+                connect.sendMessage(textBox1.Text, "Jim");
                 textBox1.ResetText();
                 
             }
@@ -105,6 +105,7 @@ namespace WindowsFormsApplication1
         private void buttonReset_Click(object sender, EventArgs e)
         {
             connect.sendCommand("RS");
+            connect.requestUsers();
         }
 
         private void textBoxSetDistance_Click(object sender, EventArgs e)
@@ -129,10 +130,11 @@ namespace WindowsFormsApplication1
         {
             foreach (String user in users)
             {
-                if (!listBox1.Items.Contains(user))
-                {
-                    listBox1.Items.Add(user);
-                }
+
+                //if (!listBox1.Items.Contains(user))
+                //{
+                    this.listBox1.Items.Add(user);
+                //}
             }
         }
     }

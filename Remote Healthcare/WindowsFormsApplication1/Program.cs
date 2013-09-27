@@ -59,6 +59,11 @@ namespace WindowsFormsApplication1
             //clientStream.Write(), 0, );
         }
 
+        private void form2()
+        {
+            Application.Run(Program.form1);
+        }
+
         public void HandleCommunication(object tcp)
         {
             TcpClient tcpClient = (TcpClient)tcp;
@@ -67,17 +72,32 @@ namespace WindowsFormsApplication1
             while (true)
             {
                 Packet packet;
-                if (tcpClient.GetStream() != null && tcpClient.GetStream().CanRead)
+                if (tcpClient.GetStream() != null)
                 {
-                    try
+                    if (tcpClient.GetStream().CanRead)
                     {
-                        packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
-                        handlePacket(packet);
+                        try
+                        {
+                            packet = (Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                            handlePacket(packet);
+                        }
+
+                        catch
+                        {
+                            Console.WriteLine("Packet lost");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("broke connection");
+                        break;
                     }
 
-                    catch
-                    {
-                    }
+                }
+                else
+                {
+                    Console.WriteLine("broke connection");
+                    break;
                 }
 
             }
@@ -91,11 +111,15 @@ namespace WindowsFormsApplication1
             {
                 case Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST:
                     List<String> users = (List<String>)packet.Data;
-                    Program.form1.updateUsers(users);
+                    if (Program.form1.InvokeRequired)
+                    {
+                        Program.form1.Invoke(new Action(() => Program.form1.updateUsers(users)));
+                    }
+                    
                     break;
                 case Packet.PacketFlag.PACKETFLAG_CHAT:
                     ChatMessage chatMess = (ChatMessage)packet.Data;
-                    chatMess.Sender.ToString();
+                    Console.WriteLine(chatMess.Sender.ToString());
                     break;
                 case Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
                     break;
@@ -112,7 +136,9 @@ namespace WindowsFormsApplication1
                             break;
                         case ResponseHandshake.ResultType.RESULTTYPE_OK:
                             Program.form2.Hide();
-                            Application.Run(Program.form1);
+                            Thread Comm = new Thread(form2);
+                            Comm.Start();
+                            requestUsers();
                             break;
                     }
                     break;
@@ -122,11 +148,12 @@ namespace WindowsFormsApplication1
                 case Packet.PacketFlag.PACKETFLAG_VALUES:
                     break;
                 default:
+                    Console.WriteLine("packet not recognized");
                     break;
             }
         }
 
-        private void requestUsers()
+        public void requestUsers()
         {
             Kettler_X7_Lib.Objects.Packet Pack = new Packet();
             Pack.Flag = Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST;
