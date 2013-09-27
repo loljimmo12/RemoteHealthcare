@@ -27,6 +27,7 @@ namespace WindowsFormsApplication1
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             form2 = new Form2();
+            form1 = new Form1();
             Application.Run(form2);
         }
     }
@@ -46,7 +47,7 @@ namespace WindowsFormsApplication1
                 Password = password
 
             };
-             tcpClient = new TcpClient(ip, 3000);
+             tcpClient = new TcpClient(ip, 31337);
              BinaryFormatter format = new BinaryFormatter();
              format.Serialize(tcpClient.GetStream(), Pack);
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
@@ -88,6 +89,10 @@ namespace WindowsFormsApplication1
         {
             switch (packet.Flag)
             {
+                case Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST:
+                    List<String> users = (List<String>)packet.Data;
+                    Program.form1.updateUsers(users);
+                    break;
                 case Packet.PacketFlag.PACKETFLAG_CHAT:
                     ChatMessage chatMess = (ChatMessage)packet.Data;
                     chatMess.Sender.ToString();
@@ -106,8 +111,8 @@ namespace WindowsFormsApplication1
                             Program.form2.denied(2);
                             break;
                         case ResponseHandshake.ResultType.RESULTTYPE_OK:
-                            Program.form2.Dispose();
-                            Program.form1.Activate();
+                            Program.form2.Hide();
+                            Application.Run(Program.form1);
                             break;
                     }
                     break;
@@ -119,6 +124,14 @@ namespace WindowsFormsApplication1
                 default:
                     break;
             }
+        }
+
+        private void requestUsers()
+        {
+            Kettler_X7_Lib.Objects.Packet Pack = new Packet();
+            Pack.Flag = Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST;
+            BinaryFormatter format = new BinaryFormatter();
+            format.Serialize(tcpClient.GetStream(), Pack);
         }
 
 
@@ -147,6 +160,8 @@ namespace WindowsFormsApplication1
             BinaryFormatter format = new BinaryFormatter();
             format.Serialize(tcpClient.GetStream(), Pack);
         }
+
+
     }
 
 }

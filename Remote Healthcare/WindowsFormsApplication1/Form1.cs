@@ -61,9 +61,11 @@ namespace WindowsFormsApplication1
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+
             {
-                connect.sendMessage(textBox1.Text, listBox1.SelectedItem.ToString());
+                connect.sendMessage(textBox1.Text, "niemand");
                 textBox1.ResetText();
+                
             }
         }
 
@@ -120,7 +122,18 @@ namespace WindowsFormsApplication1
             textBoxSetTime.Clear();
         }
 
-        
 
+
+
+        public void updateUsers(List<string> users)
+        {
+            foreach (String user in users)
+            {
+                if (!listBox1.Items.Contains(user))
+                {
+                    listBox1.Items.Add(user);
+                }
+            }
+        }
     }
 }
