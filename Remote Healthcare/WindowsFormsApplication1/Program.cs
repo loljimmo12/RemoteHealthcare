@@ -135,10 +135,10 @@ namespace WindowsFormsApplication1
                 switch (handshake.Result)
                     {
                         case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED:
-                            Program.form2.denied(1);
+                            Program.form2.denied(2);
                             break;
                         case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS:
-                            Program.form2.denied(2);
+                            Program.form2.denied(1);
                             break;
                         case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK:
                             Program.form2.Hide();
