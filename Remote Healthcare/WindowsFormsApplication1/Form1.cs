@@ -67,7 +67,11 @@ namespace WindowsFormsApplication1
                 connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
                 Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
                 chatArea.Text = Program.clients[selectedReciever].getChat();
-                textBox1.ResetText();
+                if (chatArea.Text.Equals("GOLD")) {
+                    textBox1.ResetText(); textBox1.Text = "Always believe in your soul ";
+                }
+                else textBox1.ResetText();
+                
             }
         }
 
