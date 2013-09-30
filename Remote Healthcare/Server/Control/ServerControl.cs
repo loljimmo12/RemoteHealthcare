@@ -95,17 +95,29 @@ namespace Server.Control
         ///<summary>
         ///Forward chatmessage received from client to servermodel.
         ///</summary>
-        public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack)
+        public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack, Client client)
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
-
             ServerView.writeToConsole(message.Message);
 
-            foreach ( Client client in serverModel.onlineClients)
+            if (client.isDoctor)
             {
-                if (client.userName == message.Receiver)
+                foreach (Client tempClient in serverModel.onlineClients)
                 {
-                    client.sendHandler(pack);
+                    if (tempClient.userName == message.Receiver)
+                    {
+                        tempClient.sendHandler(pack);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Client tempClient in serverModel.onlineClients)
+                {
+                    if (tempClient.isDoctor)
+                    {
+                        tempClient.sendHandler(pack);
+                    }
                 }
             }
         }

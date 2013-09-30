@@ -21,7 +21,7 @@ namespace Server.Control
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
-                    serverControl.forwardMessage(pack);
+                    serverControl.forwardMessage(pack, client);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
