@@ -124,6 +124,22 @@ namespace WindowsFormsApplication1
                         if (client.getName().Equals(chatMess.Sender.ToString()))
                         {
                             client.recieveChat(chatMess.Message, chatMess.Sender.ToString());
+                            int o;
+                            for (int i = 0; i < Program.clients.Count; i++)
+                            {
+                                if (Program.clients[i].getName().Equals(chatMess.Sender))
+                                {
+                                    o = i;
+                                    break;
+                                }
+                            }
+                            if (Program.form1.selectedReciever == o)
+                            {
+                                if (Program.form1.InvokeRequired)
+                                {
+                                    Program.form1.Invoke(new Action(() => Program.form1.refreshChat()));
+                                }
+                            }
                         }
                     }
                     break;
@@ -151,6 +167,17 @@ namespace WindowsFormsApplication1
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
+                    Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
+                    try
+                    {
+                        if (Program.form1.InvokeRequired)
+                        {
+                            Program.form1.Invoke(new Action(() => Program.form1.setValues(vals)));
+                        }
+                    }
+                    catch
+                    {
+                    }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     break;
@@ -196,6 +223,20 @@ namespace WindowsFormsApplication1
         }
 
 
+
+        internal void requestData(string user)
+        {
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES;
+            Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
+            {
+                ClientName = user,
+                Start = DateTime.Now,
+                End = DateTime.Now
+            };
+            BinaryFormatter format = new BinaryFormatter();
+            format.Serialize(tcpClient.GetStream(), Pack);
+        }
     }
      class Client
      {

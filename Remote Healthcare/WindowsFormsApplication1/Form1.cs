@@ -13,11 +13,30 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         private Connection connect;
-        private int selectedReciever;
+        public int selectedReciever;
+        private System.Timers.Timer timer;
         public Form1()
         {
             InitializeComponent();
             connect = Program.connect;
+            timer = new System.Timers.Timer(1000);
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(timerElapse);
+            timer.AutoReset = true;
+            timer.Start();
+        }
+
+        private void timerElapse(Object source, System.Timers.ElapsedEventArgs args)
+        {
+            if (selectedReciever != null)
+            {
+                try
+                {
+                    connect.requestData(Program.clients[selectedReciever].getName());
+                }
+                catch
+                {
+                }
+            }
         }
 
         private void chart1_Click(object sender, EventArgs e)
@@ -149,6 +168,26 @@ namespace WindowsFormsApplication1
         {
             selectedReciever = this.listBox1.SelectedIndex;
             chatArea.Text = Program.clients[selectedReciever].getChat();
+        }
+
+        internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
+        {
+            Kettler_X7_Lib.Objects.Value val = vals.ValueList[0];
+            label1.Text = "Heartbeat " + val.Pulse;
+            label2.Text = "RPM " + val.RPM;
+            label3.Text = "Speed " + val.Speed;
+            label4.Text = "Distance" + val.Distance;
+            label5.Text = "Time" + val.Time;
+            label6.Text = "Power " + val.RequestedPower;
+            label7.Text = "Energy" + val.Energy;
+        }
+
+        internal void refreshChat()
+        {
+            if (selectedReciever != null)
+            {
+                chatArea.Text = Program.clients[selectedReciever].getChat();
+            }
         }
     }
 }
