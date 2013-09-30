@@ -1,8 +1,0 @@
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Release\Doctor App.exe.config
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Release\Doctor App.exe
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\bin\Release\Doctor App.pdb
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Release\Doctor_App.Form1.resources
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Release\Doctor_App.Properties.Resources.resources
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Release\Doctor App.csproj.GenerateResource.Cache
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Release\Doctor App.exe
-C:\Users\Peter\Desktop\Healtcare SVN\trunk\Doctor App\obj\Release\Doctor App.pdb

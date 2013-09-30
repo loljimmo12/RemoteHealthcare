@@ -54,16 +54,16 @@
     <Compile Include="Classes\Kettler X7.cs" />
     <Compile Include="Classes\Speech.cs" />
     <Compile Include="Networking\Client.cs" />
-    <Compile Include="Objects\BikeControl.cs" />
+    <Compile Include="Objects\Packets\BikeControl.cs" />
     <Compile Include="Objects\Client.cs" />
     <Compile Include="Networking\Server.cs" />
-    <Compile Include="Objects\Handshake.cs" />
+    <Compile Include="Objects\Packets\Handshake.cs" />
     <Compile Include="Objects\Packet.cs" />
-    <Compile Include="Objects\RequestValue.cs" />
-    <Compile Include="Objects\ResponseHandshake.cs" />
-    <Compile Include="Objects\ResponseValue.cs" />
+    <Compile Include="Objects\Packets\RequestValue.cs" />
+    <Compile Include="Objects\Packets\ResponseHandshake.cs" />
+    <Compile Include="Objects\Packets\ResponseValue.cs" />
     <Compile Include="Objects\Value.cs" />
-    <Compile Include="Objects\ChatMessage.cs" />
+    <Compile Include="Objects\Packets\ChatMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

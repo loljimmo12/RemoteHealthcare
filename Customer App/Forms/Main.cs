@@ -78,6 +78,8 @@ namespace Customer_App
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            return;
+
             // Initialize networking client
             if (!m_pNetworkClient.connect(Kettler_X7_Lib.Classes.Global.TCPSERVER_IP, Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT, false))
             {
@@ -204,6 +206,7 @@ namespace Customer_App
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
+            // Route data to server
             m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
             {
                 Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
@@ -224,11 +227,9 @@ namespace Customer_App
         }
 
         /// <summary>
-        /// Triggered when user wants to send a message
+        /// Sends chat message to server
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSendMessage_Click(object sender, EventArgs e)
+        private void sendChatMessage()
         {
             if (txtChatMessage.TextLength < 1)
             {
@@ -246,6 +247,29 @@ namespace Customer_App
 
             addToChat("Jijzelf", txtChatMessage.Text);
             txtChatMessage.Text = "";
+        }
+
+        /// <summary>
+        /// Triggered when user wants to send a message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSendMessage_Click(object sender, EventArgs e)
+        {
+            sendChatMessage();
+        }
+
+        /// <summary>
+        /// Keydown event at chat textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtChatMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                sendChatMessage();
+            }
         }
     }
 }

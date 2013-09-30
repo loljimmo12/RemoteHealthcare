@@ -248,6 +248,7 @@
             this.txtChatMessage.Name = "txtChatMessage";
             this.txtChatMessage.Size = new System.Drawing.Size(467, 20);
             this.txtChatMessage.TabIndex = 9;
+            this.txtChatMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChatMessage_KeyDown);
             // 
             // btnSendMessage
             // 
