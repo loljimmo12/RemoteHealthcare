@@ -19,25 +19,8 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             connect = Program.connect;
-            timer = new System.Timers.Timer(1000);
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(timerElapse);
-            timer.AutoReset = true;
         }
 
-        [Obsolete]
-        private void timerElapse(Object source, System.Timers.ElapsedEventArgs args)
-        {
-            if (selectedReciever != null)
-            {
-                try
-                {
-                    connect.requestData(Program.clients[selectedReciever].getName());
-                }
-                catch
-                {
-                }
-            }
-        }
 
         private void chart1_Click(object sender, EventArgs e)
         {
