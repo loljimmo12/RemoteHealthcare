@@ -1,4 +1,5 @@
-﻿using Server.Model;
+﻿using Kettler_X7_Lib.Objects;
+using Server.Model;
 using Server.View;
 using System;
 using System.Collections;
@@ -73,7 +74,13 @@ namespace Server.Control
 
             List<String> list = new List<string>();
             foreach (Client client in serverModel.onlineClients)
-                list.Add(client.userName);
+            {
+                if (!client.isDoctor)
+                {
+                    list.Add(client.userName);
+                }
+            }
+        
             pack.Data = list;
             return pack;
         }
@@ -137,6 +144,20 @@ namespace Server.Control
             }
         }
 
+        public void ForwardedValuePacket(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        {
+            foreach (Client tempClient in serverModel.onlineClients)
+            {
+                Kettler_X7_Lib.Objects.Value value = (Kettler_X7_Lib.Objects.Value) pack.Data;
+                value.Client = client.userName;
+                pack.Data = value;
+                if (tempClient.isDoctor)
+                {
+                    tempClient.sendHandler(pack);
+                }
+            }
+        }
+
         /// <summary>
         ///Returns a sendable packet based on requestvalue
         /// </summary>
@@ -196,12 +217,12 @@ namespace Server.Control
                     }
                     break;
                 case Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP:
-                    if (serverModel.onlineClients.Contains(client))
-                    {
-                        //is logged in already, send message back!
-                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
-                    }
-                    else
+//                    if (serverModel.onlineClients.Contains(client))
+//                    {
+//                        //is logged in already, send message back!
+//                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+//                    }
+//                    else
                     {
                         // everything's alright!
                         addClientToList(client);

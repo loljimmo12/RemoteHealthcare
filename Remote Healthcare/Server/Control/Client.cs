@@ -70,9 +70,13 @@ namespace Server.Control
         ///</summary>
         public void sendHandler(Kettler_X7_Lib.Objects.Packet pack)
         {
-            Console.WriteLine("flag {0}", pack.Flag);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            formatter.Serialize(tcpClient.GetStream(), pack);
+            try
+            {
+                formatter.Serialize(tcpClient.GetStream(), pack);
+            }
+            catch (Exception)
+            { }
         }
 
         ///<summary>
@@ -82,6 +86,13 @@ namespace Server.Control
         {
             this.userName = userName;
             this.password = password;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Client && (obj == this || ((Client) obj).userName == this.userName))
+                return true;
+            return false;
         }
     }
 }

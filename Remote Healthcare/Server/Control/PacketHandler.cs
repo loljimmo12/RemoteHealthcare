@@ -17,7 +17,9 @@ namespace Server.Control
             switch (pack.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
+                    Console.WriteLine("received values: {0}", pack.Data.ToString());
                     serverControl.writeToModel(client, (Kettler_X7_Lib.Objects.Value)pack.Data);
+                    serverControl.ForwardedValuePacket(client, pack);
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
@@ -50,7 +52,9 @@ namespace Server.Control
         ///</summary>
         public static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
         {
-            client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password); 
+            client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password);
+            client.isDoctor = ((Kettler_X7_Lib.Objects.Handshake) pack.Data).ClientFlag ==
+                              Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_DOCTORAPP;
         }
     }
 }
