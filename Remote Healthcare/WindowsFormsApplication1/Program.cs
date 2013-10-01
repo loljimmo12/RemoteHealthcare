@@ -235,16 +235,24 @@ namespace WindowsFormsApplication1
 
         internal void requestData(string user)
         {
-            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
-            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES;
-            Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
+            Console.WriteLine(user);
+            if (user != null || !user.Equals(""))
             {
-                ClientName = user,
-                Start = DateTime.Now,
-                End = DateTime.Now
-            };
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
+                Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+                Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES;
+                Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
+                {
+                    ClientName = user,
+                    Start = DateTime.Now,
+                    End = DateTime.Now
+                };
+                BinaryFormatter format = new BinaryFormatter();
+                format.Serialize(tcpClient.GetStream(), Pack);
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
 
         public string ip { get; set; }
