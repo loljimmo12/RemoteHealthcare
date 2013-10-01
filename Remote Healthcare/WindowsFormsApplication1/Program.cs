@@ -47,6 +47,7 @@ namespace WindowsFormsApplication1
 
             };
              tcpClient = new TcpClient(ip, 31337);
+             this.ip = ip;
              BinaryFormatter format = new BinaryFormatter();
              format.Serialize(tcpClient.GetStream(), Pack);
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
@@ -103,6 +104,7 @@ namespace WindowsFormsApplication1
                 }
                 catch
                 {
+                    tcpClient = new TcpClient(ip, 31337);
                     Console.WriteLine("socket was dropped");
                 }
 
@@ -244,6 +246,8 @@ namespace WindowsFormsApplication1
             BinaryFormatter format = new BinaryFormatter();
             format.Serialize(tcpClient.GetStream(), Pack);
         }
+
+        public string ip { get; set; }
     }
      class Client
      {
