@@ -176,7 +176,7 @@ namespace WindowsFormsApplication1
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
-                    Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
+            /*        Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
                     try
                     {
                         if (Program.form1.InvokeRequired)
@@ -186,7 +186,7 @@ namespace WindowsFormsApplication1
                     }
                     catch
                     {
-                    }
+                    }*/
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     break;
