@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
 
         private void timerElapse(Object source, System.Timers.ElapsedEventArgs args)
         {
-            if (selectedReciever != null)
+            if (selectedReciever != null && Program.clients.Count > 0)
             {
                 try
                 {
