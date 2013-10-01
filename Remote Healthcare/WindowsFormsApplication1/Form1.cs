@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
 
         private void timerElapse(Object source, System.Timers.ElapsedEventArgs args)
         {
-            if (Program.clients != null)
+            if (selectedReciever != null)
             {
                 try
                 {
@@ -80,8 +80,7 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (listBox1.SelectedIndex >= 0 && e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
 
             {
                 connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
@@ -154,15 +153,29 @@ namespace WindowsFormsApplication1
 
         public void updateUsers(List<string> users)
         {
+
+            foreach (Client client in Program.clients)
+            {
+                if (!users.Contains(client.getName()))
+                {
+                    this.listBox1.Items.Remove(client.getName());
+                    Program.clients.Remove(client);
+                }
+            }
+
             foreach (String user in users)
             {
-
+                
                 if (!listBox1.Items.Contains(user))
                 {
                     this.listBox1.Items.Add(user);
                     Program.clients.Add(new Client(user));
                 }
+
             }
+
+           
+            
         }
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -173,7 +186,7 @@ namespace WindowsFormsApplication1
 
         internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
         {
-            if (vals.ValueList != null && vals.ValueList.Count > 0)
+            if (vals.ValueList.Count > 0)
             {
                 Kettler_X7_Lib.Objects.Value val = vals.ValueList[0];
                 label1.Text = "Heartbeat " + val.Pulse;
