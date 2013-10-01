@@ -111,7 +111,7 @@ namespace Server.Control
             {
                 foreach (Client tempClient in serverModel.onlineClients)
                 {
-                    if (tempClient.userName == message.Receiver)
+                    if (tempClient.userName == message.Receiver || message.Receiver == "ALL")
                     {
                         tempClient.sendHandler(pack);
                     }
