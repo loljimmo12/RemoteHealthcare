@@ -236,7 +236,7 @@ namespace WindowsFormsApplication1
         internal void requestData(string user)
         {
             Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
-            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES;
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES;
             Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
             {
                 ClientName = user,
