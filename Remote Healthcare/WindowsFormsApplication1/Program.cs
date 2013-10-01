@@ -176,7 +176,7 @@ namespace WindowsFormsApplication1
                     break;
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
-            /*        Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
+                    Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
                     try
                     {
                         if (Program.form1.InvokeRequired)
@@ -186,7 +186,7 @@ namespace WindowsFormsApplication1
                     }
                     catch
                     {
-                    }*/
+                    }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     break;
@@ -233,26 +233,18 @@ namespace WindowsFormsApplication1
 
 
 
-        internal void requestData(string user)
+        internal void requestData(string user, DateTime start, DateTime end)
         {
-            Console.WriteLine(user);
-            if (user != null || !user.Equals(""))
+            Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
+            Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES;
+            Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
             {
-                Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
-                Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES;
-                Pack.Data = new Kettler_X7_Lib.Objects.RequestValue()
-                {
-                    ClientName = user,
-                    Start = DateTime.Now,
-                    End = DateTime.Now
-                };
-                BinaryFormatter format = new BinaryFormatter();
-                format.Serialize(tcpClient.GetStream(), Pack);
-            }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+                ClientName = user,
+                Start = start,
+                End = end
+            };
+            BinaryFormatter format = new BinaryFormatter();
+            format.Serialize(tcpClient.GetStream(), Pack);
         }
 
         public string ip { get; set; }
