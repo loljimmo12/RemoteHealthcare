@@ -68,7 +68,7 @@ namespace Simulator
 
             while ((receive=reader.ReadLine())!=null)
             {
-                if (receive.Length > 0)
+                if (tcpClient.GetStream().DataAvailable)
                 {
                     //Console.WriteLine(reader.ReadLine());
                     cm = reader.ReadLine();
