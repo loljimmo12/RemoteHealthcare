@@ -66,7 +66,7 @@ namespace Simulator
             StreamWriter writer = new StreamWriter(tcpClient.GetStream());
             string receive = null;
 
-            while ((receive=reader.ReadLine())!=null)
+            while (true)
             {
                 if (tcpClient.GetStream().DataAvailable)
                 {
