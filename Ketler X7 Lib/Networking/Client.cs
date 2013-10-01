@@ -116,6 +116,22 @@ namespace Kettler_X7_Lib.Networking
         }
 
         /// <summary>
+        /// Disconnects client from server
+        /// </summary>
+        public void disconnect()
+        {
+            if (m_pTcpClient != null && m_pTcpClient.Connected)
+            {
+                m_pTcpClient.Close();
+            }
+
+            if (m_pWorkerThread != null && m_pWorkerThread.IsAlive)
+            {
+                m_pWorkerThread.Abort();
+            }
+        }
+
+        /// <summary>
         /// Authenticates client to server
         /// </summary>
         /// <param name="nClientFlag"></param>
@@ -196,7 +212,7 @@ namespace Kettler_X7_Lib.Networking
                         break;
                     case ClientType.CLIENTTYPE_STRING:
 
-                        ((System.IO.StreamWriter)m_pOutHandlerObj).Write(pData);
+                        ((System.IO.StreamWriter)m_pOutHandlerObj).WriteLine(pData);
 
                         break;
                 }
@@ -241,12 +257,13 @@ namespace Kettler_X7_Lib.Networking
                                 }
 
                                 pData = ((System.IO.StreamReader)m_pInHandlerObj).ReadLine();
-
+                        
                                 break;
                         }
                     }
                     catch
                     {
+                        System.Diagnostics.Debug.WriteLine("Server went??");
                     }
                     
                     if (pData != null && DataReceived != null)

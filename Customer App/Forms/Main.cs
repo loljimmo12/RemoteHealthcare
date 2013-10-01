@@ -78,8 +78,6 @@ namespace Customer_App
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            return;
-
             // Initialize networking client
             if (!m_pNetworkClient.connect(Kettler_X7_Lib.Classes.Global.TCPSERVER_IP, Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT, false))
             {
@@ -87,7 +85,7 @@ namespace Customer_App
             }
             else
             {
-                m_pNetworkClient.authenticate(Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP, "Client 1", "jim");
+                m_pNetworkClient.authenticate(Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP, Kettler_X7_Lib.Classes.Global.CLIENT_NAME, null);
                 m_pNetworkClient.DataReceived += m_pNetworkClient_DataReceived;
             }
 
@@ -132,12 +130,12 @@ namespace Customer_App
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE:
 
-                    System.Diagnostics.Debug.WriteLine(((Kettler_X7_Lib.Objects.ResponseHandshake)e.PacketData).Result + " as a response to our handshake");
+                    System.Diagnostics.Debug.WriteLine(((Kettler_X7_Lib.Objects.ResponseHandshake)pPacket.Data).Result + " as a response to our handshake");
 
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
 
-                    m_pKettlerX7.sendRawCommand(((Kettler_X7_Lib.Objects.BikeControl)e.PacketData).Command);
+                    m_pKettlerX7.sendRawCommand(((Kettler_X7_Lib.Objects.BikeControl)pPacket.Data).Command);
 
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
@@ -206,6 +204,9 @@ namespace Customer_App
                 lblTimeValue.Text = e.Value.Time.ToString();
             });
 
+            // Set client name
+            e.Value.Client = Kettler_X7_Lib.Classes.Global.CLIENT_NAME;
+
             // Route data to server
             m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
             {
@@ -224,6 +225,7 @@ namespace Customer_App
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             m_pKettlerX7.onClose();
+            m_pNetworkClient.disconnect();
         }
 
         /// <summary>
@@ -247,6 +249,7 @@ namespace Customer_App
 
             addToChat("Jijzelf", txtChatMessage.Text);
             txtChatMessage.Text = "";
+            txtChatMessage.Focus();
         }
 
         /// <summary>

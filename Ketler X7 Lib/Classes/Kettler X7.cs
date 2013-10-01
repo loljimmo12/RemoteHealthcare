@@ -129,7 +129,6 @@ namespace Kettler_X7_Lib.Classes
                             throw new Exception("Could not create TCP connection.");
                         }
 
-
                         ((Networking.Client)m_pHandler).DataReceived += Kettler_X7_DataReceived;
 
                         break;
@@ -202,6 +201,28 @@ namespace Kettler_X7_Lib.Classes
             if (m_pWorkerThread != null && m_pWorkerThread.IsAlive)
             {
                 m_pWorkerThread.Abort();
+            }
+
+            if (m_pHandler != null)
+            {
+                switch (m_nSource)
+                {
+                    case Source.SOURCE_SERIALPORT:
+
+                        System.IO.Ports.SerialPort pSerialPort = (System.IO.Ports.SerialPort)m_pHandler;
+
+                        if (pSerialPort.IsOpen)
+                        {
+                            pSerialPort.Close();
+                        }
+
+                        break;
+                    case Source.SOURCE_SIMULATOR:
+
+                        ((Networking.Client)m_pHandler).disconnect();
+
+                        break;
+                }
             }
 
             // Close serial port
@@ -299,8 +320,6 @@ namespace Kettler_X7_Lib.Classes
             }
 
             Command nCommand = COMMAND_LIST.FirstOrDefault(x => (x.Value == strPreCommand)).Key;
-
-            System.Diagnostics.Debug.WriteLine(nCommand);
         }
 
         /// <summary>

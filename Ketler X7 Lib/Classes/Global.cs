@@ -11,7 +11,7 @@ namespace Kettler_X7_Lib.Classes
         /// <summary>
         /// The simulator's IP address
         /// </summary>
-        public const string SIMULATOR_IP = "";
+        public const string SIMULATOR_IP = "145.102.64.177";
 
         /// <summary>
         /// The simulator's port
@@ -21,11 +21,16 @@ namespace Kettler_X7_Lib.Classes
         /// <summary>
         /// The server's IP address
         /// </summary>
-        public const string TCPSERVER_IP = "";
+        public const string TCPSERVER_IP = "145.102.75.159";
 
         /// <summary>
         /// The server's port
         /// </summary>
         public const int TCPSERVER_PORT = 31337;
+
+        /// <summary>
+        /// The name of this client
+        /// </summary>
+        public const string CLIENT_NAME = "Client 1";
     }
 }

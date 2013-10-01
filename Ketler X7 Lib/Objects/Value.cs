@@ -10,6 +10,11 @@ namespace Kettler_X7_Lib.Objects
     public class Value
     {
         /// <summary>
+        /// The name of the client, server should set this
+        /// </summary>
+        public string Client { get; set; }
+        
+        /// <summary>
         /// The current pulse of the device
         /// </summary>
         public uint Pulse { get; set; }

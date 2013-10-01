@@ -49,6 +49,7 @@
             this.lblChatMessage = new System.Windows.Forms.Label();
             this.txtChatMessage = new System.Windows.Forms.TextBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
+            this.lblValues = new System.Windows.Forms.Label();
             this.tpCurrentStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +74,8 @@
             this.tpCurrentStats.Controls.Add(this.lblRPMText, 0, 1);
             this.tpCurrentStats.Controls.Add(this.lblPulseValue, 1, 0);
             this.tpCurrentStats.Controls.Add(this.lblPulseText, 0, 0);
-            this.tpCurrentStats.Location = new System.Drawing.Point(12, 10);
+            this.tpCurrentStats.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tpCurrentStats.Location = new System.Drawing.Point(12, 45);
             this.tpCurrentStats.Name = "tpCurrentStats";
             this.tpCurrentStats.RowCount = 8;
             this.tpCurrentStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -92,7 +94,7 @@
             this.lblTimeValue.AutoSize = true;
             this.lblTimeValue.Location = new System.Drawing.Point(197, 144);
             this.lblTimeValue.Name = "lblTimeValue";
-            this.lblTimeValue.Size = new System.Drawing.Size(0, 13);
+            this.lblTimeValue.Size = new System.Drawing.Size(0, 19);
             this.lblTimeValue.TabIndex = 15;
             // 
             // lblTimeText
@@ -100,7 +102,7 @@
             this.lblTimeText.AutoSize = true;
             this.lblTimeText.Location = new System.Drawing.Point(3, 144);
             this.lblTimeText.Name = "lblTimeText";
-            this.lblTimeText.Size = new System.Drawing.Size(24, 13);
+            this.lblTimeText.Size = new System.Drawing.Size(33, 19);
             this.lblTimeText.TabIndex = 14;
             this.lblTimeText.Text = "Tijd";
             // 
@@ -109,7 +111,7 @@
             this.lblEnergyValue.AutoSize = true;
             this.lblEnergyValue.Location = new System.Drawing.Point(197, 124);
             this.lblEnergyValue.Name = "lblEnergyValue";
-            this.lblEnergyValue.Size = new System.Drawing.Size(0, 13);
+            this.lblEnergyValue.Size = new System.Drawing.Size(0, 19);
             this.lblEnergyValue.TabIndex = 13;
             // 
             // lblEnergyText
@@ -117,7 +119,7 @@
             this.lblEnergyText.AutoSize = true;
             this.lblEnergyText.Location = new System.Drawing.Point(3, 124);
             this.lblEnergyText.Name = "lblEnergyText";
-            this.lblEnergyText.Size = new System.Drawing.Size(43, 13);
+            this.lblEnergyText.Size = new System.Drawing.Size(58, 19);
             this.lblEnergyText.TabIndex = 12;
             this.lblEnergyText.Text = "Energie";
             // 
@@ -126,7 +128,7 @@
             this.lblActPowerValue.AutoSize = true;
             this.lblActPowerValue.Location = new System.Drawing.Point(197, 104);
             this.lblActPowerValue.Name = "lblActPowerValue";
-            this.lblActPowerValue.Size = new System.Drawing.Size(0, 13);
+            this.lblActPowerValue.Size = new System.Drawing.Size(0, 19);
             this.lblActPowerValue.TabIndex = 11;
             // 
             // lblActPowerText
@@ -134,7 +136,7 @@
             this.lblActPowerText.AutoSize = true;
             this.lblActPowerText.Location = new System.Drawing.Point(3, 104);
             this.lblActPowerText.Name = "lblActPowerText";
-            this.lblActPowerText.Size = new System.Drawing.Size(89, 13);
+            this.lblActPowerText.Size = new System.Drawing.Size(119, 19);
             this.lblActPowerText.TabIndex = 10;
             this.lblActPowerText.Text = "Geleverde kracht";
             // 
@@ -143,7 +145,7 @@
             this.lblReqPowerValue.AutoSize = true;
             this.lblReqPowerValue.Location = new System.Drawing.Point(197, 84);
             this.lblReqPowerValue.Name = "lblReqPowerValue";
-            this.lblReqPowerValue.Size = new System.Drawing.Size(0, 13);
+            this.lblReqPowerValue.Size = new System.Drawing.Size(0, 19);
             this.lblReqPowerValue.TabIndex = 9;
             // 
             // lblReqPowerText
@@ -151,7 +153,7 @@
             this.lblReqPowerText.AutoSize = true;
             this.lblReqPowerText.Location = new System.Drawing.Point(3, 84);
             this.lblReqPowerText.Name = "lblReqPowerText";
-            this.lblReqPowerText.Size = new System.Drawing.Size(93, 13);
+            this.lblReqPowerText.Size = new System.Drawing.Size(123, 19);
             this.lblReqPowerText.TabIndex = 8;
             this.lblReqPowerText.Text = "Gevraagde kracht";
             // 
@@ -160,7 +162,7 @@
             this.lblDistanceValue.AutoSize = true;
             this.lblDistanceValue.Location = new System.Drawing.Point(197, 64);
             this.lblDistanceValue.Name = "lblDistanceValue";
-            this.lblDistanceValue.Size = new System.Drawing.Size(0, 13);
+            this.lblDistanceValue.Size = new System.Drawing.Size(0, 19);
             this.lblDistanceValue.TabIndex = 7;
             // 
             // lblDistanceText
@@ -168,7 +170,7 @@
             this.lblDistanceText.AutoSize = true;
             this.lblDistanceText.Location = new System.Drawing.Point(3, 64);
             this.lblDistanceText.Name = "lblDistanceText";
-            this.lblDistanceText.Size = new System.Drawing.Size(43, 13);
+            this.lblDistanceText.Size = new System.Drawing.Size(59, 19);
             this.lblDistanceText.TabIndex = 6;
             this.lblDistanceText.Text = "Afstand";
             // 
@@ -177,7 +179,7 @@
             this.lblSpeedValue.AutoSize = true;
             this.lblSpeedValue.Location = new System.Drawing.Point(197, 44);
             this.lblSpeedValue.Name = "lblSpeedValue";
-            this.lblSpeedValue.Size = new System.Drawing.Size(0, 13);
+            this.lblSpeedValue.Size = new System.Drawing.Size(0, 19);
             this.lblSpeedValue.TabIndex = 5;
             // 
             // lblSpeedText
@@ -185,7 +187,7 @@
             this.lblSpeedText.AutoSize = true;
             this.lblSpeedText.Location = new System.Drawing.Point(3, 44);
             this.lblSpeedText.Name = "lblSpeedText";
-            this.lblSpeedText.Size = new System.Drawing.Size(48, 13);
+            this.lblSpeedText.Size = new System.Drawing.Size(64, 19);
             this.lblSpeedText.TabIndex = 4;
             this.lblSpeedText.Text = "Snelheid";
             // 
@@ -194,7 +196,7 @@
             this.lblRPMValue.AutoSize = true;
             this.lblRPMValue.Location = new System.Drawing.Point(197, 22);
             this.lblRPMValue.Name = "lblRPMValue";
-            this.lblRPMValue.Size = new System.Drawing.Size(0, 13);
+            this.lblRPMValue.Size = new System.Drawing.Size(0, 19);
             this.lblRPMValue.TabIndex = 3;
             // 
             // lblRPMText
@@ -202,7 +204,7 @@
             this.lblRPMText.AutoSize = true;
             this.lblRPMText.Location = new System.Drawing.Point(3, 22);
             this.lblRPMText.Name = "lblRPMText";
-            this.lblRPMText.Size = new System.Drawing.Size(31, 13);
+            this.lblRPMText.Size = new System.Drawing.Size(39, 19);
             this.lblRPMText.TabIndex = 2;
             this.lblRPMText.Text = "RPM";
             // 
@@ -211,7 +213,7 @@
             this.lblPulseValue.AutoSize = true;
             this.lblPulseValue.Location = new System.Drawing.Point(197, 0);
             this.lblPulseValue.Name = "lblPulseValue";
-            this.lblPulseValue.Size = new System.Drawing.Size(0, 13);
+            this.lblPulseValue.Size = new System.Drawing.Size(0, 19);
             this.lblPulseValue.TabIndex = 1;
             // 
             // lblPulseText
@@ -219,32 +221,34 @@
             this.lblPulseText.AutoSize = true;
             this.lblPulseText.Location = new System.Drawing.Point(3, 0);
             this.lblPulseText.Name = "lblPulseText";
-            this.lblPulseText.Size = new System.Drawing.Size(46, 13);
+            this.lblPulseText.Size = new System.Drawing.Size(64, 19);
             this.lblPulseText.TabIndex = 0;
             this.lblPulseText.Text = "Hartslag";
             // 
             // txtChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(410, 32);
+            this.txtChat.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChat.Location = new System.Drawing.Point(410, 45);
             this.txtChat.Multiline = true;
             this.txtChat.Name = "txtChat";
             this.txtChat.ReadOnly = true;
+            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtChat.Size = new System.Drawing.Size(581, 451);
             this.txtChat.TabIndex = 7;
             // 
             // lblChatMessage
             // 
             this.lblChatMessage.AutoSize = true;
-            this.lblChatMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChatMessage.Location = new System.Drawing.Point(410, 10);
+            this.lblChatMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChatMessage.Location = new System.Drawing.Point(406, 9);
             this.lblChatMessage.Name = "lblChatMessage";
-            this.lblChatMessage.Size = new System.Drawing.Size(43, 20);
+            this.lblChatMessage.Size = new System.Drawing.Size(47, 20);
             this.lblChatMessage.TabIndex = 8;
             this.lblChatMessage.Text = "Chat";
             // 
             // txtChatMessage
             // 
-            this.txtChatMessage.Location = new System.Drawing.Point(410, 489);
+            this.txtChatMessage.Location = new System.Drawing.Point(410, 502);
             this.txtChatMessage.Name = "txtChatMessage";
             this.txtChatMessage.Size = new System.Drawing.Size(467, 20);
             this.txtChatMessage.TabIndex = 9;
@@ -252,7 +256,7 @@
             // 
             // btnSendMessage
             // 
-            this.btnSendMessage.Location = new System.Drawing.Point(884, 486);
+            this.btnSendMessage.Location = new System.Drawing.Point(884, 499);
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Size = new System.Drawing.Size(107, 23);
             this.btnSendMessage.TabIndex = 10;
@@ -260,11 +264,22 @@
             this.btnSendMessage.UseVisualStyleBackColor = true;
             this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
             // 
+            // lblValues
+            // 
+            this.lblValues.AutoSize = true;
+            this.lblValues.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValues.Location = new System.Drawing.Point(8, 9);
+            this.lblValues.Name = "lblValues";
+            this.lblValues.Size = new System.Drawing.Size(143, 20);
+            this.lblValues.TabIndex = 11;
+            this.lblValues.Text = "Huidige waarden";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 517);
+            this.ClientSize = new System.Drawing.Size(1003, 530);
+            this.Controls.Add(this.lblValues);
             this.Controls.Add(this.btnSendMessage);
             this.Controls.Add(this.txtChatMessage);
             this.Controls.Add(this.lblChatMessage);
@@ -304,6 +319,7 @@
         private System.Windows.Forms.Label lblChatMessage;
         private System.Windows.Forms.TextBox txtChatMessage;
         private System.Windows.Forms.Button btnSendMessage;
+        private System.Windows.Forms.Label lblValues;
 
     }
 }
