@@ -65,6 +65,7 @@ namespace Simulator
             string cm;
             StreamWriter writer = new StreamWriter(tcpClient.GetStream());
             string receive = null;
+            writer.AutoFlush = true;
 
             while (true)
             {
