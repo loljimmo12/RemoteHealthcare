@@ -71,32 +71,39 @@ namespace WindowsFormsApplication1
             while (true)
             {
                 Kettler_X7_Lib.Objects.Packet packet;
-                if (tcpClient.GetStream() != null)
+                try
                 {
-                    if (tcpClient.GetStream().CanRead)
+                    if (tcpClient.GetStream() != null)
                     {
-                        try
+                        if (tcpClient.GetStream().CanRead)
                         {
-                            packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
-                            handlePacket(packet);
+                            try
+                            {
+                                packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                                handlePacket(packet);
+                            }
+
+                            catch
+                            {
+                                Console.WriteLine("Packet lost");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("broke connection");
+                            break;
                         }
 
-                        catch
-                        {
-                            Console.WriteLine("Packet lost");
-                        }
                     }
                     else
                     {
                         Console.WriteLine("broke connection");
                         break;
                     }
-
                 }
-                else
+                catch
                 {
-                    Console.WriteLine("broke connection");
-                    break;
+                    Console.WriteLine("socket was dropped");
                 }
 
             }
@@ -124,7 +131,7 @@ namespace WindowsFormsApplication1
                         if (client.getName().Equals(chatMess.Sender.ToString()))
                         {
                             client.recieveChat(chatMess.Message, chatMess.Sender.ToString());
-                            int o;
+                            int o = 0;
                             for (int i = 0; i < Program.clients.Count; i++)
                             {
                                 if (Program.clients[i].getName().Equals(chatMess.Sender))
