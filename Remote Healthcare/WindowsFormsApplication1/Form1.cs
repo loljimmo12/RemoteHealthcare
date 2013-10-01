@@ -22,9 +22,9 @@ namespace WindowsFormsApplication1
             timer = new System.Timers.Timer(1000);
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timerElapse);
             timer.AutoReset = true;
-            timer.Start();
         }
 
+        [Obsolete]
         private void timerElapse(Object source, System.Timers.ElapsedEventArgs args)
         {
             if (selectedReciever != null)
