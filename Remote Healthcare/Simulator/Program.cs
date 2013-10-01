@@ -81,7 +81,7 @@ namespace Simulator
                     }
                     Console.WriteLine("Client said: " + cm);
                     //byte[] myWriteBuffer = Encoding.ASCII.GetBytes(sim.HandleCommand(cm));
-                    writer.WriteLine(sim.HandleCommand(cm));
+                    writer.WriteLine(sim.HandleCommand(cm).Replace(",", "."));
                 }
                 Thread.Sleep(10);
                 
