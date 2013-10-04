@@ -192,9 +192,28 @@ namespace WindowsFormsApplication1
                     Kettler_X7_Lib.Objects.Value val = (Kettler_X7_Lib.Objects.Value)packet.Data;
                     try
                     {
-                        if (Program.form1.InvokeRequired)
+                        foreach (Client client in Program.clients)
                         {
-                            Program.form1.Invoke(new Action(() => Program.form1.setValue(val)));
+                            if (client.getName().Equals(val.Client.ToString()))
+                            {
+                                client.updateValues(val);
+                                int o = 0;
+                                //for (int i = 0; i < Program.clients.Count; i++)
+                                //{
+                                //    if (Program.clients[i].getName().Equals(chatMess.Sender))
+                                //    {
+                                //        o = i;
+                                //        break;
+                                //    }
+                                //}
+                            }
+                        }
+                        if (false)
+                        {
+                            if (Program.form1.InvokeRequired)
+                            {
+                                //Program.form1.Invoke(new Action(() => Program.form1.setValue(val)));
+                            }
                         }
                     }
                     catch
