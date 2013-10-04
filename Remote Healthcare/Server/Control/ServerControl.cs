@@ -22,6 +22,7 @@ namespace Server.Control
             serverModel = new ServerModel();
             //test doctor list:
             serverModel.doctors = new List<DoctorCredentials> {new DoctorCredentials("Jim","Kanarie") };
+
             this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
         }
