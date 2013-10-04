@@ -172,14 +172,19 @@ namespace WindowsFormsApplication1
             if (vals.ValueList.Count > 0)
             {
                 Kettler_X7_Lib.Objects.Value val = vals.ValueList[0];
-                label1.Text = "Heartbeat " + val.Pulse;
-                label2.Text = "RPM " + val.RPM;
-                label3.Text = "Speed " + val.Speed;
-                label4.Text = "Distance" + val.Distance;
-                label5.Text = "Time" + val.Time;
-                label6.Text = "Power " + val.RequestedPower;
-                label7.Text = "Energy" + val.Energy;
+                setValue(val);
             }
+        }
+
+        internal void setValue(Kettler_X7_Lib.Objects.Value val)
+        {
+            label1.Text = "Heartbeat " + val.Pulse;
+            label2.Text = "RPM " + val.RPM;
+            label3.Text = "Speed " + val.Speed;
+            label4.Text = "Distance " + val.Distance;
+            label5.Text = "Time " + val.Time;
+            label6.Text = "Power " + val.RequestedPower;
+            label7.Text = "Energy " + val.Energy;
         }
 
         internal void refreshChat()

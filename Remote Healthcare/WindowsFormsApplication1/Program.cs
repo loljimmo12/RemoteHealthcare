@@ -189,6 +189,18 @@ namespace WindowsFormsApplication1
                     }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
+                    Kettler_X7_Lib.Objects.Value val = (Kettler_X7_Lib.Objects.Value)packet.Data;
+                    try
+                    {
+                        if (Program.form1.InvokeRequired)
+                        {
+                            Program.form1.Invoke(new Action(() => Program.form1.setValue(val)));
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    break;
                     break;
                 default:
                     Console.WriteLine("packet not recognized");
