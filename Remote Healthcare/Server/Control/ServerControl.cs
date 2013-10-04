@@ -187,7 +187,16 @@ namespace Server.Control
                     else
                     {
                         if (doc.password == shake.Password)
-                            response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                        {
+                            if (serverModel.onlineClients.Contains(client))
+                            {
+                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+                            }
+                            else
+                            {
+                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                            }
+                        }
                         else
                         {
                             doc.logins.Add(new Log(DateTime.Now, false));
@@ -207,12 +216,16 @@ namespace Server.Control
                                 }
 
                                 if (timeOutAccount)
-                                    response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+                                    response.Result =
+                                        Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
                                 else
-                                    response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                                    response.Result =
+                                        Kettler_X7_Lib.Objects.ResponseHandshake.ResultType
+                                            .RESULTTYPE_INVALIDCREDENTIALS;
                             }
                             else
-                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                                response.Result =
+                                    Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
                         }
                     }
                     break;
