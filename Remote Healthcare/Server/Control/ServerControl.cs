@@ -2,7 +2,6 @@
 using Server.Model;
 using Server.View;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
@@ -218,12 +217,12 @@ namespace Server.Control
                     }
                     break;
                 case Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_CUSTOMERAPP:
-//                    if (serverModel.onlineClients.Contains(client))
-//                    {
-//                        //is logged in already, send message back!
-//                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
-//                    }
-//                    else
+                    if (serverModel.onlineClients.Contains(client))
+                    {
+                        //is logged in already, send message back!
+                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                    }
+                    else
                     {
                         // everything's alright!
                         addClientToList(client);
@@ -238,6 +237,9 @@ namespace Server.Control
             responsePack.Data = response;
             responsePack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE;
             client.sendHandler(responsePack);
+
+            if (response.Result == ResponseHandshake.ResultType.RESULTTYPE_OK)
+                changeClientStatus(client, "online");
         }
 
         ///<summary>

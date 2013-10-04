@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Server.Control
 {
@@ -37,7 +31,6 @@ namespace Server.Control
             NetworkStream clientStream = tcpClient.GetStream();
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
-            serverControl.changeClientStatus(this, "online");           
 
             for (; ; )
             {
@@ -48,9 +41,6 @@ namespace Server.Control
                 }
                 catch {
                     disconnect();
-                }
-                finally
-                {
                 }
                 
                 Thread.Sleep(10);
