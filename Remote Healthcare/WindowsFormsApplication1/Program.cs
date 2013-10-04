@@ -265,11 +265,17 @@ namespace WindowsFormsApplication1
      {
          protected string naam;
          protected string chatLog;
+         protected Kettler_X7_Lib.Objects.Value lastVal;
          
          public Client(string naam)
          {
              this.naam = naam;
              chatLog = "";
+         }
+
+         public void updateValues(Kettler_X7_Lib.Objects.Value val)
+         {
+             lastVal = val;
          }
 
          public void recieveChat(string message, string sender)
@@ -285,6 +291,11 @@ namespace WindowsFormsApplication1
          public string getName()
          {
              return naam;
+         }
+
+         public Kettler_X7_Lib.Objects.Value getVal()
+         {
+             return lastVal;
          }
      }
 
