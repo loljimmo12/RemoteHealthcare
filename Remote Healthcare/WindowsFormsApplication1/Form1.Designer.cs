@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.clientChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -78,14 +78,14 @@
             // 
             // clientChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.clientChart.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.clientChart.ChartAreas.Add(chartArea2);
             this.clientChart.Location = new System.Drawing.Point(105, 12);
             this.clientChart.Name = "clientChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "Series1";
-            this.clientChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "Series1";
+            this.clientChart.Series.Add(series2);
             this.clientChart.Size = new System.Drawing.Size(283, 157);
             this.clientChart.TabIndex = 2;
             this.clientChart.Text = "Client";
@@ -270,6 +270,7 @@
             // 
             // comboBoxSelectReciever
             // 
+            this.comboBoxSelectReciever.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectReciever.FormattingEnabled = true;
             this.comboBoxSelectReciever.Items.AddRange(new object[] {
             "One user",
@@ -278,7 +279,6 @@
             this.comboBoxSelectReciever.Name = "comboBoxSelectReciever";
             this.comboBoxSelectReciever.Size = new System.Drawing.Size(93, 21);
             this.comboBoxSelectReciever.TabIndex = 19;
-            this.comboBoxSelectReciever.Text = "One user";
             this.comboBoxSelectReciever.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // Form1

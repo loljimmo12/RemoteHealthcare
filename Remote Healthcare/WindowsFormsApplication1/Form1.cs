@@ -66,9 +66,19 @@ namespace WindowsFormsApplication1
             if (listBox1.SelectedIndex >= 0 && e.KeyCode == Keys.Enter)
 
             {
-                connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
-                Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
-                chatArea.Text = Program.clients[selectedReciever].getChat();
+                if (comboBoxSelectReciever.ToString().Equals("All users"))
+                {
+                    connect.sendMessage(textBox1.Text, "ALL");
+                    Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me (to all)");
+                    chatArea.Text = Program.clients[selectedReciever].getChat();
+                }
+                else 
+                { 
+                    connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
+                    Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
+                    chatArea.Text = Program.clients[selectedReciever].getChat();
+                }
+                
                 
                 
             }
@@ -169,19 +179,14 @@ namespace WindowsFormsApplication1
             if (vals.ValueList.Count > 0)
             {
                 Kettler_X7_Lib.Objects.Value val = vals.ValueList[0];
-                setValue(val);
+                label1.Text = "Heartbeat " + val.Pulse;
+                label2.Text = "RPM " + val.RPM;
+                label3.Text = "Speed " + val.Speed;
+                label4.Text = "Distance" + val.Distance;
+                label5.Text = "Time" + val.Time;
+                label6.Text = "Power " + val.RequestedPower;
+                label7.Text = "Energy" + val.Energy;
             }
-        }
-
-        internal void setValue(Kettler_X7_Lib.Objects.Value val)
-        {
-            label1.Text = "Heartbeat " + val.Pulse;
-            label2.Text = "RPM " + val.RPM;
-            label3.Text = "Speed " + val.Speed;
-            label4.Text = "Distance " + val.Distance;
-            label5.Text = "Time " + val.Time;
-            label6.Text = "Power " + val.RequestedPower;
-            label7.Text = "Energy " + val.Energy;
         }
 
         internal void refreshChat()
