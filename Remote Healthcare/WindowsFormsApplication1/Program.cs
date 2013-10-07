@@ -189,6 +189,37 @@ namespace WindowsFormsApplication1
                     }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
+                    Kettler_X7_Lib.Objects.Value val = (Kettler_X7_Lib.Objects.Value)packet.Data;
+                    try
+                    {
+                        foreach (Client client in Program.clients)
+                        {
+                            if (client.getName().Equals(val.Client.ToString()))
+                            {
+                                client.updateValues(val);
+                                int o = 0;
+                                //for (int i = 0; i < Program.clients.Count; i++)
+                                //{
+                                //    if (Program.clients[i].getName().Equals(chatMess.Sender))
+                                //    {
+                                //        o = i;
+                                //        break;
+                                //    }
+                                //}
+                            }
+                        }
+                        if (false)
+                        {
+                            if (Program.form1.InvokeRequired)
+                            {
+                                //Program.form1.Invoke(new Action(() => Program.form1.setValue(val)));
+                            }
+                        }
+                    }
+                    catch
+                    {
+                    }
+                    break;
                     break;
                 default:
                     Console.WriteLine("packet not recognized");
@@ -253,11 +284,17 @@ namespace WindowsFormsApplication1
      {
          protected string naam;
          protected string chatLog;
+         protected Kettler_X7_Lib.Objects.Value lastVal;
          
          public Client(string naam)
          {
              this.naam = naam;
              chatLog = "";
+         }
+
+         public void updateValues(Kettler_X7_Lib.Objects.Value val)
+         {
+             lastVal = val;
          }
 
          public void recieveChat(string message, string sender)
@@ -273,6 +310,11 @@ namespace WindowsFormsApplication1
          public string getName()
          {
              return naam;
+         }
+
+         public Kettler_X7_Lib.Objects.Value getVal()
+         {
+             return lastVal;
          }
      }
 
