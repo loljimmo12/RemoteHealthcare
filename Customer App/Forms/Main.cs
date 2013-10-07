@@ -78,8 +78,24 @@ namespace Customer_App
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Attempt to load Server IP from file
+            string strServerIP = null;
+
+            try
+            {
+                strServerIP = System.IO.File.ReadAllText("ServerIP.txt");
+            }
+            catch
+            {
+            }
+
+            if (strServerIP == null)
+            {
+                strServerIP = Kettler_X7_Lib.Classes.Global.TCPSERVER_IP;
+            }
+
             // Initialize networking client
-            if (!m_pNetworkClient.connect(Kettler_X7_Lib.Classes.Global.TCPSERVER_IP, Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT, false))
+            if (!m_pNetworkClient.connect(strServerIP, Kettler_X7_Lib.Classes.Global.TCPSERVER_PORT, false))
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de server maken!");
             }
