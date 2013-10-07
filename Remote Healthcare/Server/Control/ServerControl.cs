@@ -37,7 +37,7 @@ namespace Server.Control
             {
                 try
                 {
-                    ServerView.writeToConsole("Listening..");
+                    ServerView.writeToConsole("Listening...");
                     tempClient = tcpListener.AcceptTcpClient();
                     acceptAClient(tempClient);
                     ServerView.writeToConsole("Connected.");
