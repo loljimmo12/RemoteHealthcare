@@ -136,14 +136,18 @@ namespace WindowsFormsApplication1
 
         public void updateUsers(List<string> users)
         {
-
+            List<Client> clients = new List<Client>();
             foreach (Client client in Program.clients)
             {
                 if (!users.Contains(client.getName()))
                 {
                     this.listBox1.Items.Remove(client.getName());
-                    Program.clients.Remove(client);
+                    clients.Add(client);
                 }
+            }
+            foreach (Client client in clients)
+            {
+                Program.clients.Remove(client);
             }
 
             foreach (String user in users)
@@ -164,7 +168,14 @@ namespace WindowsFormsApplication1
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             selectedReciever = this.listBox1.SelectedIndex;
-            chatArea.Text = Program.clients[selectedReciever].getChat();
+            if (selectedReciever < Program.clients.Count)
+            {
+                try
+                {
+                    chatArea.Text = Program.clients[selectedReciever].getChat();
+                }
+                catch { }
+            }
         }
 
         internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
