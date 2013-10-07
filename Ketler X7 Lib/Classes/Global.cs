@@ -11,7 +11,7 @@ namespace Kettler_X7_Lib.Classes
         /// <summary>
         /// The simulator's IP address
         /// </summary>
-        public const string SIMULATOR_IP = "145.102.64.177";
+        public const string SIMULATOR_IP = "145.102.65.69";
 
         /// <summary>
         /// The simulator's port

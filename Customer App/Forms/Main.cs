@@ -112,14 +112,14 @@ namespace Customer_App
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
 
-                if (!m_pKettlerX7.connect(null, Kettler_X7_Lib.Classes.Global.SIMULATOR_IP, Kettler_X7_Lib.Classes.Global.SIMULATOR_PORT, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
+                /*if (!m_pKettlerX7.connect(null, Kettler_X7_Lib.Classes.Global.SIMULATOR_IP, Kettler_X7_Lib.Classes.Global.SIMULATOR_PORT, Kettler_X7_Lib.Classes.Kettler_X7.Source.SOURCE_SIMULATOR))
                 {
                     Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de simulatie fiets maken!");
                 }
                 else
                 {
                     bConnected = true;
-                }
+                }*/
             }
             else
             {
@@ -153,11 +153,6 @@ namespace Customer_App
 
                     m_pKettlerX7.sendRawCommand(((Kettler_X7_Lib.Objects.BikeControl)pPacket.Data).Command);
 
-                    break;
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
-
-                    System.Diagnostics.Debug.WriteLine("Server sent values");
-                    
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
 
@@ -259,6 +254,7 @@ namespace Customer_App
                 Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT,
                 Data = new Kettler_X7_Lib.Objects.ChatMessage()
                 {
+                    Sender = Kettler_X7_Lib.Classes.Global.CLIENT_NAME,
                     Message = txtChatMessage.Text
                 }
             });
