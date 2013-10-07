@@ -63,16 +63,13 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (listBox1.SelectedIndex >= 0 && e.KeyCode == Keys.Enter)
 
             {
                 connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
                 Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
                 chatArea.Text = Program.clients[selectedReciever].getChat();
-                if (chatArea.Text.Equals("GOLD")) {
-                    textBox1.ResetText(); textBox1.Text = "Always believe in your soul ";
-                }
-                else textBox1.ResetText();
+                
                 
             }
         }
@@ -204,6 +201,11 @@ namespace WindowsFormsApplication1
             {
                 chatArea.Text = Program.clients[selectedReciever].getChat();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
