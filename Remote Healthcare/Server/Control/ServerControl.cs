@@ -1,4 +1,5 @@
-﻿using Kettler_X7_Lib.Objects;
+﻿using System.Xml.Linq;
+using Kettler_X7_Lib.Objects;
 using Server.Model;
 using Server.View;
 using System;
@@ -19,9 +20,7 @@ namespace Server.Control
         public ServerControl()
         {
             serverModel = new ServerModel();
-            //test doctor list:
-            serverModel.doctors = new List<DoctorCredentials> {new DoctorCredentials("Jim","Kanarie") };
-
+            serverModel.doctors = readDoctorFile("doctors.xml");
             this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
         }
@@ -269,6 +268,20 @@ namespace Server.Control
         public void finalizeClient()
         {
             serverModel.finalizeData();
+        }
+
+        public List<DoctorCredentials> readDoctorFile(String filepath)
+        {
+            List<DoctorCredentials> list = new List<DoctorCredentials>();
+            XDocument doc = XDocument.Load(filepath);
+            var doctors = doc.Descendants("doctor");
+            foreach (XElement xElement in doctors)
+            {
+                string name = xElement.Element("name").Value;
+                string pw = xElement.Element("password").Value;
+                list.Add(new DoctorCredentials(name, pw));
+            }
+            return list;
         }
     }
 }
