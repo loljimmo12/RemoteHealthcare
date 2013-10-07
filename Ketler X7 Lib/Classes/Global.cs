@@ -31,6 +31,6 @@ namespace Kettler_X7_Lib.Classes
         /// <summary>
         /// The name of this client
         /// </summary>
-        public const string CLIENT_NAME = "Client 1";
+        public static string CLIENT_NAME;
     }
 }

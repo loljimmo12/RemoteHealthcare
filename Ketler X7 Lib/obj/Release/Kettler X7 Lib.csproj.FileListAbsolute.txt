@@ -7,3 +7,11 @@ C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Ketler X7 Lib\bin\Release
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.dll
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.pdb
 C:\Users\Peter\Desktop\Healthcare Git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.csprojResolveAssemblyReference.cache
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\bin\Release\Resources\Certificate.cer
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\bin\Release\Kettler X7 Lib.dll.config
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\bin\Release\Kettler X7 Lib.dll
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\bin\Release\Kettler X7 Lib.pdb
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\bin\Release\NAudio.xml
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.csprojResolveAssemblyReference.cache
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.dll
+C:\Users\Ian\Desktop\git\RemoteHealthcare\Ketler X7 Lib\obj\Release\Kettler X7 Lib.pdb
