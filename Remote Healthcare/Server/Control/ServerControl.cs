@@ -4,6 +4,7 @@ using Server.View;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Server.Control
@@ -15,6 +16,8 @@ namespace Server.Control
     {
         private ServerModel serverModel;
         private TcpListener tcpListener;
+
+        static X509Certificate serverCertificate = null;
 
         public ServerControl()
         {
@@ -31,6 +34,7 @@ namespace Server.Control
         ///</summary>
         public void listenForClients()
         {
+            serverCertificate = X509Certificate.CreateFromCertFile("Healthcare.cer");
             tcpListener.Start();
             TcpClient tempClient;
 
@@ -269,6 +273,11 @@ namespace Server.Control
         public void finalizeClient()
         {
             serverModel.finalizeData();
+        }
+
+        public X509Certificate getCertificate()
+        {
+            return serverCertificate;
         }
     }
 }

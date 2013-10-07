@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 namespace Server.Control
@@ -8,6 +11,7 @@ namespace Server.Control
     {
         private Thread listenThread;
         private TcpClient tcpClient;
+        //private SslStream clientStream;
         public String userName { get; set; }
         private String password;
         private ServerControl serverControl;
@@ -29,8 +33,21 @@ namespace Server.Control
         public void handler()
         {
             NetworkStream clientStream = tcpClient.GetStream();
+            //clientStream = new SslStream(tcpClient.GetStream(), false);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
+
+            X509Certificate serverCertificate = serverControl.getCertificate();
+
+            //try
+            //{
+            //    clientStream.AuthenticateAsServer(serverCertificate,false, SslProtocols.Tls, true);
+            //} 
+            //catch (AuthenticationException)
+            //{
+            //    Console.WriteLine("Authentication failed");
+            //    disconnect();
+            //}
 
             for (; ; )
             {
@@ -39,7 +56,8 @@ namespace Server.Control
                     pack = formatter.Deserialize(clientStream) as Kettler_X7_Lib.Objects.Packet;
                     PacketHandler.getPacket(serverControl, this, pack);
                 }
-                catch {
+                catch 
+                {
                     disconnect();
                 }
                 
@@ -51,6 +69,7 @@ namespace Server.Control
         {
             serverControl.changeClientStatus(this, "offline");
             serverControl.finalizeClient();
+            //clientStream.Close();
             tcpClient.Close();
             listenThread.Abort();
         }
