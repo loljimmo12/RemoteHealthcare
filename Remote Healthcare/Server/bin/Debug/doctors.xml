@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<doctors>
+	<doctor>
+		<name>Jim</name>
+		<password>Kanarie</password>
+	</doctor>
+	<doctor>
+		<name>2de doctor die niet gebruikt wordt</name>
+		<password>want het is alleen om te testen</password>
+	</doctor>
+</doctors>
