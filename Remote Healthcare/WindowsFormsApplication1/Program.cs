@@ -127,12 +127,12 @@ namespace WindowsFormsApplication1
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
                     Kettler_X7_Lib.Objects.ChatMessage chatMess = (Kettler_X7_Lib.Objects.ChatMessage)packet.Data;
-                    Console.WriteLine(chatMess.Sender.ToString());
+                    Console.WriteLine(chatMess.Message);
                     foreach (Client client in Program.clients)
                     {
                         if (client.getName().Equals(chatMess.Sender.ToString()))
                         {
-                            client.recieveChat(chatMess.Message, chatMess.Sender.ToString());
+                            client.recieveChat(chatMess.Message, chatMess.Sender);
                             int o = 0;
                             for (int i = 0; i < Program.clients.Count; i++)
                             {
@@ -142,7 +142,7 @@ namespace WindowsFormsApplication1
                                     break;
                                 }
                             }
-                            if (Program.form1.selectedReciever == o)
+                            if (true)//Program.form1.selectedReciever == o)
                             {
                                 if (Program.form1.InvokeRequired)
                                 {
