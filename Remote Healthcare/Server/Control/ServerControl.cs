@@ -33,7 +33,7 @@ namespace Server.Control
         ///</summary>
         public void listenForClients()
         {
-            serverCertificate = X509Certificate.CreateFromCertFile("Healthcare.cer");
+            //serverCertificate = X509Certificate.CreateFromCertFile("Healthcare.cer");
             tcpListener.Start();
             TcpClient tempClient;
 
