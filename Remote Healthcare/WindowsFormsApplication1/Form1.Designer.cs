@@ -50,6 +50,7 @@
             this.textBoxSetEnergy = new System.Windows.Forms.TextBox();
             this.textBoxSetTime = new System.Windows.Forms.TextBox();
             this.comboBoxPower = new System.Windows.Forms.ComboBox();
+            this.comboBoxSelectReciever = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(105, 399);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(470, 20);
+            this.textBox1.Size = new System.Drawing.Size(370, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -267,11 +268,25 @@
             this.comboBoxPower.Text = "25 Power";
             this.comboBoxPower.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // comboBoxSelectReciever
+            // 
+            this.comboBoxSelectReciever.FormattingEnabled = true;
+            this.comboBoxSelectReciever.Items.AddRange(new object[] {
+            "One user",
+            "All users"});
+            this.comboBoxSelectReciever.Location = new System.Drawing.Point(482, 400);
+            this.comboBoxSelectReciever.Name = "comboBoxSelectReciever";
+            this.comboBoxSelectReciever.Size = new System.Drawing.Size(93, 21);
+            this.comboBoxSelectReciever.TabIndex = 19;
+            this.comboBoxSelectReciever.Text = "One user";
+            this.comboBoxSelectReciever.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
+            this.Controls.Add(this.comboBoxSelectReciever);
             this.Controls.Add(this.comboBoxPower);
             this.Controls.Add(this.textBoxSetTime);
             this.Controls.Add(this.textBoxSetEnergy);
@@ -322,6 +337,7 @@
         private System.Windows.Forms.TextBox textBoxSetEnergy;
         private System.Windows.Forms.TextBox textBoxSetTime;
         private System.Windows.Forms.ComboBox comboBoxPower;
+        private System.Windows.Forms.ComboBox comboBoxSelectReciever;
 
     }
 }
