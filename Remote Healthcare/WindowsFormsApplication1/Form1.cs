@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -89,7 +90,7 @@ namespace WindowsFormsApplication1
         {
             if(textBoxSetDistance != null)
             {
-                connect.sendCommand("PD"+textBoxSetDistance.Text);
+                connect.sendCommand("PD" + textBoxSetDistance.Text, this.listBox1.SelectedItem.ToString());
             }
         }
 
@@ -97,7 +98,7 @@ namespace WindowsFormsApplication1
         {
             if(textBoxSetEnergy != null)
             {
-                connect.sendCommand("PE"+textBoxSetEnergy.Text);
+                connect.sendCommand("PE" + textBoxSetEnergy.Text, this.listBox1.SelectedItem.ToString());
             }
         
         }
@@ -106,7 +107,7 @@ namespace WindowsFormsApplication1
         {
             if(textBoxSetTime != null)
             {
-                connect.sendCommand("PT"+textBoxSetTime.Text);
+                connect.sendCommand("PT" + textBoxSetTime.Text, this.listBox1.SelectedItem.ToString());
             }
         }
 
@@ -114,13 +115,13 @@ namespace WindowsFormsApplication1
         {
             if(textBoxSetTime != null)
             {
-                connect.sendCommand("PW" + comboBoxPower.Text);
+                connect.sendCommand("PW" + comboBoxPower.Text, this.listBox1.SelectedItem.ToString());
             }
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            connect.sendCommand("RS");
+            connect.sendCommand("RS", this.listBox1.SelectedItem.ToString());
             connect.requestUsers();
         }
 
@@ -144,13 +145,13 @@ namespace WindowsFormsApplication1
 
         public void updateUsers(List<string> users)
         {
-
+            List<Client> clients = new List<Client>();
             foreach (Client client in Program.clients)
             {
                 if (!users.Contains(client.getName()))
                 {
                     this.listBox1.Items.Remove(client.getName());
-                    Program.clients.Remove(client);
+                    clients.Add(client);
                 }
             }
 
@@ -164,7 +165,10 @@ namespace WindowsFormsApplication1
                 }
 
             }
-
+            foreach (Client client in clients)
+            {
+                Program.clients.Remove(client);
+            } 
            
             
         }
@@ -173,7 +177,7 @@ namespace WindowsFormsApplication1
         {
             
             selectedReciever = this.listBox1.SelectedIndex;
-            if (selectedReciever < Program.clients.Count())
+            if (selectedReciever < Program.clients.Count() && selectedReciever != -1)
             {
                 chatArea.Text = Program.clients[selectedReciever].getChat();
             }
@@ -181,22 +185,22 @@ namespace WindowsFormsApplication1
             {
                 this.listBox1.SelectedIndex = -1;
                 selectedReciever = -1;
-                chatArea.Text = Program.clients[selectedReciever].getChat();
+                //chatArea.Text = Program.clients[selectedReciever].getChat();
             }
         }
 
-        internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
+        internal void setValues(Kettler_X7_Lib.Objects.Value val)
         {
-            if (vals.ValueList.Count > 0)
+            if (val != null)
             {
-                Kettler_X7_Lib.Objects.Value val = vals.ValueList[0];
+                //Debug.WriteLine(val.Pulse);
                 label1.Text = "Heartbeat " + val.Pulse;
                 label2.Text = "RPM " + val.RPM;
-                label3.Text = "Speed " + val.Speed;
-                label4.Text = "Distance" + val.Distance;
-                label5.Text = "Time" + val.Time;
+                label3.Text = "Speed " + val.Speed/10.0;
+                label4.Text = "Distance " + val.Distance/10.0;
+                label5.Text = "Time " + val.Time;
                 label6.Text = "Power " + val.RequestedPower;
-                label7.Text = "Energy" + val.Energy;
+                label7.Text = "Energy " + val.Energy;
             }
         }
 
@@ -211,6 +215,19 @@ namespace WindowsFormsApplication1
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        internal void updateVals()
+        {
+            if (selectedReciever != -1)
+            {
+                try
+                {
+                    setValues(Program.clients[selectedReciever].getVal());
+                }
+                catch { }
+            }
+            
         }
     }
 }

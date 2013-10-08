@@ -189,7 +189,7 @@ namespace WindowsFormsApplication1
                     {
                         if (Program.form1.InvokeRequired)
                         {
-                            Program.form1.Invoke(new Action(() => Program.form1.setValues(vals)));
+                           // Program.form1.Invoke(new Action(() => Program.form1.setValues(vals)));
                         }
                     }
                     catch
@@ -197,6 +197,36 @@ namespace WindowsFormsApplication1
                     }
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
+                    Kettler_X7_Lib.Objects.Value vales = (Kettler_X7_Lib.Objects.Value)packet.Data;
+                    foreach (Client client in Program.clients)
+                    {
+                        if (client.getName().Equals(vales.Client.ToString()))
+                        {
+                            //client.recieveChat(val.Message, chatMess.Sender.ToString());
+                            client.setVal(vales);
+                            //int o = 0;
+                            //for (int i = 0; i < Program.clients.Count; i++)
+                            //{
+                            //    if (Program.clients[i].getName().Equals(chatMess.Sender))
+                            //    {
+                            //        o = i;
+                            //        break;
+                            //    }
+                            //}
+                            //if (Program.form1.selectedReciever == o)
+                            //{
+                            //    if (Program.form1.InvokeRequired)
+                            //    {
+                            //        Program.form1.Invoke(new Action(() => Program.form1.refreshChat()));
+                            //    }
+                            //}
+                            if (Program.form1.InvokeRequired)
+                            {
+                                Program.form1.Invoke(new Action(() => Program.form1.updateVals()));
+                            }
+                            
+                        }
+                    }
                     break;
                 default:
                     Console.WriteLine("packet not recognized");
@@ -245,13 +275,14 @@ namespace WindowsFormsApplication1
             sendPacket(Pack);
         }
 
-        public void sendCommand(string command)
+        public void sendCommand(string command, string client)
         {
             Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
             Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL;
             Pack.Data = new Kettler_X7_Lib.Objects.BikeControl()
             {
-               Command = command 
+               Command = command ,
+               Receiver = client
             };
             sendPacket(Pack);
         }
@@ -279,11 +310,22 @@ namespace WindowsFormsApplication1
      {
          protected string naam;
          protected string chatLog;
+         protected Kettler_X7_Lib.Objects.Value lastValue;
          
          public Client(string naam)
          {
              this.naam = naam;
              chatLog = "";
+         }
+
+         public void setVal(Kettler_X7_Lib.Objects.Value val)
+         {
+             lastValue = val;
+         }
+
+         public Kettler_X7_Lib.Objects.Value getVal()
+         {
+             return lastValue;
          }
 
          public void recieveChat(string message, string sender)
