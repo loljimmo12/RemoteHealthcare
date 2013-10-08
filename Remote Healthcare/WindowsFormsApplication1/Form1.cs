@@ -70,6 +70,10 @@ namespace WindowsFormsApplication1
                 {
                     connect.sendMessage(textBox1.Text, "ALL");
                     chatArea.Text += "Me ( to all ) [" + DateTime.Now.ToShortTimeString() + "]: "+ textBox1.Text + "\n";
+                    foreach (Client client in Program.clients)
+                    {
+                        client.recieveChat(textBox1.Text, "Me ( to all )")
+                    }
                     textBox1.Text = "";
                 }
                 else 
