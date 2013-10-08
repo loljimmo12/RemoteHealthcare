@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Threading;
+using System.Net.Security;
 
 namespace WindowsFormsApplication1
 {
@@ -48,6 +49,14 @@ namespace WindowsFormsApplication1
             };
              tcpClient = new TcpClient(ip, 31337);
              this.ip = ip;
+             stream = new SslStream(tcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(checkCert), null);
+             try
+             {
+                 stream.AuthenticateAsClient(ip);
+             }
+             catch
+             {
+             }
              sendPacket(Pack);
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
              Comm.Start(tcpClient);
@@ -79,7 +88,7 @@ namespace WindowsFormsApplication1
                         {
                             try
                             {
-                                packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(tcpClient.GetStream());
+                                packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(stream);
                                 handlePacket(packet);
                             }
 
@@ -238,8 +247,18 @@ namespace WindowsFormsApplication1
             if (packet != null)
             {
                 BinaryFormatter format = new BinaryFormatter();
-                format.Serialize(tcpClient.GetStream(), packet);
+                format.Serialize(stream, packet);
             }
+        }
+
+        public bool checkCert(object pSender,
+              System.Security.Cryptography.X509Certificates.X509Certificate pX509Certificate,
+              System.Security.Cryptography.X509Certificates.X509Chain pX509Chain, System.Net.Security.SslPolicyErrors pSslPolicyErrors)
+        {
+            System.Security.Cryptography.X509Certificates.X509Certificate2 pX509Certificate2 = (System.Security.Cryptography.X509Certificates.X509Certificate2)pX509Certificate;
+            Console.WriteLine(pX509Certificate2.Subject);
+            Console.WriteLine(pX509Certificate2.Thumbprint);
+            return true;
         }
 
 
@@ -283,6 +302,8 @@ namespace WindowsFormsApplication1
         }
 
         public string ip { get; set; }
+
+        public SslStream stream { get; set; }
     }
      class Client
      {
