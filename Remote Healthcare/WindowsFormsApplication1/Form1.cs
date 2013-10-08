@@ -129,6 +129,7 @@ namespace WindowsFormsApplication1
         {
             connect.sendCommand("RS", this.listBox1.SelectedItem.ToString());
             connect.requestUsers();
+            connect.requestData(this.listBox1.SelectedItem.ToString(), DateTime.UtcNow, DateTime.Now);
         }
 
         private void textBoxSetDistance_Click(object sender, EventArgs e)
