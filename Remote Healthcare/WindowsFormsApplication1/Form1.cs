@@ -20,8 +20,9 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             connect = Program.connect;
+            comboBoxSelectReciever.SelectedIndex = 0;
         }
-
+        
 
         private void chart1_Click(object sender, EventArgs e)
         {
@@ -70,7 +71,7 @@ namespace WindowsFormsApplication1
                 if (comboBoxSelectReciever.SelectedIndex == 1)
                 {
                     connect.sendMessage(textBox1.Text, "ALL");
-                    chatArea.Text += "Me ( to all ) [" + DateTime.Now.ToShortTimeString() + "]: "+ textBox1.Text + "\n";
+                    chatArea.Text += "[" + DateTime.Now.ToShortTimeString() + "] Me (to all): " + textBox1.Text + "\n";
                     foreach (Client client in Program.clients)
                     {
                         client.recieveChat(textBox1.Text, "Me ( to all )");
