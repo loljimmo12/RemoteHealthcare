@@ -121,7 +121,7 @@ namespace WindowsFormsApplication1
         {
             if(textBoxSetTime != null)
             {
-                connect.sendCommand("PW" + comboBoxPower.Text, this.listBox1.SelectedItem.ToString());
+                connect.sendCommand("PW " + comboBoxPower.Text.Split(' ')[0], this.listBox1.SelectedItem.ToString());
             }
         }
 
@@ -234,6 +234,11 @@ namespace WindowsFormsApplication1
                 catch { }
             }
             
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            connect.sendCommand("CM", this.listBox1.SelectedItem.ToString());
         }
     }
 }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.clientChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -51,6 +51,7 @@
             this.textBoxSetTime = new System.Windows.Forms.TextBox();
             this.comboBoxPower = new System.Windows.Forms.ComboBox();
             this.comboBoxSelectReciever = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,14 +79,14 @@
             // 
             // clientChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.clientChart.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.clientChart.ChartAreas.Add(chartArea1);
             this.clientChart.Location = new System.Drawing.Point(105, 12);
             this.clientChart.Name = "clientChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Name = "Series1";
-            this.clientChart.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.clientChart.Series.Add(series1);
             this.clientChart.Size = new System.Drawing.Size(283, 157);
             this.clientChart.TabIndex = 2;
             this.clientChart.Text = "Client";
@@ -281,11 +282,22 @@
             this.comboBoxSelectReciever.TabIndex = 19;
             this.comboBoxSelectReciever.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(451, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Enable Commands";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxSelectReciever);
             this.Controls.Add(this.comboBoxPower);
             this.Controls.Add(this.textBoxSetTime);
@@ -338,6 +350,7 @@
         private System.Windows.Forms.TextBox textBoxSetTime;
         private System.Windows.Forms.ComboBox comboBoxPower;
         private System.Windows.Forms.ComboBox comboBoxSelectReciever;
+        private System.Windows.Forms.Button button1;
 
     }
 }
