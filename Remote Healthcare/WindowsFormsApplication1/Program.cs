@@ -15,6 +15,7 @@ namespace WindowsFormsApplication1
     {
         public static Form1 form1;
         public static Form2 form2;
+        public static Form3 form3;
         public static Connection connect;
         public static List<Client> clients;
         /// <summary>
@@ -28,6 +29,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
             form2 = new Form2();
             form1 = new Form1();
+            form3 = new Form3();
             Application.Run(form2);
         }
     }
