@@ -11,7 +11,7 @@ namespace Server.Control
     {
         private Thread listenThread;
         private TcpClient tcpClient;
-        //private SslStream clientStream;
+        private SslStream clientStream;
         public String userName { get; set; }
         private String password;
         private ServerControl serverControl;
@@ -32,22 +32,21 @@ namespace Server.Control
         ///</summary>
         public void handler()
         {
-            NetworkStream clientStream = tcpClient.GetStream();
-            //clientStream = new SslStream(tcpClient.GetStream(), false);
+            clientStream = new SslStream(tcpClient.GetStream(), false);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
 
             X509Certificate serverCertificate = serverControl.getCertificate();
 
-            //try
-            //{
-            //    clientStream.AuthenticateAsServer(serverCertificate,false, SslProtocols.Tls, true);
-            //} 
-            //catch (AuthenticationException)
-            //{
-            //    Console.WriteLine("Authentication failed");
-            //    disconnect();
-            //}
+            try
+            {
+                clientStream.AuthenticateAsServer(serverCertificate,false, SslProtocols.Tls, false);
+            } 
+            catch (AuthenticationException)
+            {
+                Console.WriteLine("Authentication failed");
+                disconnect();
+            }
 
             for (; ; )
             {
@@ -69,9 +68,15 @@ namespace Server.Control
         {
             serverControl.changeClientStatus(this, "offline");
             serverControl.finalizeClient();
-            //clientStream.Close();
-            tcpClient.Close();
-            listenThread.Abort();
+            try
+            {
+                clientStream.Close();
+                tcpClient.Close();
+                listenThread.Abort();
+            }
+            catch
+            {
+            }
         }
 
         ///<summary>
@@ -82,7 +87,7 @@ namespace Server.Control
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             try
             {
-                formatter.Serialize(tcpClient.GetStream(), pack);
+                formatter.Serialize(clientStream, pack);
             }
             catch (Exception)
             { }
@@ -95,6 +100,11 @@ namespace Server.Control
         {
             this.userName = userName;
             this.password = password;
+        }
+
+        public override int GetHashCode()
+        {
+            return userName.GetHashCode();    
         }
 
         public override bool Equals(object obj)

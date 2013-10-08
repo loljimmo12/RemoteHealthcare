@@ -17,7 +17,6 @@ namespace Server.Control
             switch (pack.Flag)
             {
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                    Console.WriteLine("received values: {0}", pack.Data.ToString());
                     serverControl.writeToModel(client, (Kettler_X7_Lib.Objects.Value)pack.Data);
                     serverControl.ForwardedValuePacket(client, pack);
                     break;
@@ -40,7 +39,6 @@ namespace Server.Control
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST:
                     client.sendHandler(serverControl.getOnlineClientListPacket());
-                    Console.WriteLine("send a list of online users!");
                     break;
                 default:
                     break;

@@ -33,7 +33,7 @@ namespace Server.Control
         ///</summary>
         public void listenForClients()
         {
-            //serverCertificate = X509Certificate.CreateFromCertFile("Healthcare.cer");
+            serverCertificate = X509Certificate.CreateFromCertFile("Healthcare.cer");
             tcpListener.Start();
             TcpClient tempClient;
 
@@ -108,7 +108,6 @@ namespace Server.Control
         public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack, Client client)
         {
             Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
-            ServerView.writeToConsole(message.Message);
 
             if (client.isDoctor)
             {
