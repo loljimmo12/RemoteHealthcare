@@ -63,20 +63,21 @@ namespace WindowsFormsApplication1
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (listBox1.SelectedIndex >= 0 && e.KeyCode == Keys.Enter)
+            if ((listBox1.SelectedIndex >= 0 && e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Enter && comboBoxSelectReciever.SelectedIndex == 1))
 
             {
-                if (comboBoxSelectReciever.ToString().Equals("All users"))
+                if (comboBoxSelectReciever.SelectedIndex == 1)
                 {
                     connect.sendMessage(textBox1.Text, "ALL");
-                    Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me (to all)");
-                    chatArea.Text = Program.clients[selectedReciever].getChat();
+                    chatArea.Text += "Me ( to all ) [" + DateTime.Now.ToShortTimeString() + "]: "+ textBox1.Text + "\n";
+                    textBox1.Text = "";
                 }
                 else 
                 { 
                     connect.sendMessage(textBox1.Text, this.listBox1.SelectedItem.ToString());
                     Program.clients[selectedReciever].recieveChat(textBox1.Text, "Me");
                     chatArea.Text = Program.clients[selectedReciever].getChat();
+                    textBox1.Text = "";
                 }
                 
                 
@@ -143,18 +144,14 @@ namespace WindowsFormsApplication1
 
         public void updateUsers(List<string> users)
         {
-            List<Client> clients = new List<Client>();
+
             foreach (Client client in Program.clients)
             {
                 if (!users.Contains(client.getName()))
                 {
                     this.listBox1.Items.Remove(client.getName());
-                    clients.Add(client);
+                    Program.clients.Remove(client);
                 }
-            }
-            foreach (Client client in clients)
-            {
-                Program.clients.Remove(client);
             }
 
             foreach (String user in users)
@@ -175,14 +172,7 @@ namespace WindowsFormsApplication1
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             selectedReciever = this.listBox1.SelectedIndex;
-            if (selectedReciever < Program.clients.Count)
-            {
-                try
-                {
-                    chatArea.Text = Program.clients[selectedReciever].getChat();
-                }
-                catch { }
-            }
+            chatArea.Text = Program.clients[selectedReciever].getChat();
         }
 
         internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
