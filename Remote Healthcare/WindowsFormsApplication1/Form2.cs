@@ -24,7 +24,15 @@ namespace WindowsFormsApplication1
         {
             if (e.KeyCode == Keys.Enter)
             {
-                connect.Login(textBox1.Text, textBox2.Text, textBox3.Text);
+                try
+                {
+                    connect.Login(textBox1.Text, textBox2.Text, textBox3.Text);
+                }
+
+                catch
+                {
+                    MessageBox.Show("Server is unavailable, it is probably offline, please try again later.", "Server unavailable", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -43,10 +51,10 @@ namespace WindowsFormsApplication1
             switch (errorCode)
             {
                 case 1:
-                    MessageBox.Show("Invalid username and/or password!", "Acces denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid username and/or password!", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case 2:
-                    MessageBox.Show("User already in use!", "Invalid credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("User already in use!", "Acces denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
          }

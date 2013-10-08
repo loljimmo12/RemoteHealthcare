@@ -171,8 +171,18 @@ namespace WindowsFormsApplication1
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
+            
             selectedReciever = this.listBox1.SelectedIndex;
-            chatArea.Text = Program.clients[selectedReciever].getChat();
+            if (selectedReciever < Program.clients.Count())
+            {
+                chatArea.Text = Program.clients[selectedReciever].getChat();
+            }
+            else
+            {
+                this.listBox1.SelectedIndex = -1;
+                selectedReciever = -1;
+                chatArea.Text = Program.clients[selectedReciever].getChat();
+            }
         }
 
         internal void setValues(Kettler_X7_Lib.Objects.ResponseValue vals)
