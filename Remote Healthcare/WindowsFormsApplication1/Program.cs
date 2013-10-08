@@ -48,8 +48,7 @@ namespace WindowsFormsApplication1
             };
              tcpClient = new TcpClient(ip, 31337);
              this.ip = ip;
-             BinaryFormatter format = new BinaryFormatter();
-             format.Serialize(tcpClient.GetStream(), Pack);
+             sendPacket(Pack);
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
              Comm.Start(tcpClient);
              
@@ -231,8 +230,16 @@ namespace WindowsFormsApplication1
         {
             Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
             Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST;
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
+            sendPacket(Pack);
+        }
+
+        public void sendPacket(Kettler_X7_Lib.Objects.Packet packet)
+        {
+            if (packet != null)
+            {
+                BinaryFormatter format = new BinaryFormatter();
+                format.Serialize(tcpClient.GetStream(), packet);
+            }
         }
 
 
@@ -246,8 +253,7 @@ namespace WindowsFormsApplication1
                 Sender = "Jim",
                 Message = message
             };
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
+            sendPacket(Pack);
         }
 
         public void sendCommand(string command)
@@ -258,8 +264,7 @@ namespace WindowsFormsApplication1
             {
                Command = command 
             };
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
+            sendPacket(Pack);
         }
 
 
@@ -274,8 +279,7 @@ namespace WindowsFormsApplication1
                 Start = start,
                 End = end
             };
-            BinaryFormatter format = new BinaryFormatter();
-            format.Serialize(tcpClient.GetStream(), Pack);
+            sendPacket(Pack);
         }
 
         public string ip { get; set; }
