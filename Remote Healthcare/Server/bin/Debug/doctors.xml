@@ -5,7 +5,7 @@
 		<password>Kanarie</password>
 	</doctor>
 	<doctor>
-		<name>2de doctor die niet gebruikt wordt</name>
-		<password>want het is alleen om te testen</password>
+		<name>2de doctor</name>
+		<password>vogel</password>
 	</doctor>
 </doctors>

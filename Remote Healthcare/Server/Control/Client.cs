@@ -32,7 +32,7 @@ namespace Server.Control
         ///</summary>
         public void handler()
         {
-            clientStream = new SslStream(tcpClient.GetStream(), false);
+            clientStream = new SslStream(tcpClient.GetStream(), true);
             System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             Kettler_X7_Lib.Objects.Packet pack = null;
 
@@ -42,7 +42,7 @@ namespace Server.Control
             {
                 clientStream.AuthenticateAsServer(serverCertificate,false, SslProtocols.Tls, false);
             } 
-            catch (AuthenticationException)
+            catch (Exception)
             {
                 Console.WriteLine("Authentication failed");
                 disconnect();
