@@ -187,16 +187,21 @@ namespace WindowsFormsApplication1
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
                     Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
-                    try
+                    foreach (Kettler_X7_Lib.Objects.Value value in vals.ValueList)
                     {
-                        if (Program.form1.InvokeRequired)
-                        {
+                        Console.WriteLine(value.Client);
+                    }
+                    Console.WriteLine("amount of datas: " + vals.ValueList.Count);
+                    //try
+                    //{
+                    //    if (Program.form1.InvokeRequired)
+                    //    {
                            // Program.form1.Invoke(new Action(() => Program.form1.setValues(vals)));
-                        }
-                    }
-                    catch
-                    {
-                    }
+                    //    }
+                    //}
+                    //catch
+                    //{
+                    //}
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     Kettler_X7_Lib.Objects.Value vales = (Kettler_X7_Lib.Objects.Value)packet.Data;
