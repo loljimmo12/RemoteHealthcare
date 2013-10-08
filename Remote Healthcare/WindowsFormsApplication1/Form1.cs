@@ -73,7 +73,8 @@ namespace WindowsFormsApplication1
                     chatArea.Text += "Me ( to all ) [" + DateTime.Now.ToShortTimeString() + "]: "+ textBox1.Text + "\n";
                     foreach (Client client in Program.clients)
                     {
-                        client.recieveChat(textBox1.Text, "Me ( to all )")
+                        client.recieveChat(textBox1.Text, "Me ( to all )");
+                    //nee
                     }
                     textBox1.Text = "";
                 }
