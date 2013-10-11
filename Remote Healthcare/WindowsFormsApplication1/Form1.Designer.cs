@@ -51,6 +51,7 @@
             this.textBoxSetTime = new System.Windows.Forms.TextBox();
             this.comboBoxPower = new System.Windows.Forms.ComboBox();
             this.comboBoxSelectReciever = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -282,11 +283,22 @@
             this.comboBoxSelectReciever.TabIndex = 19;
             this.comboBoxSelectReciever.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(451, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Enable Commands";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxSelectReciever);
             this.Controls.Add(this.comboBoxPower);
             this.Controls.Add(this.textBoxSetTime);
@@ -339,6 +351,7 @@
         private System.Windows.Forms.TextBox textBoxSetTime;
         private System.Windows.Forms.ComboBox comboBoxPower;
         private System.Windows.Forms.ComboBox comboBoxSelectReciever;
+        private System.Windows.Forms.Button button1;
 
     }
 }

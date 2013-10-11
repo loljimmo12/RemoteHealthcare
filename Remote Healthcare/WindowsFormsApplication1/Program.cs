@@ -60,12 +60,15 @@ namespace WindowsFormsApplication1
              {
              }
              sendPacket(Pack);
+             logged = true;
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
              Comm.Start(tcpClient);
-             
+             lost = 0;
+             this.login = login;
+             this.pass = password;
             //temp code for testing without server
             //Program.form2.denied(2);
-            Program.form2.Close();
+            //Program.form2.Close();
             //clientStream.Write(), 0, );
         }
 
@@ -92,11 +95,26 @@ namespace WindowsFormsApplication1
                             {
                                 packet = (Kettler_X7_Lib.Objects.Packet)new BinaryFormatter().Deserialize(stream);
                                 handlePacket(packet);
+                                lost = 0;
                             }
 
                             catch
                             {
-                                Console.WriteLine("Packet lost");
+                                if (logged)
+                                {
+                                    ++lost;
+                                    Console.WriteLine("Packet lost");
+                                    if (lost > 5)
+                                    {
+                                        logged = false;
+                                        Program.connect.Login(login, pass, ip);
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    Program.form2.denied(3);
+                                }
                             }
                         }
                         else
@@ -312,6 +330,14 @@ namespace WindowsFormsApplication1
         public string ip { get; set; }
 
         public SslStream stream { get; set; }
+
+        public int lost { get; set; }
+
+        public bool logged { get; set; }
+
+        public string login { get; set; }
+
+        public string pass { get; set; }
     }
      class Client
      {
