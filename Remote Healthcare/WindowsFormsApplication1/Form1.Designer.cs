@@ -93,6 +93,7 @@
             // 
             // chatArea
             // 
+            this.chatArea.Enabled = false;
             this.chatArea.Location = new System.Drawing.Point(105, 262);
             this.chatArea.Name = "chatArea";
             this.chatArea.Size = new System.Drawing.Size(470, 131);

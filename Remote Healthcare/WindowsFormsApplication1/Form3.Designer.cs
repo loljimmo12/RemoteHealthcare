@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class Form3
+    partial class h
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxHHBegin = new System.Windows.Forms.TextBox();
+            this.textBoxMMBegin = new System.Windows.Forms.TextBox();
+            this.textBoxSSBegin = new System.Windows.Forms.TextBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBoxSSEnd = new System.Windows.Forms.TextBox();
+            this.textBoxMMEnd = new System.Windows.Forms.TextBox();
+            this.textBoxHHEnd = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelEnergy = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             this.labelHeartBeat = new System.Windows.Forms.Label();
             this.comboBoxSelectDateTime = new System.Windows.Forms.ComboBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonLoadData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,26 +61,32 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 0;
             // 
-            // textBox1
+            // textBoxHHBegin
             // 
-            this.textBox1.Location = new System.Drawing.Point(308, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(29, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBoxHHBegin.Location = new System.Drawing.Point(319, 13);
+            this.textBoxHHBegin.Name = "textBoxHHBegin";
+            this.textBoxHHBegin.Size = new System.Drawing.Size(22, 20);
+            this.textBoxHHBegin.TabIndex = 1;
+            this.textBoxHHBegin.Text = "HH";
+            this.textBoxHHBegin.Enter += new System.EventHandler(this.textBoxHHBegin_Enter);
             // 
-            // textBox2
+            // textBoxMMBegin
             // 
-            this.textBox2.Location = new System.Drawing.Point(343, 13);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(29, 20);
-            this.textBox2.TabIndex = 2;
+            this.textBoxMMBegin.Location = new System.Drawing.Point(354, 12);
+            this.textBoxMMBegin.Name = "textBoxMMBegin";
+            this.textBoxMMBegin.Size = new System.Drawing.Size(22, 20);
+            this.textBoxMMBegin.TabIndex = 2;
+            this.textBoxMMBegin.Text = "MM";
+            this.textBoxMMBegin.Enter += new System.EventHandler(this.textBoxMMBegin_Enter);
             // 
-            // textBox3
+            // textBoxSSBegin
             // 
-            this.textBox3.Location = new System.Drawing.Point(378, 13);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(29, 20);
-            this.textBox3.TabIndex = 3;
+            this.textBoxSSBegin.Location = new System.Drawing.Point(389, 12);
+            this.textBoxSSBegin.Name = "textBoxSSBegin";
+            this.textBoxSSBegin.Size = new System.Drawing.Size(22, 20);
+            this.textBoxSSBegin.TabIndex = 3;
+            this.textBoxSSBegin.Text = "SS";
+            this.textBoxSSBegin.Enter += new System.EventHandler(this.textBoxSSBegin_Enter);
             // 
             // dateTimePicker2
             // 
@@ -88,26 +95,33 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 4;
             // 
-            // textBox4
+            // textBoxSSEnd
             // 
-            this.textBox4.Location = new System.Drawing.Point(378, 51);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(29, 20);
-            this.textBox4.TabIndex = 7;
+            this.textBoxSSEnd.Location = new System.Drawing.Point(389, 51);
+            this.textBoxSSEnd.Name = "textBoxSSEnd";
+            this.textBoxSSEnd.Size = new System.Drawing.Size(22, 20);
+            this.textBoxSSEnd.TabIndex = 7;
+            this.textBoxSSEnd.Text = "SS";
+            this.textBoxSSEnd.Enter += new System.EventHandler(this.textBoxSSEnd_Enter);
             // 
-            // textBox5
+            // textBoxMMEnd
             // 
-            this.textBox5.Location = new System.Drawing.Point(343, 51);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(29, 20);
-            this.textBox5.TabIndex = 6;
+            this.textBoxMMEnd.Location = new System.Drawing.Point(354, 51);
+            this.textBoxMMEnd.Name = "textBoxMMEnd";
+            this.textBoxMMEnd.Size = new System.Drawing.Size(22, 20);
+            this.textBoxMMEnd.TabIndex = 6;
+            this.textBoxMMEnd.Text = "MM";
+            this.textBoxMMEnd.Enter += new System.EventHandler(this.textBoxMMEnd_Enter);
             // 
-            // textBox6
+            // textBoxHHEnd
             // 
-            this.textBox6.Location = new System.Drawing.Point(308, 51);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(29, 20);
-            this.textBox6.TabIndex = 5;
+            this.textBoxHHEnd.Location = new System.Drawing.Point(319, 50);
+            this.textBoxHHEnd.Name = "textBoxHHEnd";
+            this.textBoxHHEnd.Size = new System.Drawing.Size(22, 20);
+            this.textBoxHHEnd.TabIndex = 5;
+            this.textBoxHHEnd.Text = "HH";
+            this.textBoxHHEnd.TextChanged += new System.EventHandler(this.textBoxHHEnd_TextChanged);
+            this.textBoxHHEnd.Enter += new System.EventHandler(this.textBoxHHEnd_Enter);
             // 
             // label1
             // 
@@ -133,7 +147,7 @@
             // labelEnergy
             // 
             this.labelEnergy.AutoSize = true;
-            this.labelEnergy.Location = new System.Drawing.Point(202, 140);
+            this.labelEnergy.Location = new System.Drawing.Point(202, 191);
             this.labelEnergy.Name = "labelEnergy";
             this.labelEnergy.Size = new System.Drawing.Size(40, 13);
             this.labelEnergy.TabIndex = 16;
@@ -142,7 +156,7 @@
             // labelPower
             // 
             this.labelPower.AutoSize = true;
-            this.labelPower.Location = new System.Drawing.Point(202, 120);
+            this.labelPower.Location = new System.Drawing.Point(202, 171);
             this.labelPower.Name = "labelPower";
             this.labelPower.Size = new System.Drawing.Size(37, 13);
             this.labelPower.TabIndex = 15;
@@ -151,7 +165,7 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Location = new System.Drawing.Point(202, 99);
+            this.labelTime.Location = new System.Drawing.Point(202, 150);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(30, 13);
             this.labelTime.TabIndex = 14;
@@ -160,7 +174,7 @@
             // labelDistance
             // 
             this.labelDistance.AutoSize = true;
-            this.labelDistance.Location = new System.Drawing.Point(26, 162);
+            this.labelDistance.Location = new System.Drawing.Point(26, 213);
             this.labelDistance.Name = "labelDistance";
             this.labelDistance.Size = new System.Drawing.Size(49, 13);
             this.labelDistance.TabIndex = 13;
@@ -169,7 +183,7 @@
             // labelSpeed
             // 
             this.labelSpeed.AutoSize = true;
-            this.labelSpeed.Location = new System.Drawing.Point(26, 140);
+            this.labelSpeed.Location = new System.Drawing.Point(26, 191);
             this.labelSpeed.Name = "labelSpeed";
             this.labelSpeed.Size = new System.Drawing.Size(38, 13);
             this.labelSpeed.TabIndex = 12;
@@ -178,7 +192,7 @@
             // labelRPM
             // 
             this.labelRPM.AutoSize = true;
-            this.labelRPM.Location = new System.Drawing.Point(26, 120);
+            this.labelRPM.Location = new System.Drawing.Point(26, 171);
             this.labelRPM.Name = "labelRPM";
             this.labelRPM.Size = new System.Drawing.Size(31, 13);
             this.labelRPM.TabIndex = 11;
@@ -186,7 +200,7 @@
             // 
             // labelHeartBeat
             // 
-            this.labelHeartBeat.Location = new System.Drawing.Point(23, 99);
+            this.labelHeartBeat.Location = new System.Drawing.Point(23, 150);
             this.labelHeartBeat.Name = "labelHeartBeat";
             this.labelHeartBeat.Size = new System.Drawing.Size(58, 13);
             this.labelHeartBeat.TabIndex = 10;
@@ -197,32 +211,42 @@
             // 
             this.comboBoxSelectDateTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectDateTime.FormattingEnabled = true;
-            this.comboBoxSelectDateTime.Location = new System.Drawing.Point(308, 99);
+            this.comboBoxSelectDateTime.Location = new System.Drawing.Point(305, 150);
             this.comboBoxSelectDateTime.Name = "comboBoxSelectDateTime";
             this.comboBoxSelectDateTime.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectDateTime.TabIndex = 17;
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(12, 195);
+            chartArea8.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart1.Legends.Add(legend8);
+            this.chart1.Location = new System.Drawing.Point(12, 245);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chart1.Series.Add(series8);
             this.chart1.Size = new System.Drawing.Size(414, 214);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "chart1";
             // 
-            // Form3
+            // buttonLoadData
+            // 
+            this.buttonLoadData.Location = new System.Drawing.Point(328, 77);
+            this.buttonLoadData.Name = "buttonLoadData";
+            this.buttonLoadData.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadData.TabIndex = 19;
+            this.buttonLoadData.Text = "Load data";
+            this.buttonLoadData.UseVisualStyleBackColor = true;
+            // 
+            // h
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 421);
+            this.ClientSize = new System.Drawing.Size(438, 471);
+            this.Controls.Add(this.buttonLoadData);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.comboBoxSelectDateTime);
             this.Controls.Add(this.labelEnergy);
@@ -234,15 +258,15 @@
             this.Controls.Add(this.labelHeartBeat);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBoxSSEnd);
+            this.Controls.Add(this.textBoxMMEnd);
+            this.Controls.Add(this.textBoxHHEnd);
             this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxSSBegin);
+            this.Controls.Add(this.textBoxMMBegin);
+            this.Controls.Add(this.textBoxHHBegin);
             this.Controls.Add(this.dateTimePicker1);
-            this.Name = "Form3";
+            this.Name = "h";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
@@ -254,13 +278,13 @@
         #endregion
 
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxHHBegin;
+        private System.Windows.Forms.TextBox textBoxMMBegin;
+        private System.Windows.Forms.TextBox textBoxSSBegin;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBoxSSEnd;
+        private System.Windows.Forms.TextBox textBoxMMEnd;
+        private System.Windows.Forms.TextBox textBoxHHEnd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelEnergy;
@@ -272,5 +296,6 @@
         private System.Windows.Forms.Label labelHeartBeat;
         private System.Windows.Forms.ComboBox comboBoxSelectDateTime;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button buttonLoadData;
     }
 }
