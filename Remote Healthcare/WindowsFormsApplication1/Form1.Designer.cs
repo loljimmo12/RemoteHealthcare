@@ -52,6 +52,7 @@
             this.comboBoxPower = new System.Windows.Forms.ComboBox();
             this.comboBoxSelectReciever = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.buttonLoadOldData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,7 +169,7 @@
             // 
             // buttonSetDistance
             // 
-            this.buttonSetDistance.Location = new System.Drawing.Point(493, 12);
+            this.buttonSetDistance.Location = new System.Drawing.Point(493, 42);
             this.buttonSetDistance.Name = "buttonSetDistance";
             this.buttonSetDistance.Size = new System.Drawing.Size(82, 23);
             this.buttonSetDistance.TabIndex = 10;
@@ -178,7 +179,7 @@
             // 
             // buttonSetEnergy
             // 
-            this.buttonSetEnergy.Location = new System.Drawing.Point(493, 41);
+            this.buttonSetEnergy.Location = new System.Drawing.Point(493, 71);
             this.buttonSetEnergy.Name = "buttonSetEnergy";
             this.buttonSetEnergy.Size = new System.Drawing.Size(82, 23);
             this.buttonSetEnergy.TabIndex = 11;
@@ -188,7 +189,7 @@
             // 
             // buttonSetTime
             // 
-            this.buttonSetTime.Location = new System.Drawing.Point(493, 70);
+            this.buttonSetTime.Location = new System.Drawing.Point(493, 100);
             this.buttonSetTime.Name = "buttonSetTime";
             this.buttonSetTime.Size = new System.Drawing.Size(82, 23);
             this.buttonSetTime.TabIndex = 12;
@@ -198,7 +199,7 @@
             // 
             // buttonSetPower
             // 
-            this.buttonSetPower.Location = new System.Drawing.Point(493, 100);
+            this.buttonSetPower.Location = new System.Drawing.Point(493, 130);
             this.buttonSetPower.Name = "buttonSetPower";
             this.buttonSetPower.Size = new System.Drawing.Size(82, 23);
             this.buttonSetPower.TabIndex = 13;
@@ -208,9 +209,9 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(500, 146);
+            this.buttonReset.Location = new System.Drawing.Point(493, 159);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.Size = new System.Drawing.Size(82, 23);
             this.buttonReset.TabIndex = 14;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
@@ -218,7 +219,7 @@
             // 
             // textBoxSetDistance
             // 
-            this.textBoxSetDistance.Location = new System.Drawing.Point(394, 15);
+            this.textBoxSetDistance.Location = new System.Drawing.Point(394, 45);
             this.textBoxSetDistance.Name = "textBoxSetDistance";
             this.textBoxSetDistance.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetDistance.TabIndex = 15;
@@ -227,7 +228,7 @@
             // 
             // textBoxSetEnergy
             // 
-            this.textBoxSetEnergy.Location = new System.Drawing.Point(394, 43);
+            this.textBoxSetEnergy.Location = new System.Drawing.Point(394, 73);
             this.textBoxSetEnergy.Name = "textBoxSetEnergy";
             this.textBoxSetEnergy.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetEnergy.TabIndex = 16;
@@ -236,7 +237,7 @@
             // 
             // textBoxSetTime
             // 
-            this.textBoxSetTime.Location = new System.Drawing.Point(394, 72);
+            this.textBoxSetTime.Location = new System.Drawing.Point(394, 102);
             this.textBoxSetTime.Name = "textBoxSetTime";
             this.textBoxSetTime.Size = new System.Drawing.Size(81, 20);
             this.textBoxSetTime.TabIndex = 17;
@@ -264,7 +265,7 @@
             "350 Power",
             "375 Power",
             "400 Power"});
-            this.comboBoxPower.Location = new System.Drawing.Point(394, 102);
+            this.comboBoxPower.Location = new System.Drawing.Point(394, 132);
             this.comboBoxPower.Name = "comboBoxPower";
             this.comboBoxPower.Size = new System.Drawing.Size(81, 21);
             this.comboBoxPower.TabIndex = 18;
@@ -285,7 +286,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(451, 175);
+            this.button1.Location = new System.Drawing.Point(451, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 23);
             this.button1.TabIndex = 20;
@@ -293,11 +294,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // buttonLoadOldData
+            // 
+            this.buttonLoadOldData.Location = new System.Drawing.Point(482, 233);
+            this.buttonLoadOldData.Name = "buttonLoadOldData";
+            this.buttonLoadOldData.Size = new System.Drawing.Size(91, 23);
+            this.buttonLoadOldData.TabIndex = 21;
+            this.buttonLoadOldData.Text = "Load old data";
+            this.buttonLoadOldData.UseVisualStyleBackColor = true;
+            this.buttonLoadOldData.Click += new System.EventHandler(this.buttonLoadOldData_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
+            this.Controls.Add(this.buttonLoadOldData);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxSelectReciever);
             this.Controls.Add(this.comboBoxPower);
@@ -352,6 +364,7 @@
         private System.Windows.Forms.ComboBox comboBoxPower;
         private System.Windows.Forms.ComboBox comboBoxSelectReciever;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLoadOldData;
 
     }
 }

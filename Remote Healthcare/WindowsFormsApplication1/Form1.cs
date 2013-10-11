@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
+        
         public Form1()
         {
             InitializeComponent();
@@ -240,6 +241,12 @@ namespace WindowsFormsApplication1
         private void button1_Click_1(object sender, EventArgs e)
         {
             connect.sendCommand("CM", this.listBox1.SelectedItem.ToString());
+        }
+
+        private void buttonLoadOldData_Click(object sender, EventArgs e)
+        {
+            Form3 formOldData = new Form3();
+            formOldData.Show();
         }
     }
 }
