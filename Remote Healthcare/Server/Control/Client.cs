@@ -15,7 +15,6 @@ namespace Server.Control
         public String userName { get; set; }
         private String password;
         private ServerControl serverControl;
-
         public bool isDoctor { get; set; }
 
         public Client(TcpClient client, ServerControl sControl)
@@ -64,6 +63,9 @@ namespace Server.Control
             }
         }
 
+        ///<summary>
+        ///Disconnects the online users and closes all streams.
+        ///</summary>
         private void disconnect()
         {
             serverControl.changeClientStatus(this, "offline");
@@ -109,7 +111,7 @@ namespace Server.Control
 
         public override bool Equals(object obj)
         {
-            if (obj is Client && (obj == this || ((Client) obj).userName == this.userName))
+            if (obj is Client && (obj == this || ((Client) obj).userName == userName))
                 return true;
             return false;
         }

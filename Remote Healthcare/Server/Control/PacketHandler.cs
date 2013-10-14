@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using Kettler_X7_Lib.Objects;
+
 namespace Server.Control
 {
     class PacketHandler
@@ -6,35 +8,36 @@ namespace Server.Control
         ///<summary>
         ///Handles datapackets received by clients.
         ///</summary>
-        public static void getPacket(ServerControl serverControl, Client client, Kettler_X7_Lib.Objects.Packet pack)
+        public static void getPacket(ServerControl serverControl, Client client, Packet pack)
         {
             switch (pack.Flag)
             {
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
-                    serverControl.writeToModel(client, (Kettler_X7_Lib.Objects.Value)pack.Data);
+                case Packet.PacketFlag.PACKETFLAG_VALUES:
+                    serverControl.writeToModel(client, (Value)pack.Data);
                     serverControl.ForwardedValuePacket(client, pack);
                     break;
 
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_CHAT:
+                case Packet.PacketFlag.PACKETFLAG_CHAT:
                     serverControl.forwardMessage(pack, client);
                     break;
 
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
+                case Packet.PacketFlag.PACKETFLAG_BIKECONTROL:
                     serverControl.forwardBikeCommand(pack);
                     break;
 
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
+                case Packet.PacketFlag.PACKETFLAG_REQUEST_HANDSHAKE:
                     setUsernamePassword(client, pack);
-                    serverControl.handshakeResponse(client, (Kettler_X7_Lib.Objects.Handshake)pack.Data);
+                    serverControl.handshakeResponse(client, (Handshake)pack.Data);
                     break;
 
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:
-                    client.sendHandler(serverControl.requestSpecifiedClientData((Kettler_X7_Lib.Objects.RequestValue)pack.Data));
+                case Packet.PacketFlag.PACKETFLAG_REQUEST_VALUES:
+                    client.sendHandler(serverControl.requestSpecifiedClientData((RequestValue)pack.Data));
                     break;
-                case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST:
+                case Packet.PacketFlag.PACKETFLAG_REQUEST_USERLIST:
                     client.sendHandler(serverControl.getOnlineClientListPacket());
                     break;
                 default:
+                    Console.WriteLine("Error: unhandled Packet received - {0}", pack.Flag);
                     break;
             }
         }
@@ -42,11 +45,10 @@ namespace Server.Control
         ///<summary>
         ///Forwards client-credentials.
         ///</summary>
-        public static void setUsernamePassword(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        public static void setUsernamePassword(Client client, Packet pack)
         {
-            client.setUsernamePassword(((Kettler_X7_Lib.Objects.Handshake)pack.Data).Username, ((Kettler_X7_Lib.Objects.Handshake)pack.Data).Password);
-            client.isDoctor = ((Kettler_X7_Lib.Objects.Handshake) pack.Data).ClientFlag ==
-                              Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_DOCTORAPP;
+            client.setUsernamePassword(((Handshake)pack.Data).Username, ((Handshake)pack.Data).Password);
+            client.isDoctor = ((Handshake) pack.Data).ClientFlag == Kettler_X7_Lib.Objects.Client.ClientFlag.CLIENTFLAG_DOCTORAPP;
         }
     }
 }

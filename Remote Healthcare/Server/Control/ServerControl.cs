@@ -17,14 +17,13 @@ namespace Server.Control
     {
         private ServerModel serverModel;
         private TcpListener tcpListener;
-
         static X509Certificate serverCertificate = null;
 
         public ServerControl()
         {
             serverModel = new ServerModel();
             serverModel.doctors = readDoctorFile("doctors.xml");
-            this.tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
+            tcpListener = new TcpListener(System.Net.IPAddress.Any, 31337);
             listenForClients();
         }
 
@@ -70,10 +69,10 @@ namespace Server.Control
             serverModel.writeBikeData(client, null);
         }
 
-        public Kettler_X7_Lib.Objects.Packet getOnlineClientListPacket()
+        public Packet getOnlineClientListPacket()
         {
-            Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
-            pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST;
+            Packet pack = new Packet();
+            pack.Flag = Packet.PacketFlag.PACKETFLAG_RESPONSE_USERLIST;
 
             List<String> list = new List<string>();
             foreach (Client client in serverModel.onlineClients)
@@ -83,7 +82,6 @@ namespace Server.Control
                     list.Add(client.userName);
                 }
             }
-        
             pack.Data = list;
             return pack;
         }
@@ -110,9 +108,9 @@ namespace Server.Control
         ///<summary>
         ///Forward chatmessage received from client to servermodel.
         ///</summary>
-        public void forwardMessage(Kettler_X7_Lib.Objects.Packet pack, Client client)
+        public void forwardMessage(Packet pack, Client client)
         {
-            Kettler_X7_Lib.Objects.ChatMessage message = (Kettler_X7_Lib.Objects.ChatMessage)pack.Data;
+            ChatMessage message = (ChatMessage)pack.Data;
 
             if (client.isDoctor)
             {
@@ -139,9 +137,9 @@ namespace Server.Control
         ///<summary>
         ///Forward bikecommand received from client to servermodel.
         ///</summary>
-        public void forwardBikeCommand(Kettler_X7_Lib.Objects.Packet pack)
+        public void forwardBikeCommand(Packet pack)
         {
-            Kettler_X7_Lib.Objects.BikeControl bikeControl = (Kettler_X7_Lib.Objects.BikeControl)pack.Data;
+            BikeControl bikeControl = (BikeControl)pack.Data;
             foreach (Client client in serverModel.onlineClients)
             {
                 if (client.userName == bikeControl.Receiver)
@@ -151,7 +149,10 @@ namespace Server.Control
             }
         }
 
-        public void ForwardedValuePacket(Client client, Kettler_X7_Lib.Objects.Packet pack)
+        /// <summary>
+        ///Forwards value packets to client.
+        /// </summary>
+        public void ForwardedValuePacket(Client client, Packet pack)
         {
             foreach (Client tempClient in serverModel.onlineClients)
             {
@@ -266,7 +267,7 @@ namespace Server.Control
         ///<summary>
         ///Forward client data to servermodel.
         ///</summary>
-        public void writeToModel(Client client, Kettler_X7_Lib.Objects.Value values)
+        public void writeToModel(Client client, Value values)
         {
             serverModel.writeBikeData(client, values);
         }

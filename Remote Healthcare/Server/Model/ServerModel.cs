@@ -19,7 +19,7 @@ namespace Server.Model
         public List<Client> onlineClients { get; set; }
         public List<DoctorCredentials> doctors { get; set; }
         List<Log> logs { get; set; }
-        Dictionary<string, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> allClients { get; set; }
+        Dictionary<string, Dictionary<DateTime, Value>> allClients { get; set; }
 
         ///<summary>
         ///initalization of a Model object.
@@ -34,7 +34,7 @@ namespace Server.Model
             }
             else
             {
-                allClients = new Dictionary<string, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>>();
+                allClients = new Dictionary<string, Dictionary<DateTime, Value>>();
             }
             if (File.Exists(logFileName))
             {
@@ -48,7 +48,7 @@ namespace Server.Model
         ///<summary>
         ///Writes the data from a Value into the Dictionary
         ///</summary>
-        public void writeBikeData(Client client, Kettler_X7_Lib.Objects.Value values)
+        public void writeBikeData(Client client, Value values)
         {
             if (allClients.ContainsKey(client.userName))
             {
@@ -56,7 +56,7 @@ namespace Server.Model
             }
             else
             {
-                Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> clientData = new Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>();
+                Dictionary<DateTime, Value> clientData = new Dictionary<DateTime, Value>();
                 clientData.Add(DateTime.Now, values);                
                 allClients.Add(client.userName, clientData);
             }
@@ -65,12 +65,12 @@ namespace Server.Model
         ///<summary>
         ///Reads the field containing all client data and returns the Dictionary.
         ///<summary>
-        public Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> readAllClientData()
+        public Dictionary<String, Dictionary<DateTime, Value>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> allClients = (Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>>)serializer.Deserialize(stream);
+                Dictionary<String, Dictionary<DateTime, Value>> allClients = (Dictionary<String, Dictionary<DateTime, Value>>)serializer.Deserialize(stream);
                 return allClients;
             }
         }
@@ -78,9 +78,9 @@ namespace Server.Model
         ///<summary>
         ///Returns the list to the specified client, because normal getters are boring.
         ///</summary>
-        public List<Kettler_X7_Lib.Objects.Value> readBikeData(Client client)
+        public List<Value> readBikeData(Client client)
         {
-            Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> allClientData = allClients[client.userName];
+            Dictionary<DateTime, Value> allClientData = allClients[client.userName];
             return allClientData.Values.ToList();
         }
 
@@ -144,6 +144,9 @@ namespace Server.Model
             printConnectedStatus();            
         }
 
+        ///<summary>
+        ///Prints the status of online doctors and clients on the console.
+        ///</summary>
         public void printConnectedStatus()
         {
             int clients = 0;
@@ -157,7 +160,7 @@ namespace Server.Model
         }
 
         ///<summary>
-        ///
+        ///Writes the data to the file and adds log.
         ///</summary>
         public void finalizeData()
         {
