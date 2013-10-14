@@ -245,8 +245,7 @@ namespace WindowsFormsApplication1
 
         private void buttonLoadOldData_Click(object sender, EventArgs e)
         {
-            Form3 formOldData = new Form3();
-            formOldData.Show();
+           //Program.form3.
         }
     }
 }

@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
     {
         public static Form1 form1;
         public static Form2 form2;
-        public static Form3 form3;
+        public static h form3;
         public static Connection connect;
         public static List<Client> clients;
         /// <summary>
@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
             form2 = new Form2();
             form1 = new Form1();
-            form3 = new Form3();
+            form3 = new h();
             Application.Run(form2);
         }
     }
@@ -66,6 +66,7 @@ namespace WindowsFormsApplication1
              lost = 0;
              this.login = login;
              this.pass = password;
+             Console.WriteLine("Ik kom hier");
             //temp code for testing without server
             //Program.form2.denied(2);
             //Program.form2.Close();
@@ -194,7 +195,7 @@ namespace WindowsFormsApplication1
                             Program.form2.denied(1);
                             break;
                         case Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK:
-                            Program.form2.Hide();
+                            //Program.form2.Hide();
                             Thread Comm = new Thread(form2);
                             Comm.Start();
                             Program.clients = new List<Client>();
