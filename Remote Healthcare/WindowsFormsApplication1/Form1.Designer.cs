@@ -53,6 +53,7 @@
             this.comboBoxSelectReciever = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonLoadOldData = new System.Windows.Forms.Button();
+            this.buttonLock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -304,11 +305,22 @@
             this.buttonLoadOldData.UseVisualStyleBackColor = true;
             this.buttonLoadOldData.Click += new System.EventHandler(this.buttonLoadOldData_Click);
             // 
+            // buttonLock
+            // 
+            this.buttonLock.Location = new System.Drawing.Point(394, 159);
+            this.buttonLock.Name = "buttonLock";
+            this.buttonLock.Size = new System.Drawing.Size(81, 23);
+            this.buttonLock.TabIndex = 22;
+            this.buttonLock.Text = "Lock bicycle";
+            this.buttonLock.UseVisualStyleBackColor = true;
+            this.buttonLock.Click += new System.EventHandler(this.buttonLock_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 433);
+            this.Controls.Add(this.buttonLock);
             this.Controls.Add(this.buttonLoadOldData);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxSelectReciever);
@@ -365,6 +377,7 @@
         private System.Windows.Forms.ComboBox comboBoxSelectReciever;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonLoadOldData;
+        private System.Windows.Forms.Button buttonLock;
 
     }
 }
