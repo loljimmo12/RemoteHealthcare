@@ -62,5 +62,22 @@ namespace WindowsFormsApplication1
         {
             if (textBoxSSEnd.Text.Equals("SS")) textBoxSSEnd.Text = "";
         }
+
+        private void buttonLoadData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dateTimePicker1.Value.AddHours(Convert.ToDouble(textBoxHHBegin.Text));
+                dateTimePicker1.Value.AddMinutes(Convert.ToDouble(textBoxMMBegin.Text));
+                dateTimePicker1.Value.AddSeconds(Convert.ToDouble(textBoxSSBegin.Text));
+                dateTimePicker2.Value.AddHours(Convert.ToDouble(textBoxHHEnd.Text));
+                dateTimePicker2.Value.AddMinutes(Convert.ToDouble(textBoxMMEnd.Text));
+                dateTimePicker2.Value.AddSeconds(Convert.ToDouble(textBoxSSEnd.Text));
+            }
+            catch
+            {
+                MessageBox.Show("Not all fields are correct, please correct your values and try again.", "Please think", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

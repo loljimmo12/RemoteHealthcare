@@ -246,7 +246,7 @@ namespace WindowsFormsApplication1
 
         private void buttonLoadOldData_Click(object sender, EventArgs e)
         {
-           //Program.form3.
+            Program.form3.Show();
         }
 
         private void buttonLock_Click(object sender, EventArgs e)

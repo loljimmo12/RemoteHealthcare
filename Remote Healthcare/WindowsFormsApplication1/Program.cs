@@ -220,7 +220,8 @@ namespace WindowsFormsApplication1
                     //    }
                     //}
                     //catch
-                    //{
+                    //{		chatMess	null	Kettler_X7_Lib.Objects.ChatMessage
+
                     //}
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
