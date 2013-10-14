@@ -133,7 +133,6 @@ namespace WindowsFormsApplication1
                 }
                 catch
                 {
-                    tcpClient = new TcpClient(ip, 31337);
                     Console.WriteLine("socket was dropped");
                 }
 
@@ -283,7 +282,7 @@ namespace WindowsFormsApplication1
             System.Security.Cryptography.X509Certificates.X509Certificate2 pX509Certificate2 = (System.Security.Cryptography.X509Certificates.X509Certificate2)pX509Certificate;
             Console.WriteLine(pX509Certificate2.Subject);
             Console.WriteLine(pX509Certificate2.Thumbprint);
-            return (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint.Equals("C6DF2597EF96EE13F129E4227D8C66757C606228"));
+            return (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint.Equals("A85BD88DB8119CB25AD1AE16E140B7CCCCB87255"));
             //return true;
         }
 
