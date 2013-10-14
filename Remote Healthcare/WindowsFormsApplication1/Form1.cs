@@ -22,6 +22,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             connect = Program.connect;
             comboBoxSelectReciever.SelectedIndex = 0;
+            comboBoxPower.SelectedIndex = 0;
         }
         
 
