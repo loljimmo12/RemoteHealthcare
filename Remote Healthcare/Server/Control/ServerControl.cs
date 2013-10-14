@@ -94,11 +94,16 @@ namespace Server.Control
         public void changeClientStatus(Client client, String status)
         {
             serverModel.changeClientStatus(client, status);
-
-            foreach (Client tempClient in serverModel.onlineClients)
+            try
             {
-                if(tempClient.isDoctor)
-                    tempClient.sendHandler(getOnlineClientListPacket());
+                foreach (Client tempClient in serverModel.onlineClients)
+                {
+                    if (tempClient.isDoctor)
+                        tempClient.sendHandler(getOnlineClientListPacket());
+                }
+            }
+            catch (InvalidOperationException)
+            {
             }
         }
 

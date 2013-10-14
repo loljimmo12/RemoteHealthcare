@@ -5,7 +5,11 @@
 		<password>Kanarie</password>
 	</doctor>
 	<doctor>
-		<name>2de doctor</name>
-		<password>vogel</password>
+		<name>2</name>
+		<password>twee</password>
+	</doctor>
+	<doctor>
+		<name>3</name>
+		<password>drie</password>
 	</doctor>
 </doctors>
