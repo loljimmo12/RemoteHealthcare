@@ -152,8 +152,7 @@ namespace Server.Model
                 if (!c.isDoctor) clients++;
                 if (c.isDoctor) doctors++;
             }
-            ServerView.writeToConsole("Online clients in list: " + clients);
-            ServerView.writeToConsole("Online doctors in list: " + doctors);
+            ServerView.writeToConsole("Online doctors: " + doctors+ ", online clients: "+clients+".");
         }
 
         ///<summary>
