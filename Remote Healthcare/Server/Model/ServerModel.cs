@@ -140,8 +140,20 @@ namespace Server.Model
             {
                 onlineClients.Remove(client);
             }
-            ServerView.writeToConsole("Online clients in list: " + onlineClients.Count);
-            
+            printConnectedStatus();            
+        }
+
+        public void printConnectedStatus()
+        {
+            int clients = 0;
+            int doctors = 0;
+            foreach (Client c in onlineClients)
+            {
+                if (!c.isDoctor) clients++;
+                if (c.isDoctor) doctors++;
+            }
+            ServerView.writeToConsole("Online clients in list: " + clients);
+            ServerView.writeToConsole("Online doctors in list: " + doctors);
         }
 
         ///<summary>
