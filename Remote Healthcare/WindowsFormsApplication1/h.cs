@@ -74,6 +74,7 @@ namespace WindowsFormsApplication1
                 dateTimePicker2.Value.AddHours(Convert.ToDouble(textBoxHHEnd.Text));
                 dateTimePicker2.Value.AddMinutes(Convert.ToDouble(textBoxMMEnd.Text));
                 dateTimePicker2.Value.AddSeconds(Convert.ToDouble(textBoxSSEnd.Text));
+                conn.requestData(user, dateTimePicker1.Value.Date, dateTimePicker2.Value.Date);
             }
             catch
             {
@@ -85,6 +86,16 @@ namespace WindowsFormsApplication1
         {
             //TODO display data and ignore nulls
 
+        }
+
+        public string user { get; set; }
+
+        internal Connection conn { get; set; }
+
+        internal void init(string p, Connection connect)
+        {
+            this.user = p;
+            this.conn = connect;
         }
     }
 }

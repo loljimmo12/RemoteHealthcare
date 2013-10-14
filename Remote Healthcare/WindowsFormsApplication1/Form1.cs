@@ -131,7 +131,7 @@ namespace WindowsFormsApplication1
         {
             connect.sendCommand("RS", this.listBox1.SelectedItem.ToString());
             //connect.requestUsers();
-            connect.requestData(this.listBox1.SelectedItem.ToString(), DateTime.UtcNow, DateTime.Now);
+            //connect.requestData(this.listBox1.SelectedItem.ToString(), DateTime.UtcNow, DateTime.Now);
         }
 
         private void textBoxSetDistance_Click(object sender, EventArgs e)
@@ -247,6 +247,10 @@ namespace WindowsFormsApplication1
         private void buttonLoadOldData_Click(object sender, EventArgs e)
         {
             Program.form3.Show();
+            if (Program.form3.InvokeRequired)
+            {
+                Program.form3.Invoke(new Action(() => Program.form3.init(listBox1.SelectedItem.ToString(), connect)));
+            }
         }
 
         private void buttonLock_Click(object sender, EventArgs e)
