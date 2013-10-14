@@ -149,16 +149,21 @@ namespace Server.Model
         ///</summary>
         public void finalizeData()
         {
-            using (FileStream stream = File.Open(clientFile, FileMode.Append))
+            try
             {
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(stream, allClients);
+                using (FileStream stream = File.Open(clientFile, FileMode.Append))
+                {
+                    BinaryFormatter serializer = new BinaryFormatter();
+                    serializer.Serialize(stream, allClients);
+                }
+                using (FileStream stream = File.Open(logFileName, FileMode.Append))
+                {
+                    BinaryFormatter serializer = new BinaryFormatter();
+                    serializer.Serialize(stream, logs);
+                }
             }
-            using (FileStream stream = File.Open(logFileName, FileMode.Append))
-            {
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(stream, logs);
-            }
+            catch(IOException)
+            {}
         }
     }
 }

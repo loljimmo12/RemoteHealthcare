@@ -48,7 +48,6 @@ namespace Server.Control
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("hey, I caught this exception and did nothing, ServerControl.cs");
                 }
                
                 Thread.Sleep(10);
