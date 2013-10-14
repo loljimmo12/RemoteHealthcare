@@ -260,6 +260,10 @@ namespace Server.Control
 
             if (response.Result == ResponseHandshake.ResultType.RESULTTYPE_OK)
                 changeClientStatus(client, "online");
+            else            
+            {
+                client = null;
+            }
         }
 
         ///<summary>
