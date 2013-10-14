@@ -1,4 +1,5 @@
-﻿using Server.View;
+﻿using Kettler_X7_Lib.Objects;
+using Server.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -86,19 +87,22 @@ namespace Server.Model
         /// <summary>
         ///Returns the requested datalist, between begintime and endtime for 1 specific client
         /// </summary>
-        public List<Kettler_X7_Lib.Objects.Value> readSpecifiedBikeData(String clientUsername, DateTime beginTime, DateTime endTime)
+        public ResponseValue readSpecifiedBikeData(String clientUsername, DateTime beginTime, DateTime endTime)
         {
-            Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> dataDict = allClients[clientUsername];
-            List<Kettler_X7_Lib.Objects.Value> dataList = new List<Kettler_X7_Lib.Objects.Value>();
+            ResponseValue response = new ResponseValue();
+            
+            Dictionary<DateTime, Value> dataDict = allClients[clientUsername];
+            List<Value> dataList = new List<Value>();
           
-            foreach(KeyValuePair<DateTime, Kettler_X7_Lib.Objects.Value> entry in dataDict)
+            foreach(KeyValuePair<DateTime, Value> entry in dataDict)
             {
                 if (entry.Key.CompareTo(beginTime) >= 0 && entry.Key.CompareTo(endTime) <= 0)
                 {
                     dataList.Add(entry.Value);
                 }
             }
-            return dataList;
+            response.ValueList = dataList;
+            return response;
         }
 
         ///<summary>

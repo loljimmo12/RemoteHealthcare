@@ -155,7 +155,7 @@ namespace Server.Control
         {
             foreach (Client tempClient in serverModel.onlineClients)
             {
-                Kettler_X7_Lib.Objects.Value value = (Kettler_X7_Lib.Objects.Value) pack.Data;
+                Value value = (Value) pack.Data;
                 value.Client = client.userName;
                 pack.Data = value;
                 if (tempClient.isDoctor)
@@ -168,10 +168,10 @@ namespace Server.Control
         /// <summary>
         ///Returns a sendable packet based on requestvalue
         /// </summary>
-        public Kettler_X7_Lib.Objects.Packet requestSpecifiedClientData(Kettler_X7_Lib.Objects.RequestValue requestValue)
+        public Packet requestSpecifiedClientData(RequestValue requestValue)
         {
-            Kettler_X7_Lib.Objects.Packet pack = new Kettler_X7_Lib.Objects.Packet();
-            pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES;
+            Packet pack = new Packet();
+            pack.Flag = Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES;
             pack.Data = serverModel.readSpecifiedBikeData(requestValue.ClientName, requestValue.Start, requestValue.End);
             return pack;
         }
@@ -179,10 +179,10 @@ namespace Server.Control
         ///<summary>
         ///Check the Handshake Request for login information and respond.
         /// </summary>
-        public void handshakeResponse(Client client, Kettler_X7_Lib.Objects.Handshake shake)
+        public void handshakeResponse(Client client, Handshake shake)
         {
-            Kettler_X7_Lib.Objects.ResponseHandshake response = new Kettler_X7_Lib.Objects.ResponseHandshake();
-            response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+            ResponseHandshake response = new ResponseHandshake();
+            response.Result = ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
 
             switch (shake.ClientFlag)
             {
@@ -190,18 +190,18 @@ namespace Server.Control
                     DoctorCredentials doc = serverModel.doctors.Find(x => x.username == shake.Username);
 
                     if (doc == null)
-                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                        response.Result = ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
                     else
                     {
                         if (doc.password == shake.Password)
                         {
                             if (serverModel.onlineClients.Contains(client))
                             {
-                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+                                response.Result = ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
                             }
                             else
                             {
-                                response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                                response.Result = ResponseHandshake.ResultType.RESULTTYPE_OK;
                             }
                         }
                         else
@@ -224,15 +224,12 @@ namespace Server.Control
 
                                 if (timeOutAccount)
                                     response.Result =
-                                        Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
+                                        ResponseHandshake.ResultType.RESULTTYPE_ACCESSDENIED;
                                 else
-                                    response.Result =
-                                        Kettler_X7_Lib.Objects.ResponseHandshake.ResultType
-                                            .RESULTTYPE_INVALIDCREDENTIALS;
+                                    response.Result = ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
                             }
                             else
-                                response.Result =
-                                    Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                                response.Result = ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
                         }
                     }
                     break;
@@ -240,22 +237,22 @@ namespace Server.Control
                     if (serverModel.onlineClients.Contains(client))
                     {
                         //is logged in already, send message back!
-                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
+                        response.Result = ResponseHandshake.ResultType.RESULTTYPE_INVALIDCREDENTIALS;
                     }
                     else
                     {
                         // everything's alright!
                         addClientToList(client);
-                        response.Result = Kettler_X7_Lib.Objects.ResponseHandshake.ResultType.RESULTTYPE_OK;
+                        response.Result = ResponseHandshake.ResultType.RESULTTYPE_OK;
                     }
                     break;
                 default:
                     break;
             }
 
-            Kettler_X7_Lib.Objects.Packet responsePack = new Kettler_X7_Lib.Objects.Packet();
+            Packet responsePack = new Packet();
             responsePack.Data = response;
-            responsePack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE;
+            responsePack.Flag = Packet.PacketFlag.PACKETFLAG_RESPONSE_HANDSHAKE;
             client.sendHandler(responsePack);
 
             if (response.Result == ResponseHandshake.ResultType.RESULTTYPE_OK)
