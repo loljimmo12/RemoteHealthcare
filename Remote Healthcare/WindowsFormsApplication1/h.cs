@@ -79,6 +79,7 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show("Not all fields are correct, please correct your values and try again.", "Please think", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
         public void handleDataSet(List<Kettler_X7_Lib.Objects.Value> list)
         {
