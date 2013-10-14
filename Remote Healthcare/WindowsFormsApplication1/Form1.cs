@@ -130,7 +130,7 @@ namespace WindowsFormsApplication1
         private void buttonReset_Click(object sender, EventArgs e)
         {
             connect.sendCommand("RS", this.listBox1.SelectedItem.ToString());
-            connect.requestUsers();
+            //connect.requestUsers();
             connect.requestData(this.listBox1.SelectedItem.ToString(), DateTime.UtcNow, DateTime.Now);
         }
 
