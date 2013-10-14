@@ -1,13 +1,10 @@
-﻿using Server.Control;
-using Server.Model;
-using Server.View;
+﻿using Server.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+using Client = Server.Control.Client;
 
 namespace Server.Model
 {
@@ -21,7 +18,7 @@ namespace Server.Model
         public List<Client> onlineClients { get; set; }
         public List<DoctorCredentials> doctors { get; set; }
         List<Log> logs { get; set; }
-        Dictionary<string, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> allClients { get; set; }
+        Dictionary<string, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> allClients { get; set; }
 
         ///<summary>
         ///initalization of a Model object.
@@ -36,7 +33,7 @@ namespace Server.Model
             }
             else
             {
-                allClients = new Dictionary<string, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>>();
+                allClients = new Dictionary<string, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>>();
             }
             if (File.Exists(logFileName))
             {
@@ -54,12 +51,12 @@ namespace Server.Model
         {
             if (allClients.ContainsKey(client.userName))
             {
-                allClients[client.userName].Add(System.DateTime.Now, values);
+                allClients[client.userName].Add(DateTime.Now, values);
             }
             else
             {
-                Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> clientData = new Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>();
-                clientData.Add(System.DateTime.Now, values);                
+                Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> clientData = new Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>();
+                clientData.Add(DateTime.Now, values);                
                 allClients.Add(client.userName, clientData);
             }
         }
@@ -67,12 +64,12 @@ namespace Server.Model
         ///<summary>
         ///Reads the field containing all client data and returns the Dictionary.
         ///<summary>
-        public Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> readAllClientData()
+        public Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> readAllClientData()
         {
             BinaryFormatter serializer = new BinaryFormatter();
             using (FileStream stream = File.OpenRead(clientFile))
             {
-                Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>> allClients = (Dictionary<String, Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value>>)serializer.Deserialize(stream);
+                Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>> allClients = (Dictionary<String, Dictionary<DateTime, Kettler_X7_Lib.Objects.Value>>)serializer.Deserialize(stream);
                 return allClients;
             }
         }
@@ -82,19 +79,19 @@ namespace Server.Model
         ///</summary>
         public List<Kettler_X7_Lib.Objects.Value> readBikeData(Client client)
         {
-            Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> allClientData = allClients[client.userName];
-            return allClientData.Values.ToList<Kettler_X7_Lib.Objects.Value>();
+            Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> allClientData = allClients[client.userName];
+            return allClientData.Values.ToList();
         }
 
         /// <summary>
         ///Returns the requested datalist, between begintime and endtime for 1 specific client
         /// </summary>
-        public List<Kettler_X7_Lib.Objects.Value> readSpecifiedBikeData(String clientUsername, System.DateTime beginTime, System.DateTime endTime)
+        public List<Kettler_X7_Lib.Objects.Value> readSpecifiedBikeData(String clientUsername, DateTime beginTime, DateTime endTime)
         {
-            Dictionary<System.DateTime, Kettler_X7_Lib.Objects.Value> dataDict = allClients[clientUsername];
-            List<Kettler_X7_Lib.Objects.Value> dataList = null;
+            Dictionary<DateTime, Kettler_X7_Lib.Objects.Value> dataDict = allClients[clientUsername];
+            List<Kettler_X7_Lib.Objects.Value> dataList = new List<Kettler_X7_Lib.Objects.Value>();
           
-            foreach(KeyValuePair<System.DateTime, Kettler_X7_Lib.Objects.Value> entry in dataDict)
+            foreach(KeyValuePair<DateTime, Kettler_X7_Lib.Objects.Value> entry in dataDict)
             {
                 if (entry.Key.CompareTo(beginTime) >= 0 && entry.Key.CompareTo(endTime) <= 0)
                 {
