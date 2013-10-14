@@ -61,5 +61,10 @@ namespace WindowsFormsApplication1
         {
             if (textBoxSSEnd.Text.Equals("SS")) textBoxSSEnd.Text = "";
         }
+
+        public void handleDataSet(List<Kettler_X7_Lib.Objects.Value> list)
+        {
+            //TODO display data and ignore nulls
+        }
     }
 }
