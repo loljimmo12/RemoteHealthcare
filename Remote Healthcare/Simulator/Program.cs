@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Simulator
 {
     class Program
     {
-
-
         private TcpListener tcpListener;
         private Thread listenThread;
 
@@ -112,6 +106,7 @@ namespace Simulator
 
             tcpClient.Close();
         }
+
         private void SimulateTime(object Simulator)
         {
             simulate sim = (simulate)Simulator;
@@ -121,12 +116,8 @@ namespace Simulator
                 Thread.Sleep(1000);
             }
         }
-
-        }
-
-        
-
     }
+}
 
     class simulate
     {
@@ -252,7 +243,6 @@ namespace Simulator
                 default:
                     return error;
             }
-
         }
 
 
@@ -265,7 +255,7 @@ namespace Simulator
             if (powerBreak <= 300 && powerBreak > 200)
                 revolutionsPerMinute = 70 + rand;
             else revolutionsPerMinute = 50 + rand;
-            velocity = revolutionsPerMinute * 0.36;
+            velocity = revolutionsPerMinute * 0.36 * 10.0;
             timeSeconds++;
             
             if (timeSeconds % 3 == 0)
@@ -275,10 +265,6 @@ namespace Simulator
             if (heartBeat < 70) heartBeat = 70;
             if (heartBeat > 150) heartBeat = 150;
             prevbreak = powerBreak; 
-            distance = distance + Convert.ToInt32(velocity);
-
-
+            distance = Convert.ToInt32(velocity * (timeSeconds/60.0/60.0));
         }
-        
-
     }
