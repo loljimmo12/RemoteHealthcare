@@ -39,7 +39,7 @@ namespace Kettler_X7_Lib.Classes
                         pMemoryStream.Write(byData, 0, byData.Length);
                         pMemoryStream.Position = 0;
 
-                        using (NAudio.Wave.WaveStream pWaveStream = new NAudio.Wave.BlockAlignReductionStream(
+                        /*using (NAudio.Wave.WaveStream pWaveStream = new NAudio.Wave.BlockAlignReductionStream(
                             NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(pMemoryStream))))
                         {
                             using (NAudio.Wave.WaveOut pWaveOut = new NAudio.Wave.WaveOut(NAudio.Wave.WaveCallbackInfo.FunctionCallback()))
@@ -52,7 +52,7 @@ namespace Kettler_X7_Lib.Classes
                                     System.Threading.Thread.Sleep(100);
                                 }
                             }
-                        }
+                        }*/
                     }
                 }
             });
