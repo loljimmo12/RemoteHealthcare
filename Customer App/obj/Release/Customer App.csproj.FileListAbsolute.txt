@@ -30,3 +30,13 @@ C:\Users\Ian\Desktop\git\RemoteHealthcare\Customer App\obj\Release\Customer_App.
 Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\Customer App.exe.config
 Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer App.exe
 Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer App.pdb
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer App.csprojResolveAssemblyReference.cache
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer_App.Form1.resources
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer_App.Forms.NameClient.resources
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer_App.Properties.Resources.resources
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\obj\Release\Customer App.csproj.GenerateResource.Cache
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\Kettler X7 Lib.dll
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\NAudio.dll
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\Kettler X7 Lib.pdb
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\Customer App.exe
+Z:\avans-jaar-2\Astrand Test\RemoteHealthcare\Customer App\bin\Release\Customer App.pdb
