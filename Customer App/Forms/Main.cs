@@ -219,11 +219,19 @@ namespace Customer_App
             e.Value.Client = Kettler_X7_Lib.Classes.Global.CLIENT_NAME;
 
             // Route data to server
-            m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
+            if (!testing)
             {
-                Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
-                Data = e.Value
-            });
+                m_pNetworkClient.routeToServer(new Kettler_X7_Lib.Objects.Packet()
+                {
+                    Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES,
+                    Data = e.Value
+                });
+            }
+            else
+            {
+                if (TestingValues == null) { TestingValues = new List<Kettler_X7_Lib.Objects.Value>(); }
+                TestingValues.Add(e.Value);
+            }
 
             //m_pData.addData(e.Value);
         }
@@ -286,5 +294,14 @@ namespace Customer_App
                 sendChatMessage();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            testing = true;
+        }
+
+        public bool testing { get; set; }
+
+        public List<Kettler_X7_Lib.Objects.Value> TestingValues { get; set; }
     }
 }
