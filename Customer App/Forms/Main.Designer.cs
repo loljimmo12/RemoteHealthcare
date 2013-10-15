@@ -50,6 +50,7 @@
             this.txtChatMessage = new System.Windows.Forms.TextBox();
             this.btnSendMessage = new System.Windows.Forms.Button();
             this.lblValues = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tpCurrentStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -274,11 +275,21 @@
             this.lblValues.TabIndex = 11;
             this.lblValues.Text = "Huidige waarden";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 217);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(391, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Start Astrand Test";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 530);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblValues);
             this.Controls.Add(this.btnSendMessage);
             this.Controls.Add(this.txtChatMessage);
@@ -320,6 +331,7 @@
         private System.Windows.Forms.TextBox txtChatMessage;
         private System.Windows.Forms.Button btnSendMessage;
         private System.Windows.Forms.Label lblValues;
+        private System.Windows.Forms.Button button1;
 
     }
 }
