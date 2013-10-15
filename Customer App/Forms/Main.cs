@@ -297,7 +297,16 @@ namespace Customer_App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            testing = true;
+            if (testing)
+            {
+                button1.Text = "Start Astrand Test";
+            }
+            else
+            {
+                button1.Text = "Breek Test Af";
+                TestingValues = null;
+            }
+            testing = !testing;
         }
 
         public bool testing { get; set; }
