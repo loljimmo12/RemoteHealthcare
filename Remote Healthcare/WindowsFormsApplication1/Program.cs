@@ -72,7 +72,21 @@ namespace WindowsFormsApplication1
             //Program.form2.Close();
             //clientStream.Write(), 0, );
         }
-
+        /// <summary>
+        /// er was er eens een oude rus,
+        /// die woonde in de kaukasus
+        /// hij was verliefd op olga, ole
+        /// hij zei ik wil met je trouwen zus
+        /// dus geef me nu maar gauw een kus
+        /// anders spring ik in de wolga, ole
+        /// ai ai olga als jij niet van me houdt
+        /// dan spring ik in de wolga
+        /// en o kind die is zo koud
+        /// met jou wil ik mijn wodka delen
+        /// dansen en de balalaika spelen
+        /// ai ai olga als jij niet van me houdt,
+        /// dan spring ik in de wolga en o kind die is zo koud
+        /// </summary>
         private void form2()
         {
             Application.Run(Program.form1);

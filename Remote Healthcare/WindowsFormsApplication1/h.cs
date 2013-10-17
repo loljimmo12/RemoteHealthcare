@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,8 @@ namespace WindowsFormsApplication1
     public partial class h : Form
     {
         Dictionary<Dictionary<Kettler_X7_Lib.Objects.Value, int>,int> valuesListList = new Dictionary<Dictionary<Kettler_X7_Lib.Objects.Value,int>,int>();
-        
+        ArrayList array = new ArrayList();
+ 
         public h()
         {
             InitializeComponent();
@@ -90,8 +92,8 @@ namespace WindowsFormsApplication1
                 if (value.Time.TotalSeconds == 0)
                 {
                     //adds the section splitter to the comboBox
+                    comboBoxSelectSection.Items.Add("Session: " + iSession);
                     ++iSession;
-                    comboBoxSelectTime.Items.Add("---Session " + iSession + "---");
                 }
                 Dictionary<Kettler_X7_Lib.Objects.Value, int> valueAndIndex = new Dictionary<Kettler_X7_Lib.Objects.Value, int>();
                 valueAndIndex.Add(value, iTotal);
@@ -110,6 +112,40 @@ namespace WindowsFormsApplication1
         {
             this.user = p;
             this.conn = connect;
+        }
+
+        private void comboBoxSelectSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            foreach(KeyValuePair<Dictionary<Kettler_X7_Lib.Objects.Value, int>, int> dic in valuesListList)
+            {
+                if(dic.Key == comboBoxSelectSection.SelectedItem)
+                {
+                    array.Add(dic.Value);
+                }
+            }
+            foreach(Kettler_X7_Lib.Objects.Value valu in array)
+            {
+                comboBoxSelectTime.Items.Add(valu.Time);
+            }
+        }
+
+        private void comboBoxSelectTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (Kettler_X7_Lib.Objects.Value valu in array)
+            {
+                if(valu.Time.Seconds == int.Parse(comboBoxSelectTime.SelectedText))
+                {
+                    labelSpeed.Text = "Speed " + valu.Speed;
+                    labelHeartBeat.Text = "Heartbeat " + valu.Pulse;
+                    labelRPM.Text = "RPM "+valu.RPM;
+                    labelDistance.Text = "Distance " +valu.Distance;
+                    labelTime.Text = "Time "+valu.Time;
+                    labelPower.Text = "Power "+valu.RequestedPower;
+                    labelEnergy.Text = "Energy " + valu.Energy;
+
+                }
+            }
         }
 
     }
