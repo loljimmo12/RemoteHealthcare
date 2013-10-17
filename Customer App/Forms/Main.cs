@@ -245,6 +245,7 @@ namespace Customer_App
         {
             m_pKettlerX7.onClose();
             m_pNetworkClient.disconnect();
+            Environment.Exit(Environment.ExitCode);
         }
 
         /// <summary>
@@ -297,12 +298,19 @@ namespace Customer_App
 
         private void button1_Click(object sender, EventArgs e)
         {
+            toggleAstrand();
+        }
+
+        private void toggleAstrand()
+        {
             if (testing)
             {
                 button1.Text = "Start Astrand Test";
+                astrandHelper.Text = "";
             }
             else
             {
+                astrandHelper.Text = "Warming-up gaat beginnen";
                 button1.Text = "Breek Test Af";
                 TestingValues = null;
             }

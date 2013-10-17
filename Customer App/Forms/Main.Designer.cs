@@ -51,6 +51,7 @@
             this.btnSendMessage = new System.Windows.Forms.Button();
             this.lblValues = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.astrandHelper = new System.Windows.Forms.Label();
             this.tpCurrentStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -285,11 +286,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // astrandHelper
+            // 
+            this.astrandHelper.AutoSize = true;
+            this.astrandHelper.Location = new System.Drawing.Point(13, 247);
+            this.astrandHelper.Name = "astrandHelper";
+            this.astrandHelper.Size = new System.Drawing.Size(0, 13);
+            this.astrandHelper.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 530);
+            this.Controls.Add(this.astrandHelper);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblValues);
             this.Controls.Add(this.btnSendMessage);
@@ -333,6 +343,7 @@
         private System.Windows.Forms.Button btnSendMessage;
         private System.Windows.Forms.Label lblValues;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label astrandHelper;
 
     }
 }
