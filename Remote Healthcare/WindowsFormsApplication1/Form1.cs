@@ -251,6 +251,10 @@ namespace WindowsFormsApplication1
             {
                 Program.form3.Invoke(new Action(() => Program.form3.init(listBox1.SelectedItem.ToString(), connect)));
             }
+            else
+            {
+                Program.form3.init(listBox1.SelectedItem.ToString(), connect);
+            }
         }
 
         private void buttonLock_Click(object sender, EventArgs e)

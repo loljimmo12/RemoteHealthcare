@@ -68,13 +68,9 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                dateTimePicker1.Value.AddHours(Convert.ToDouble(textBoxHHBegin.Text));
-                dateTimePicker1.Value.AddMinutes(Convert.ToDouble(textBoxMMBegin.Text));
-                dateTimePicker1.Value.AddSeconds(Convert.ToDouble(textBoxSSBegin.Text));
-                dateTimePicker2.Value.AddHours(Convert.ToDouble(textBoxHHEnd.Text));
-                dateTimePicker2.Value.AddMinutes(Convert.ToDouble(textBoxMMEnd.Text));
-                dateTimePicker2.Value.AddSeconds(Convert.ToDouble(textBoxSSEnd.Text));
-                conn.requestData(user, dateTimePicker1.Value.Date, dateTimePicker2.Value.Date);
+                DateTime firstDate = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, Convert.ToInt32(textBoxHHBegin.Text), Convert.ToInt32(textBoxMMBegin.Text), Convert.ToInt32(textBoxSSBegin.Text));
+                DateTime secondDate = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, Convert.ToInt32(textBoxHHEnd.Text), Convert.ToInt32(textBoxMMEnd.Text), Convert.ToInt32(textBoxSSEnd.Text));
+                conn.requestData(user, firstDate, secondDate);
             }
             catch
             {
