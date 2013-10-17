@@ -48,9 +48,10 @@
             this.labelSpeed = new System.Windows.Forms.Label();
             this.labelRPM = new System.Windows.Forms.Label();
             this.labelHeartBeat = new System.Windows.Forms.Label();
-            this.comboBoxSelectDateTime = new System.Windows.Forms.ComboBox();
+            this.comboBoxSelectSession = new System.Windows.Forms.ComboBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.buttonLoadData = new System.Windows.Forms.Button();
+            this.comboBoxSelectTime = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,14 +208,14 @@
             this.labelHeartBeat.Text = "Heartbeat";
             this.labelHeartBeat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // comboBoxSelectDateTime
+            // comboBoxSelectSession
             // 
-            this.comboBoxSelectDateTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxSelectDateTime.FormattingEnabled = true;
-            this.comboBoxSelectDateTime.Location = new System.Drawing.Point(305, 150);
-            this.comboBoxSelectDateTime.Name = "comboBoxSelectDateTime";
-            this.comboBoxSelectDateTime.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSelectDateTime.TabIndex = 17;
+            this.comboBoxSelectSession.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSelectSession.FormattingEnabled = true;
+            this.comboBoxSelectSession.Location = new System.Drawing.Point(305, 150);
+            this.comboBoxSelectSession.Name = "comboBoxSelectSession";
+            this.comboBoxSelectSession.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSelectSession.TabIndex = 17;
             // 
             // chart1
             // 
@@ -242,14 +243,24 @@
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
             // 
+            // comboBoxSelectTime
+            // 
+            this.comboBoxSelectTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSelectTime.FormattingEnabled = true;
+            this.comboBoxSelectTime.Location = new System.Drawing.Point(305, 177);
+            this.comboBoxSelectTime.Name = "comboBoxSelectTime";
+            this.comboBoxSelectTime.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSelectTime.TabIndex = 20;
+            // 
             // h
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 471);
+            this.Controls.Add(this.comboBoxSelectTime);
             this.Controls.Add(this.buttonLoadData);
             this.Controls.Add(this.chart1);
-            this.Controls.Add(this.comboBoxSelectDateTime);
+            this.Controls.Add(this.comboBoxSelectSession);
             this.Controls.Add(this.labelEnergy);
             this.Controls.Add(this.labelPower);
             this.Controls.Add(this.labelTime);
@@ -295,8 +306,9 @@
         private System.Windows.Forms.Label labelSpeed;
         private System.Windows.Forms.Label labelRPM;
         private System.Windows.Forms.Label labelHeartBeat;
-        private System.Windows.Forms.ComboBox comboBoxSelectDateTime;
+        private System.Windows.Forms.ComboBox comboBoxSelectSession;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button buttonLoadData;
+        private System.Windows.Forms.ComboBox comboBoxSelectTime;
     }
 }

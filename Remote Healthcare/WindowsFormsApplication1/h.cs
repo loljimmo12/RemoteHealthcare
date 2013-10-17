@@ -80,7 +80,16 @@ namespace WindowsFormsApplication1
 
         public void handleDataSet(List<Kettler_X7_Lib.Objects.Value> list)
         {
-            //TODO display data and ignore nulls
+            int iCount = 0;
+            int iSession = 0;
+            foreach (Kettler_X7_Lib.Objects.Value value in list)
+            {
+            
+                if (value.Time.TotalSeconds == 0) { iSession++; iCount = 0; comboBoxSelectSession.Items.Add("Session " + iSession); }
+                iCount++;
+                comboBoxSelectTime.Items.Add(value.Client + " " + iCount);
+            }
+
 
         }
 
@@ -93,5 +102,6 @@ namespace WindowsFormsApplication1
             this.user = p;
             this.conn = connect;
         }
+
     }
 }
