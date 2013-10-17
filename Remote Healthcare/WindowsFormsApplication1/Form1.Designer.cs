@@ -96,9 +96,9 @@
             // 
             // chatArea
             // 
-            this.chatArea.Enabled = false;
             this.chatArea.Location = new System.Drawing.Point(105, 262);
             this.chatArea.Name = "chatArea";
+            this.chatArea.ReadOnly = true;
             this.chatArea.Size = new System.Drawing.Size(470, 131);
             this.chatArea.TabIndex = 3;
             this.chatArea.Text = "";
