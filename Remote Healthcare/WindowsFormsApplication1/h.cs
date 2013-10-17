@@ -12,6 +12,8 @@ namespace WindowsFormsApplication1
 {
     public partial class h : Form
     {
+        Dictionary<Dictionary<Kettler_X7_Lib.Objects.Value, int>,int> valuesListList = new Dictionary<Dictionary<Kettler_X7_Lib.Objects.Value,int>,int>();
+        
         public h()
         {
             InitializeComponent();
@@ -80,14 +82,21 @@ namespace WindowsFormsApplication1
 
         public void handleDataSet(List<Kettler_X7_Lib.Objects.Value> list)
         {
-            int iCount = 0;
+            int iTotal = 0;
             int iSession = 0;
             foreach (Kettler_X7_Lib.Objects.Value value in list)
             {
-            
-                if (value.Time.TotalSeconds == 0) { iSession++; iCount = 0; comboBoxSelectSession.Items.Add("Session " + iSession); }
-                iCount++;
-                comboBoxSelectTime.Items.Add(value.Client + " " + iCount);
+                //Used to split the sessions into different sections
+                if (value.Time.TotalSeconds == 0)
+                {
+                    //adds the section splitter to the comboBox
+                    ++iSession;
+                    comboBoxSelectTime.Items.Add("---Session " + iSession + "---");
+                }
+                Dictionary<Kettler_X7_Lib.Objects.Value, int> valueAndIndex = new Dictionary<Kettler_X7_Lib.Objects.Value, int>();
+                valueAndIndex.Add(value, iTotal);
+                valuesListList.Add(valueAndIndex, iSession);
+
             }
 
 

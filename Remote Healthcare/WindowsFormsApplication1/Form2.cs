@@ -59,6 +59,19 @@ namespace WindowsFormsApplication1
             }
          }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                connect.Login(textBox1.Text, textBox2.Text, textBox3.Text);
+            }
+
+            catch
+            {
+                MessageBox.Show("Server is unavailable, it is probably offline, please try again later.", "Server unavailable", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         
     }
 }
