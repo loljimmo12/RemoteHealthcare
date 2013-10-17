@@ -229,7 +229,25 @@ namespace Customer_App
             }
             else
             {
-                if (TestingValues == null) { TestingValues = new List<Kettler_X7_Lib.Objects.Value>(); }
+                if (warmup)
+                {
+                    if (e.Value.RPM == 60)
+                    {
+                        if (testGoed <= 3)
+                        {
+                            ++testGoed;
+                        }
+                        else
+                        {
+                            testGoed = 0;
+                            ++testWeerstand;
+                            m_pKettlerX7.sendRawCommand("CM");
+                            m_pKettlerX7.sendRawCommand(String.Format("PW {0}" + testWeerstand));
+                        }
+                    }
+                    
+                }
+                else if (TestingValues == null) { TestingValues = new List<Kettler_X7_Lib.Objects.Value>(); }
                 TestingValues.Add(e.Value);
             }
 
@@ -310,7 +328,9 @@ namespace Customer_App
             }
             else
             {
-                astrandHelper.Text = "Warming-up gaat beginnen";
+                astrandHelper.Text = "Warming-up gaat beginnen, probeer 60 RPM te halen";
+                warmup = true;
+                testGoed = 0;
                 button1.Text = "Breek Test Af";
                 TestingValues = null;
             }
@@ -320,5 +340,13 @@ namespace Customer_App
         public bool testing { get; set; }
 
         public List<Kettler_X7_Lib.Objects.Value> TestingValues { get; set; }
+
+        public bool testVrouw { get; set; }
+
+        public bool warmup { get; set; }
+
+        public int testGoed { get; set; }
+
+        public int testWeerstand { get; set; }
     }
 }
