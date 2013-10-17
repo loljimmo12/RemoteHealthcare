@@ -96,6 +96,7 @@
             // 
             // chatArea
             // 
+            this.chatArea.ForeColor = System.Drawing.SystemColors.GrayText;
             this.chatArea.Location = new System.Drawing.Point(105, 262);
             this.chatArea.Name = "chatArea";
             this.chatArea.ReadOnly = true;
