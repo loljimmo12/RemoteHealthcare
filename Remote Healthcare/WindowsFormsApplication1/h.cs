@@ -64,9 +64,7 @@ namespace WindowsFormsApplication1
 
         private void textBoxSSEnd_Enter(object sender, EventArgs e)
         {
-            if (textBoxSSEnd.Text.Equals("SS")) textBoxSSEnd.Text = "";
-        }
-
+            if (textBoxSSEnd.Text.Equals("SS")) textBoxSSEnd.Text = ""; } 
 
         private void buttonLoadData_Click(object sender, EventArgs e)
         {
@@ -94,7 +92,9 @@ namespace WindowsFormsApplication1
                     //adds the section splitter to the comboBox
                     comboBoxSelectSection.Items.Add("Session: " + iSession);
                     ++iSession;
+		    iTotal = 0;
                 }
+		++iTotal;
                 Dictionary<Kettler_X7_Lib.Objects.Value, int> valueAndIndex = new Dictionary<Kettler_X7_Lib.Objects.Value, int>();
                 valueAndIndex.Add(value, iTotal);
                 valuesListList.Add(valueAndIndex, iSession);
