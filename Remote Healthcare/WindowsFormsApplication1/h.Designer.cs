@@ -237,6 +237,7 @@
             // comboBoxSelectSection
             // 
             this.comboBoxSelectSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+	    this.comboBoxSelectSection.SelectedText = "Select a section";
             this.comboBoxSelectSection.FormattingEnabled = true;
             this.comboBoxSelectSection.Location = new System.Drawing.Point(305, 150);
             this.comboBoxSelectSection.Name = "comboBoxSelectSection";
@@ -247,6 +248,7 @@
             // comboBoxSelectTime
             // 
             this.comboBoxSelectTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+	    this.comboBoxSelectTime.SelectedText = "Select a time";
             this.comboBoxSelectTime.FormattingEnabled = true;
             this.comboBoxSelectTime.Location = new System.Drawing.Point(305, 177);
             this.comboBoxSelectTime.Name = "comboBoxSelectTime";

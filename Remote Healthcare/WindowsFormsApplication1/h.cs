@@ -89,12 +89,13 @@ namespace WindowsFormsApplication1
                 //Used to split the sessions into different sections
                 if (value.Time.TotalSeconds == 0)
                 {
-                    //adds the section splitter to the comboBox
+                    // Adds the section to the comboBox for sections
                     comboBoxSelectSection.Items.Add("Session: " + iSession);
                     ++iSession;
 		    iTotal = 0;
                 }
 		++iTotal;
+		// Adds the value to the Dictionary
                 Dictionary<Kettler_X7_Lib.Objects.Value, int> valueAndIndex = new Dictionary<Kettler_X7_Lib.Objects.Value, int>();
                 valueAndIndex.Add(value, iTotal);
                 valuesListList.Add(valueAndIndex, iSession);
@@ -116,6 +117,8 @@ namespace WindowsFormsApplication1
 
         private void comboBoxSelectSection_SelectedIndexChanged(object sender, EventArgs e)
         {
+	// This happens when the combobox is changed to a value
+	// Adds the values to the forms arraylist, to be more easy to use
             
             foreach(KeyValuePair<Dictionary<Kettler_X7_Lib.Objects.Value, int>, int> dic in valuesListList)
             {
@@ -132,6 +135,7 @@ namespace WindowsFormsApplication1
 
         private void comboBoxSelectTime_SelectedIndexChanged(object sender, EventArgs e)
         {
+	// Loads the requested value in the labels when selecting a value using the comboBox
             foreach (Kettler_X7_Lib.Objects.Value valu in array)
             {
                 if(valu.Time.Seconds == int.Parse(comboBoxSelectTime.SelectedText))
@@ -143,7 +147,7 @@ namespace WindowsFormsApplication1
                     labelTime.Text = "Time "+valu.Time;
                     labelPower.Text = "Power "+valu.RequestedPower;
                     labelEnergy.Text = "Energy " + valu.Energy;
-
+		    break;
                 }
             }
         }
