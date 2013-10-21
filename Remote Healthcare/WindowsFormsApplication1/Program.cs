@@ -52,13 +52,9 @@ namespace WindowsFormsApplication1
              tcpClient = new TcpClient(ip, 31337);
              this.ip = ip;
              stream = new SslStream(tcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(checkCert), null);
-             try
-             {
+            
                  stream.AuthenticateAsClient(ip);
-             }
-             catch
-             {
-             }
+           
              sendPacket(Pack);
              logged = true;
              Thread Comm = new Thread(new ParameterizedThreadStart(HandleCommunication));
@@ -67,26 +63,9 @@ namespace WindowsFormsApplication1
              this.login = login;
              this.pass = password;
              Console.WriteLine("Ik kom hier");
-            //temp code for testing without server
-            //Program.form2.denied(2);
-            //Program.form2.Close();
-            //clientStream.Write(), 0, );
+
         }
-        /// <summary>
-        /// er was er eens een oude rus,
-        /// die woonde in de kaukasus
-        /// hij was verliefd op olga, ole
-        /// hij zei ik wil met je trouwen zus
-        /// dus geef me nu maar gauw een kus
-        /// anders spring ik in de wolga, ole
-        /// ai ai olga als jij niet van me houdt
-        /// dan spring ik in de wolga
-        /// en o kind die is zo koud
-        /// met jou wil ik mijn wodka delen
-        /// dansen en de balalaika spelen
-        /// ai ai olga als jij niet van me houdt,
-        /// dan spring ik in de wolga en o kind die is zo koud
-        /// </summary>
+
         private void form2()
         {
             Application.Run(Program.form1);
@@ -219,28 +198,12 @@ namespace WindowsFormsApplication1
 
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_RESPONSE_VALUES:
                     Kettler_X7_Lib.Objects.ResponseValue vals = (Kettler_X7_Lib.Objects.ResponseValue)packet.Data;
-                    //(lock)vals.ValueList;
-                    //lock(vals.ValueList)
-                    //foreach (Kettler_X7_Lib.Objects.Value value in vals.ValueList)
-                    //{
-                    //    Console.WriteLine(value.Client);
-                    //}
-                    //Console.WriteLine("amount of datas: " + vals.ValueList.Count);
+                    
                     if (Program.form3.InvokeRequired)
                     {
                         Program.form3.Invoke(new Action(() => Program.form3.handleDataSet(vals.ValueList)));
                     }
-                    //try
-                    //{
-                    //    if (Program.form1.InvokeRequired)
-                    //    {
-                           // Program.form1.Invoke(new Action(() => Program.form1.setValues(vals)));
-                    //    }
-                    //}
-                    //catch
-                    //{		chatMess	null	Kettler_X7_Lib.Objects.ChatMessage
-
-                    //}
+                   
                     break;
                 case Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_VALUES:
                     Kettler_X7_Lib.Objects.Value vales = (Kettler_X7_Lib.Objects.Value)packet.Data;
@@ -248,25 +211,8 @@ namespace WindowsFormsApplication1
                     {
                         if (client.getName().Equals(vales.Client.ToString()))
                         {
-                            //client.recieveChat(val.Message, chatMess.Sender.ToString());
                             client.setVal(vales);
-                            //int o = 0;
-                            //for (int i = 0; i < Program.clients.Count; i++)
-                            //{
-                            //    if (Program.clients[i].getName().Equals(chatMess.Sender))
-                            //    {
-                            //        o = i;
-                            //        break;
-                            //    }
-                            //}
-                            //if (Program.form1.selectedReciever == o)
-                            //{
-                            //    if (Program.form1.InvokeRequired)
-                            //    {
-                            //        Program.form1.Invoke(new Action(() => Program.form1.refreshChat()));
-                            //    }
-                            //}
-                            if (Program.form1.InvokeRequired)
+                           if (Program.form1.InvokeRequired)
                             {
                                 Program.form1.Invoke(new Action(() => Program.form1.updateVals()));
                             }

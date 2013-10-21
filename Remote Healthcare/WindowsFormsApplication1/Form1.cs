@@ -253,7 +253,14 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                Program.form3.init(listBox1.SelectedItem.ToString(), connect);
+                try
+                {
+                    Program.form3.init(listBox1.SelectedItem.ToString(), connect);
+                }
+                catch
+                {
+                    MessageBox.Show("Please select an user before requesting old data.", "No selected user", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

@@ -79,28 +79,7 @@ namespace Simulator
                 }
                 Thread.Sleep(10);
                 
-                //Console.WriteLine(tcpClient.GetStream().DataAvailable);
-                //bytesRead = 0;
-
-                //try
-                //{
-                    //block until read
-                //    bytesRead = clientStream.Read(message, 0, 4096);
-                //}
-                //catch
-                //{
-                    //connection broke/interrupted
-                 //   break;
-                //}
-
-                //if (bytesRead == 0)
-                //{
-                    //disconnect
-                //    break;
-                //}
-
-                //ASCIIEncoding encoder = new ASCIIEncoding();
-                //string cm = encoder.GetString(message, 0, bytesRead);
+                
                
             }
 
@@ -148,7 +127,7 @@ namespace Simulator
             versionNumber = 1337;
             kiloJoules = 0;
             distance = 0;
-            timeSeconds = 0;
+            timeSeconds = -1;
             revolutionsPerMinute = 0;
             velocity = 0;
             deviceID = 12345;

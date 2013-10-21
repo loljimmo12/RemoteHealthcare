@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBoxHHBegin = new System.Windows.Forms.TextBox();
             this.textBoxMMBegin = new System.Windows.Forms.TextBox();
@@ -52,6 +52,8 @@
             this.buttonLoadData = new System.Windows.Forms.Button();
             this.comboBoxSelectSection = new System.Windows.Forms.ComboBox();
             this.comboBoxSelectTime = new System.Windows.Forms.ComboBox();
+            this.buttonPlay = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -210,16 +212,16 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 245);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(414, 214);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "chart1";
@@ -237,7 +239,6 @@
             // comboBoxSelectSection
             // 
             this.comboBoxSelectSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-	    this.comboBoxSelectSection.SelectedText = "Select a section";
             this.comboBoxSelectSection.FormattingEnabled = true;
             this.comboBoxSelectSection.Location = new System.Drawing.Point(305, 150);
             this.comboBoxSelectSection.Name = "comboBoxSelectSection";
@@ -248,7 +249,6 @@
             // comboBoxSelectTime
             // 
             this.comboBoxSelectTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-	    this.comboBoxSelectTime.SelectedText = "Select a time";
             this.comboBoxSelectTime.FormattingEnabled = true;
             this.comboBoxSelectTime.Location = new System.Drawing.Point(305, 177);
             this.comboBoxSelectTime.Name = "comboBoxSelectTime";
@@ -256,11 +256,33 @@
             this.comboBoxSelectTime.TabIndex = 21;
             this.comboBoxSelectTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTime_SelectedIndexChanged);
             // 
+            // buttonPlay
+            // 
+            this.buttonPlay.Location = new System.Drawing.Point(328, 204);
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.Size = new System.Drawing.Size(75, 23);
+            this.buttonPlay.TabIndex = 22;
+            this.buttonPlay.Text = "Play";
+            this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonPlay_MouseDown);
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(328, 107);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear.TabIndex = 23;
+            this.buttonClear.Text = "Clear boxes";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
             // h
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 471);
+            this.Controls.Add(this.buttonClear);
+            this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.comboBoxSelectTime);
             this.Controls.Add(this.comboBoxSelectSection);
             this.Controls.Add(this.buttonLoadData);
@@ -314,5 +336,7 @@
         private System.Windows.Forms.Button buttonLoadData;
         private System.Windows.Forms.ComboBox comboBoxSelectSection;
         private System.Windows.Forms.ComboBox comboBoxSelectTime;
+        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
