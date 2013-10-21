@@ -86,24 +86,27 @@ namespace WindowsFormsApplication1
 
         public void handleDataSet(List<Kettler_X7_Lib.Objects.Value> list)
         {
+            Kettler_X7_Lib.Objects.Value oldValue = list[0];
+            if (oldValue == null) oldValue = list[1];
             int iTotal = 0;
             int iSession = 0;
+            clearComboBoxes();
+            array.Clear();
+            valuesListList.Clear();
             foreach (Kettler_X7_Lib.Objects.Value value in list)
             {
                 if (value != null && value.Time != null)
                 {
                     //Used to split the sessions into different sections
-                    if (iSession == 0)
-                    {
-                        this.comboBoxSelectSection.Items.Clear();
-                    }
-                    if (value.Time.TotalSeconds == 0 || iSession == 0)
+                    Console.WriteLine(value.Time.TotalSeconds);
+                    Console.WriteLine(oldValue.Time.TotalSeconds);
+                    if (value.Time.TotalSeconds-oldValue.Time.TotalSeconds<0 || iSession == 0)
                     {
                         // Adds the section to the comboBox for sections
                         ++iSession;
                         comboBoxSelectSection.Items.Add("Session: " + iSession);
                         iTotal = 0;
-                        comboBoxSelectSection.Refresh();
+                        //comboBoxSelectSection.Refresh();
                     }
                     ++iTotal;
 
@@ -111,6 +114,7 @@ namespace WindowsFormsApplication1
                     Dictionary<Kettler_X7_Lib.Objects.Value, int> valueAndIndex = new Dictionary<Kettler_X7_Lib.Objects.Value, int>();
                     valueAndIndex.Add(value, iTotal);
                     valuesListList.Add(valueAndIndex, iSession);
+                    oldValue = value;
                 }
             }
 
@@ -133,6 +137,7 @@ namespace WindowsFormsApplication1
 	// Adds the values to the forms arraylist, to be more easy to use
             
             clearSelectTime();
+            array.Clear();
             foreach(KeyValuePair<Dictionary<Kettler_X7_Lib.Objects.Value, int>, int> dic in valuesListList)
             {
                 string sessionNumber = "";
@@ -155,7 +160,9 @@ namespace WindowsFormsApplication1
             foreach(Kettler_X7_Lib.Objects.Value valu in array)
             {
                 comboBoxSelectTime.Items.Add(valu.Time);
+                
             }
+            Console.WriteLine(array.Count);
 
         }
 
@@ -217,19 +224,13 @@ namespace WindowsFormsApplication1
 
         private void clearSelectTime()
         {
-            comboBoxSelectTime.Invoke((MethodInvoker)(() =>
-            {
-                comboBoxSelectTime.DataSource = null;
-            }));
+            comboBoxSelectTime.Items.Clear();
+            array.Clear();
         }
 
         private void clearSelectSection()
         {
-            comboBoxSelectSection.Invoke((MethodInvoker)(() =>
-            {
-                comboBoxSelectSection.DataSource = null;
-            }));
-            
+            comboBoxSelectSection.Items.Clear();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
