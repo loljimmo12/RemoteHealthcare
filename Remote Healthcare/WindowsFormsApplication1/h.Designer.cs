@@ -52,8 +52,6 @@
             this.buttonLoadData = new System.Windows.Forms.Button();
             this.comboBoxSelectSection = new System.Windows.Forms.ComboBox();
             this.comboBoxSelectTime = new System.Windows.Forms.ComboBox();
-            this.buttonPlay = new System.Windows.Forms.Button();
-            this.buttonClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -256,33 +254,11 @@
             this.comboBoxSelectTime.TabIndex = 21;
             this.comboBoxSelectTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectTime_SelectedIndexChanged);
             // 
-            // buttonPlay
-            // 
-            this.buttonPlay.Location = new System.Drawing.Point(328, 204);
-            this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(75, 23);
-            this.buttonPlay.TabIndex = 22;
-            this.buttonPlay.Text = "Play";
-            this.buttonPlay.UseVisualStyleBackColor = true;
-            this.buttonPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonPlay_MouseDown);
-            // 
-            // buttonClear
-            // 
-            this.buttonClear.Location = new System.Drawing.Point(328, 107);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonClear.TabIndex = 23;
-            this.buttonClear.Text = "Clear boxes";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
             // h
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 471);
-            this.Controls.Add(this.buttonClear);
-            this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.comboBoxSelectTime);
             this.Controls.Add(this.comboBoxSelectSection);
             this.Controls.Add(this.buttonLoadData);
@@ -306,6 +282,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "h";
             this.Text = "Load old data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.h_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
@@ -336,7 +313,5 @@
         private System.Windows.Forms.Button buttonLoadData;
         private System.Windows.Forms.ComboBox comboBoxSelectSection;
         private System.Windows.Forms.ComboBox comboBoxSelectTime;
-        private System.Windows.Forms.Button buttonPlay;
-        private System.Windows.Forms.Button buttonClear;
     }
 }
