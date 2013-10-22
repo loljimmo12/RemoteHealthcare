@@ -16,7 +16,6 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
-        
         public Form1()
         {
             InitializeComponent();

@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1
     class Connection
     {
         private TcpClient tcpClient;
+        private bool commandMode;
 
         public void Login(string login, string password, string ip)
         {
@@ -269,6 +270,12 @@ namespace WindowsFormsApplication1
 
         public void sendCommand(string command, string client)
         {
+            string rs = "RS";
+            if (!commandMode) { 
+                commandMode = true;
+                sendCommand("CM", client);
+            }
+
             Kettler_X7_Lib.Objects.Packet Pack = new Kettler_X7_Lib.Objects.Packet();
             Pack.Flag = Kettler_X7_Lib.Objects.Packet.PacketFlag.PACKETFLAG_BIKECONTROL;
             Pack.Data = new Kettler_X7_Lib.Objects.BikeControl()
@@ -277,6 +284,7 @@ namespace WindowsFormsApplication1
                Receiver = client
             };
             sendPacket(Pack);
+            if (Pack.Data.Equals(rs)) commandMode = false;
         }
 
 
