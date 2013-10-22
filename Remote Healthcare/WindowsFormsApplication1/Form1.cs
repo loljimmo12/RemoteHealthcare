@@ -130,8 +130,7 @@ namespace WindowsFormsApplication1
         private void buttonReset_Click(object sender, EventArgs e)
         {
             connect.sendCommand("RS", this.listBox1.SelectedItem.ToString());
-            //connect.requestUsers();
-            //connect.requestData(this.listBox1.SelectedItem.ToString(), DateTime.UtcNow, DateTime.Now);
+            clientChart.Series["Heartbeat"].Points.Clear();
         }
 
         private void textBoxSetDistance_Click(object sender, EventArgs e)
@@ -210,6 +209,7 @@ namespace WindowsFormsApplication1
                 label5.Text = "Time " + val.Time;
                 label6.Text = "Power " + val.RequestedPower;
                 label7.Text = "Energy " + val.Energy;
+                clientChart.Series["Heartbeat"].Points.AddXY(val.Time.TotalSeconds, val.Pulse);
             }
         }
 
