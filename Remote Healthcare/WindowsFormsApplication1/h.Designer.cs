@@ -307,6 +307,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "h";
             this.Text = "Load old data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.h_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
