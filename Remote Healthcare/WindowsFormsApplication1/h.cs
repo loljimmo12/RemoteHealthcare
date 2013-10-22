@@ -245,6 +245,12 @@ namespace WindowsFormsApplication1
         {
             clearComboBoxes();
         }
+
+        private void h_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
     }
 }
 
