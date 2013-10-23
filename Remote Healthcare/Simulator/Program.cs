@@ -216,6 +216,7 @@ namespace Simulator
                     locked = true;
                     return acknowledged;
                 case "ST":
+                    if (timeSeconds == -1) timeSeconds = 0;
                     if(powerBreak < 100) power = "0" + powerBreak.ToString();
                         else power = powerBreak.ToString();
                     return heartBeat.ToString() + "\t" + revolutionsPerMinute.ToString() + "\t" + (int) velocity + "\t" + (distance * 10).ToString() + "\t" + power + "\t" + (Math.Floor(kiloJoules * 10) / 10).ToString("0.#") + "\t" + timeStamp() + "\t" + powerBreak.ToString();
