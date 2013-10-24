@@ -322,6 +322,22 @@ namespace Kettler_X7_Lib.Classes
             Command nCommand = COMMAND_LIST.FirstOrDefault(x => (x.Value == strPreCommand)).Key;
         }
 
+        public void SendShit(string henk)
+        {
+            try
+            {
+                ((System.IO.Ports.SerialPort)m_pHandler).WriteLine(henk);
+            }
+            catch
+            {
+                // Return straight in case of serialport
+                if (m_nSource == Source.SOURCE_SERIALPORT)
+                {
+                    ((System.IO.Ports.SerialPort)m_pHandler).ReadLine();
+                }
+            }
+        }
+
         /// <summary>
         /// Parses the current values of the device into an object
         /// </summary>

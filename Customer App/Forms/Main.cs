@@ -108,7 +108,7 @@ namespace Customer_App
             // Initialize bike
             bool bConnected = false;
             
-            if (!m_pKettlerX7.connect("COM11"))
+            if (!m_pKettlerX7.connect("COM3"))
             {
                 Kettler_X7_Lib.Classes.GUI.throwError("Kan geen verbinding met de fiets maken!");
 
@@ -231,7 +231,7 @@ namespace Customer_App
             {
                 if (warmup)
                 {
-                    if (e.Value.RPM == 60)
+                    if (e.Value.RPM > 60)
                     {
                         if (testGoed <= 3)
                         {
@@ -241,13 +241,16 @@ namespace Customer_App
                         {
                             testGoed = 0;
                             ++testWeerstand;
-                            m_pKettlerX7.sendRawCommand("CM");
-                            m_pKettlerX7.sendRawCommand(String.Format("PW {0}" + testWeerstand));
+                            m_pKettlerX7.SendShit("PW " + testWeerstand);
                         }
+                    }
+                    if (e.Value.Pulse > 120)
+                    {
+                        toggleAstrand();
                     }
                     
                 }
-                else if (TestingValues == null) { TestingValues = new List<Kettler_X7_Lib.Objects.Value>(); }
+                if (TestingValues == null) { TestingValues = new List<Kettler_X7_Lib.Objects.Value>(); }
                 TestingValues.Add(e.Value);
             }
 
@@ -330,9 +333,15 @@ namespace Customer_App
             {
                 astrandHelper.Text = "Warming-up gaat beginnen, probeer 60 RPM te halen";
                 warmup = true;
+                testWeerstand = 50;
                 testGoed = 0;
                 button1.Text = "Breek Test Af";
                 TestingValues = null;
+                m_pKettlerX7.SendShit("RS");
+                m_pKettlerX7.SendShit("CM");
+                m_pKettlerX7.SendShit("PW " + testWeerstand);
+               // m_pKettlerX7.sendReturnCommand(Kettler_X7_Lib.Classes.Kettler_X7.Command.TAKE_CONTROL);
+                //m_pKettlerX7.sendCommand(Kettler_X7_Lib.Classes.Kettler_X7.Command.CHANGE_FORCE, testWeerstand.ToString());
             }
             testing = !testing;
         }
