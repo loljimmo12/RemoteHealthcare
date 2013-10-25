@@ -32,9 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kettler X7 Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Dropbox\23TI2.1A1\Kettler X7 Lib.dll</HintPath>
+    <Reference Include="Kettler X7 Lib">
+      <HintPath>..\..\..\..\Dropbox\23TI2.1A1\Kettler X7 Lib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -268,5 +268,16 @@ namespace WindowsFormsApplication1
         {
             connect.sendCommand("LB", this.listBox1.SelectedItem.ToString());
         }
+
+        private void buttonStartTest_Click(object sender, EventArgs e)
+        {
+            //TODO
+            //SEND CM
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

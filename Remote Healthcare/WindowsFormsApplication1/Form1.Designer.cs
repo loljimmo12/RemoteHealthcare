@@ -54,7 +54,22 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonLoadOldData = new System.Windows.Forms.Button();
             this.buttonLock = new System.Windows.Forms.Button();
+            this.buttonStartTestEnvironment = new System.Windows.Forms.Button();
+            this.groupBoxAstrandTest = new System.Windows.Forms.GroupBox();
+            this.groupBoxRealContent = new System.Windows.Forms.GroupBox();
+            this.labelTestClientStatusTitle = new System.Windows.Forms.Label();
+            this.progressBarTest = new System.Windows.Forms.ProgressBar();
+            this.labelTestClientAge = new System.Windows.Forms.Label();
+            this.labelTestClientWeight = new System.Windows.Forms.Label();
+            this.textBoxTestClientAge = new System.Windows.Forms.TextBox();
+            this.textBoxTestClientWeight = new System.Windows.Forms.TextBox();
+            this.buttonTestNoodstop = new System.Windows.Forms.Button();
+            this.labelTestClientStatus = new System.Windows.Forms.Label();
+            this.buttonTestBegin = new System.Windows.Forms.Button();
+            this.labeTestlDescriptionProgressBar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
+            this.groupBoxAstrandTest.SuspendLayout();
+            this.groupBoxRealContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -298,7 +313,7 @@
             // 
             // buttonLoadOldData
             // 
-            this.buttonLoadOldData.Location = new System.Drawing.Point(482, 233);
+            this.buttonLoadOldData.Location = new System.Drawing.Point(484, 233);
             this.buttonLoadOldData.Name = "buttonLoadOldData";
             this.buttonLoadOldData.Size = new System.Drawing.Size(91, 23);
             this.buttonLoadOldData.TabIndex = 21;
@@ -316,11 +331,138 @@
             this.buttonLock.UseVisualStyleBackColor = true;
             this.buttonLock.Click += new System.EventHandler(this.buttonLock_Click);
             // 
+            // buttonStartTestEnvironment
+            // 
+            this.buttonStartTestEnvironment.Location = new System.Drawing.Point(6, 19);
+            this.buttonStartTestEnvironment.Name = "buttonStartTestEnvironment";
+            this.buttonStartTestEnvironment.Size = new System.Drawing.Size(136, 23);
+            this.buttonStartTestEnvironment.TabIndex = 23;
+            this.buttonStartTestEnvironment.Text = "Open Åstrand omgeving";
+            this.buttonStartTestEnvironment.UseVisualStyleBackColor = true;
+            this.buttonStartTestEnvironment.Click += new System.EventHandler(this.buttonStartTest_Click);
+            // 
+            // groupBoxAstrandTest
+            // 
+            this.groupBoxAstrandTest.Controls.Add(this.groupBoxRealContent);
+            this.groupBoxAstrandTest.Controls.Add(this.buttonStartTestEnvironment);
+            this.groupBoxAstrandTest.Location = new System.Drawing.Point(581, 12);
+            this.groupBoxAstrandTest.Name = "groupBoxAstrandTest";
+            this.groupBoxAstrandTest.Size = new System.Drawing.Size(445, 381);
+            this.groupBoxAstrandTest.TabIndex = 24;
+            this.groupBoxAstrandTest.TabStop = false;
+            this.groupBoxAstrandTest.Text = "Åstrand test";
+            // 
+            // groupBoxRealContent
+            // 
+            this.groupBoxRealContent.Controls.Add(this.labeTestlDescriptionProgressBar);
+            this.groupBoxRealContent.Controls.Add(this.buttonTestBegin);
+            this.groupBoxRealContent.Controls.Add(this.labelTestClientStatus);
+            this.groupBoxRealContent.Controls.Add(this.labelTestClientStatusTitle);
+            this.groupBoxRealContent.Controls.Add(this.progressBarTest);
+            this.groupBoxRealContent.Controls.Add(this.labelTestClientAge);
+            this.groupBoxRealContent.Controls.Add(this.labelTestClientWeight);
+            this.groupBoxRealContent.Controls.Add(this.textBoxTestClientAge);
+            this.groupBoxRealContent.Controls.Add(this.textBoxTestClientWeight);
+            this.groupBoxRealContent.Controls.Add(this.buttonTestNoodstop);
+            this.groupBoxRealContent.Location = new System.Drawing.Point(7, 49);
+            this.groupBoxRealContent.Name = "groupBoxRealContent";
+            this.groupBoxRealContent.Size = new System.Drawing.Size(432, 326);
+            this.groupBoxRealContent.TabIndex = 24;
+            this.groupBoxRealContent.TabStop = false;
+            // 
+            // labelTestClientStatusTitle
+            // 
+            this.labelTestClientStatusTitle.AutoSize = true;
+            this.labelTestClientStatusTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTestClientStatusTitle.Location = new System.Drawing.Point(6, 88);
+            this.labelTestClientStatusTitle.Name = "labelTestClientStatusTitle";
+            this.labelTestClientStatusTitle.Size = new System.Drawing.Size(113, 20);
+            this.labelTestClientStatusTitle.TabIndex = 5;
+            this.labelTestClientStatusTitle.Text = "Status Client";
+            // 
+            // progressBarTest
+            // 
+            this.progressBarTest.Location = new System.Drawing.Point(6, 297);
+            this.progressBarTest.Name = "progressBarTest";
+            this.progressBarTest.Size = new System.Drawing.Size(420, 23);
+            this.progressBarTest.TabIndex = 4;
+            // 
+            // labelTestClientAge
+            // 
+            this.labelTestClientAge.AutoSize = true;
+            this.labelTestClientAge.Location = new System.Drawing.Point(6, 47);
+            this.labelTestClientAge.Name = "labelTestClientAge";
+            this.labelTestClientAge.Size = new System.Drawing.Size(148, 13);
+            this.labelTestClientAge.TabIndex = 3;
+            this.labelTestClientAge.Text = "Leeftijd van de cliënt (in jaren)";
+            // 
+            // labelTestClientWeight
+            // 
+            this.labelTestClientWeight.AutoSize = true;
+            this.labelTestClientWeight.Location = new System.Drawing.Point(6, 22);
+            this.labelTestClientWeight.Name = "labelTestClientWeight";
+            this.labelTestClientWeight.Size = new System.Drawing.Size(143, 13);
+            this.labelTestClientWeight.TabIndex = 2;
+            this.labelTestClientWeight.Text = "Gewicht van de cliënt (in Kg)";
+            // 
+            // textBoxTestClientAge
+            // 
+            this.textBoxTestClientAge.Location = new System.Drawing.Point(155, 44);
+            this.textBoxTestClientAge.Name = "textBoxTestClientAge";
+            this.textBoxTestClientAge.Size = new System.Drawing.Size(110, 20);
+            this.textBoxTestClientAge.TabIndex = 1;
+            // 
+            // textBoxTestClientWeight
+            // 
+            this.textBoxTestClientWeight.Location = new System.Drawing.Point(155, 19);
+            this.textBoxTestClientWeight.Name = "textBoxTestClientWeight";
+            this.textBoxTestClientWeight.Size = new System.Drawing.Size(110, 20);
+            this.textBoxTestClientWeight.TabIndex = 0;
+            // 
+            // buttonTestNoodstop
+            // 
+            this.buttonTestNoodstop.BackColor = System.Drawing.Color.Red;
+            this.buttonTestNoodstop.Location = new System.Drawing.Point(302, 172);
+            this.buttonTestNoodstop.Name = "buttonTestNoodstop";
+            this.buttonTestNoodstop.Size = new System.Drawing.Size(124, 116);
+            this.buttonTestNoodstop.TabIndex = 0;
+            this.buttonTestNoodstop.Text = "Noodstop";
+            this.buttonTestNoodstop.UseVisualStyleBackColor = false;
+            // 
+            // labelTestClientStatus
+            // 
+            this.labelTestClientStatus.AutoSize = true;
+            this.labelTestClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTestClientStatus.Location = new System.Drawing.Point(10, 117);
+            this.labelTestClientStatus.Name = "labelTestClientStatus";
+            this.labelTestClientStatus.Size = new System.Drawing.Size(94, 16);
+            this.labelTestClientStatus.TabIndex = 6;
+            this.labelTestClientStatus.Text = "Test niet actief";
+            // 
+            // buttonTestBegin
+            // 
+            this.buttonTestBegin.Location = new System.Drawing.Point(316, 19);
+            this.buttonTestBegin.Name = "buttonTestBegin";
+            this.buttonTestBegin.Size = new System.Drawing.Size(110, 45);
+            this.buttonTestBegin.TabIndex = 7;
+            this.buttonTestBegin.Text = "Start Åstrand test";
+            this.buttonTestBegin.UseVisualStyleBackColor = true;
+            // 
+            // labeTestlDescriptionProgressBar
+            // 
+            this.labeTestlDescriptionProgressBar.AutoSize = true;
+            this.labeTestlDescriptionProgressBar.Location = new System.Drawing.Point(6, 278);
+            this.labeTestlDescriptionProgressBar.Name = "labeTestlDescriptionProgressBar";
+            this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(153, 13);
+            this.labeTestlDescriptionProgressBar.TabIndex = 8;
+            this.labeTestlDescriptionProgressBar.Text = "Voortgang van inspanningstest";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 433);
+            this.ClientSize = new System.Drawing.Size(1038, 433);
+            this.Controls.Add(this.groupBoxAstrandTest);
             this.Controls.Add(this.buttonLock);
             this.Controls.Add(this.buttonLoadOldData);
             this.Controls.Add(this.button1);
@@ -347,7 +489,11 @@
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
             this.Text = "Doctor";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).EndInit();
+            this.groupBoxAstrandTest.ResumeLayout(false);
+            this.groupBoxRealContent.ResumeLayout(false);
+            this.groupBoxRealContent.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,6 +525,19 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonLoadOldData;
         private System.Windows.Forms.Button buttonLock;
+        private System.Windows.Forms.Button buttonStartTestEnvironment;
+        private System.Windows.Forms.GroupBox groupBoxAstrandTest;
+        private System.Windows.Forms.GroupBox groupBoxRealContent;
+        private System.Windows.Forms.Button buttonTestNoodstop;
+        private System.Windows.Forms.TextBox textBoxTestClientAge;
+        private System.Windows.Forms.TextBox textBoxTestClientWeight;
+        private System.Windows.Forms.ProgressBar progressBarTest;
+        private System.Windows.Forms.Label labelTestClientAge;
+        private System.Windows.Forms.Label labelTestClientWeight;
+        private System.Windows.Forms.Label labelTestClientStatusTitle;
+        private System.Windows.Forms.Label labelTestClientStatus;
+        private System.Windows.Forms.Label labeTestlDescriptionProgressBar;
+        private System.Windows.Forms.Button buttonTestBegin;
 
     }
 }
