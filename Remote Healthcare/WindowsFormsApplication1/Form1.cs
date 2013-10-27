@@ -429,6 +429,7 @@ namespace WindowsFormsApplication1
         }
 
         public float workload { get; set; }
+
         public int timerCount { get; set; }
             private void astrandTestTimer_Tick(object sender, EventArgs e)
             {
