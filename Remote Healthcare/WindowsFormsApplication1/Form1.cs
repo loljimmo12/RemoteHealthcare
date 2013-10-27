@@ -264,6 +264,7 @@ namespace WindowsFormsApplication1
             }
         }
 
+
         private void buttonLock_Click(object sender, EventArgs e)
         {
             connect.sendCommand("LB", this.listBox1.SelectedItem.ToString());
