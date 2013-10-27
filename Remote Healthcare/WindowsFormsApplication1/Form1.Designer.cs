@@ -57,6 +57,9 @@
             this.buttonStartTestEnvironment = new System.Windows.Forms.Button();
             this.groupBoxAstrandTest = new System.Windows.Forms.GroupBox();
             this.groupBoxRealContent = new System.Windows.Forms.GroupBox();
+            this.labeTestlDescriptionProgressBar = new System.Windows.Forms.Label();
+            this.buttonTestBegin = new System.Windows.Forms.Button();
+            this.labelTestClientStatus = new System.Windows.Forms.Label();
             this.labelTestClientStatusTitle = new System.Windows.Forms.Label();
             this.progressBarTest = new System.Windows.Forms.ProgressBar();
             this.labelTestClientAge = new System.Windows.Forms.Label();
@@ -64,9 +67,8 @@
             this.textBoxTestClientAge = new System.Windows.Forms.TextBox();
             this.textBoxTestClientWeight = new System.Windows.Forms.TextBox();
             this.buttonTestNoodstop = new System.Windows.Forms.Button();
-            this.labelTestClientStatus = new System.Windows.Forms.Label();
-            this.buttonTestBegin = new System.Windows.Forms.Button();
-            this.labeTestlDescriptionProgressBar = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.groupBoxAstrandTest.SuspendLayout();
             this.groupBoxRealContent.SuspendLayout();
@@ -354,6 +356,8 @@
             // 
             // groupBoxRealContent
             // 
+            this.groupBoxRealContent.Controls.Add(this.label8);
+            this.groupBoxRealContent.Controls.Add(this.comboBox1);
             this.groupBoxRealContent.Controls.Add(this.labeTestlDescriptionProgressBar);
             this.groupBoxRealContent.Controls.Add(this.buttonTestBegin);
             this.groupBoxRealContent.Controls.Add(this.labelTestClientStatus);
@@ -370,11 +374,39 @@
             this.groupBoxRealContent.TabIndex = 24;
             this.groupBoxRealContent.TabStop = false;
             // 
+            // labeTestlDescriptionProgressBar
+            // 
+            this.labeTestlDescriptionProgressBar.AutoSize = true;
+            this.labeTestlDescriptionProgressBar.Location = new System.Drawing.Point(6, 278);
+            this.labeTestlDescriptionProgressBar.Name = "labeTestlDescriptionProgressBar";
+            this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(153, 13);
+            this.labeTestlDescriptionProgressBar.TabIndex = 8;
+            this.labeTestlDescriptionProgressBar.Text = "Voortgang van inspanningstest";
+            // 
+            // buttonTestBegin
+            // 
+            this.buttonTestBegin.Location = new System.Drawing.Point(316, 19);
+            this.buttonTestBegin.Name = "buttonTestBegin";
+            this.buttonTestBegin.Size = new System.Drawing.Size(110, 45);
+            this.buttonTestBegin.TabIndex = 7;
+            this.buttonTestBegin.Text = "Start Åstrand test";
+            this.buttonTestBegin.UseVisualStyleBackColor = true;
+            // 
+            // labelTestClientStatus
+            // 
+            this.labelTestClientStatus.AutoSize = true;
+            this.labelTestClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTestClientStatus.Location = new System.Drawing.Point(10, 127);
+            this.labelTestClientStatus.Name = "labelTestClientStatus";
+            this.labelTestClientStatus.Size = new System.Drawing.Size(94, 16);
+            this.labelTestClientStatus.TabIndex = 6;
+            this.labelTestClientStatus.Text = "Test niet actief";
+            // 
             // labelTestClientStatusTitle
             // 
             this.labelTestClientStatusTitle.AutoSize = true;
             this.labelTestClientStatusTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTestClientStatusTitle.Location = new System.Drawing.Point(6, 88);
+            this.labelTestClientStatusTitle.Location = new System.Drawing.Point(6, 98);
             this.labelTestClientStatusTitle.Name = "labelTestClientStatusTitle";
             this.labelTestClientStatusTitle.Size = new System.Drawing.Size(113, 20);
             this.labelTestClientStatusTitle.TabIndex = 5;
@@ -429,33 +461,26 @@
             this.buttonTestNoodstop.Text = "Noodstop";
             this.buttonTestNoodstop.UseVisualStyleBackColor = false;
             // 
-            // labelTestClientStatus
+            // comboBox1
             // 
-            this.labelTestClientStatus.AutoSize = true;
-            this.labelTestClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTestClientStatus.Location = new System.Drawing.Point(10, 117);
-            this.labelTestClientStatus.Name = "labelTestClientStatus";
-            this.labelTestClientStatus.Size = new System.Drawing.Size(94, 16);
-            this.labelTestClientStatus.TabIndex = 6;
-            this.labelTestClientStatus.Text = "Test niet actief";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Man",
+            "Vrouw"});
+            this.comboBox1.Location = new System.Drawing.Point(155, 69);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(110, 21);
+            this.comboBox1.TabIndex = 9;
             // 
-            // buttonTestBegin
+            // label8
             // 
-            this.buttonTestBegin.Location = new System.Drawing.Point(316, 19);
-            this.buttonTestBegin.Name = "buttonTestBegin";
-            this.buttonTestBegin.Size = new System.Drawing.Size(110, 45);
-            this.buttonTestBegin.TabIndex = 7;
-            this.buttonTestBegin.Text = "Start Åstrand test";
-            this.buttonTestBegin.UseVisualStyleBackColor = true;
-            // 
-            // labeTestlDescriptionProgressBar
-            // 
-            this.labeTestlDescriptionProgressBar.AutoSize = true;
-            this.labeTestlDescriptionProgressBar.Location = new System.Drawing.Point(6, 278);
-            this.labeTestlDescriptionProgressBar.Name = "labeTestlDescriptionProgressBar";
-            this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(153, 13);
-            this.labeTestlDescriptionProgressBar.TabIndex = 8;
-            this.labeTestlDescriptionProgressBar.Text = "Voortgang van inspanningstest";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(113, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Geslacht van de cliënt";
             // 
             // Form1
             // 
@@ -538,6 +563,8 @@
         private System.Windows.Forms.Label labelTestClientStatus;
         private System.Windows.Forms.Label labeTestlDescriptionProgressBar;
         private System.Windows.Forms.Button buttonTestBegin;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox1;
 
     }
 }
