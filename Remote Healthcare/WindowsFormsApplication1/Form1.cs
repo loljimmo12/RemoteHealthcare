@@ -362,13 +362,13 @@ namespace WindowsFormsApplication1
         private void astrandMainTest()
         {
             
-            double tussenWaardeVO2Max = 0;
+            double tempValueVO2Max = 0;
             double VO2max = 0;
             int age = 25;
             double ageCorrection = 0.0;
 
-            //TODO <IMPORTANT> warning when client's RMP drops below 57 or above 63!! 
-            labelTestClientStatusTitle.Text = "Åstrand test is bezig.\n Client fietst nu met een RPM van ong. 60.";
+            //TODO <IMPORTANT> warning for Doctor AND Client when client's RMP drops below 57 or above 63!! 
+            labelTestClientStatusTitle.Text = "Åstrand test in progress.\n Client is cycling with a RPM of 60.";
             DateTime beginTestTijd = DateTime.Now;
             startAstrandTestTimer();
             if (DateTime.Now <= beginTestTijd.AddMinutes(6))
@@ -386,10 +386,10 @@ namespace WindowsFormsApplication1
                 }
                 double HRss = heartBeat.Average();
                 astrandClient.testState = TestStates.COOLINGDOWN;
-                labelTestClientStatusTitle.Text = "Åstrand is afgerond, cliënt is aan het uitfietsen.";
-                if(comboBox1.SelectedValue.ToString().Equals("Vrouw") )tussenWaardeVO2Max = (0.00193 * workload + 0.326) / (0.769 * HRss - 56.1) * 100;
-                else if (comboBox1.SelectedValue.ToString().Equals("Man")) tussenWaardeVO2Max = (0.00212 * workload + 0.299) / (0.769 * HRss - 48.5) * 100;
-                VO2max = (tussenWaardeVO2Max * ageCorrection * 1000)/Convert.ToInt32(textBoxTestClientWeight.Text);
+                labelTestClientStatusTitle.Text = "Åstrand is completed. Client is cooling down.";
+                if(comboBox1.SelectedValue.ToString().Equals("Vrouw") )tempValueVO2Max = (0.00193 * workload + 0.326) / (0.769 * HRss - 56.1) * 100;
+                else if (comboBox1.SelectedValue.ToString().Equals("Man")) tempValueVO2Max = (0.00212 * workload + 0.299) / (0.769 * HRss - 48.5) * 100;
+                VO2max = (tempValueVO2Max * ageCorrection * 1000)/Convert.ToInt32(textBoxTestClientWeight.Text);
                 astrandClient.VO2Max = Math.Round(VO2max*10)/10;
             }
         }
@@ -398,19 +398,29 @@ namespace WindowsFormsApplication1
         {
             astrandTestTimer = new Timer();
             astrandTestTimer.Tick += new EventHandler(astrandTestTimer_Tick);
-            astrandTestTimer.Interval = 1000; // in miliseconds
+            astrandTestTimer.Interval = 1000;
             astrandTestTimer.Start();
         }
         internal Dictionary<int, double> astrandLeeftijd;
         internal Client astrandClient { get; set; }
         public int eindPulse { get; set; }
         
-        private void buttonTestNoodstop_Click(object sender, EventArgs e)
+        private void buttonTestEmergencyBreak_Click(object sender, EventArgs e)
         {
-            //TODO add emergency break code here
+            connect.sendCommand("RS", astrandClient.getName());
+			System.Threading.Thread.Sleep(20); // waiting so the connection doesn't spam packets.
+			connect.sendCommand("CM", astrandClient.getName());
+			System.Threading.Thread.Sleep(20);
+			connect.sendCommand("PW 25", astrandClient.getName());
+			System.Threading.Thread.Sleep(20);
+			connect.sendMessage("===============",astrandClient.getName());
+			System.Threading.Thread.Sleep(20);
+			connect.sendMessage("EMERGENCY BREAK",astrandClient.getName());
+			System.Threading.Thread.Sleep(20);
+			connect.sendMessage("===============",astrandClient.getName());
+			System.Threading.Thread.Sleep(20);
         }
 
-        //TODO Check if this code is usable
         private int calculateUsableAge(int age)
         {
             if (age >= 65)

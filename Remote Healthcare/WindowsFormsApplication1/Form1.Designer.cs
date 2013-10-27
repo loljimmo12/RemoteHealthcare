@@ -68,7 +68,7 @@
             this.labelTestClientWeight = new System.Windows.Forms.Label();
             this.textBoxTestClientAge = new System.Windows.Forms.TextBox();
             this.textBoxTestClientWeight = new System.Windows.Forms.TextBox();
-            this.buttonTestNoodstop = new System.Windows.Forms.Button();
+            this.buttonTestEmergencyBreak = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.groupBoxAstrandTest.SuspendLayout();
             this.groupBoxRealContent.SuspendLayout();
@@ -339,7 +339,7 @@
             this.buttonStartTestEnvironment.Name = "buttonStartTestEnvironment";
             this.buttonStartTestEnvironment.Size = new System.Drawing.Size(136, 23);
             this.buttonStartTestEnvironment.TabIndex = 23;
-            this.buttonStartTestEnvironment.Text = "Open Åstrand omgeving";
+            this.buttonStartTestEnvironment.Text = "Open Åstrand enviroment";
             this.buttonStartTestEnvironment.UseVisualStyleBackColor = true;
             this.buttonStartTestEnvironment.Click += new System.EventHandler(this.buttonStartTest_Click);
             // 
@@ -367,7 +367,7 @@
             this.groupBoxRealContent.Controls.Add(this.labelTestClientWeight);
             this.groupBoxRealContent.Controls.Add(this.textBoxTestClientAge);
             this.groupBoxRealContent.Controls.Add(this.textBoxTestClientWeight);
-            this.groupBoxRealContent.Controls.Add(this.buttonTestNoodstop);
+            this.groupBoxRealContent.Controls.Add(this.buttonTestEmergencyBreak);
             this.groupBoxRealContent.Location = new System.Drawing.Point(7, 49);
             this.groupBoxRealContent.Name = "groupBoxRealContent";
             this.groupBoxRealContent.Size = new System.Drawing.Size(432, 326);
@@ -382,7 +382,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(113, 13);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Geslacht van de cliënt";
+            this.label8.Text = "Sex of the client";
             // 
             // comboBox1
             // 
@@ -403,7 +403,7 @@
             this.labeTestlDescriptionProgressBar.Name = "labeTestlDescriptionProgressBar";
             this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(153, 13);
             this.labeTestlDescriptionProgressBar.TabIndex = 8;
-            this.labeTestlDescriptionProgressBar.Text = "Voortgang van inspanningstest";
+            this.labeTestlDescriptionProgressBar.Text = "Progress:";
             // 
             // buttonTestBegin
             // 
@@ -423,7 +423,7 @@
             this.labelTestClientStatus.Name = "labelTestClientStatus";
             this.labelTestClientStatus.Size = new System.Drawing.Size(94, 16);
             this.labelTestClientStatus.TabIndex = 6;
-            this.labelTestClientStatus.Text = "Test niet actief";
+            this.labelTestClientStatus.Text = "Test is not active";
             // 
             // labelTestClientStatusTitle
             // 
@@ -449,7 +449,7 @@
             this.labelTestClientAge.Name = "labelTestClientAge";
             this.labelTestClientAge.Size = new System.Drawing.Size(148, 13);
             this.labelTestClientAge.TabIndex = 3;
-            this.labelTestClientAge.Text = "Leeftijd van de cliënt (in jaren)";
+            this.labelTestClientAge.Text = "Client age (in years):";
             // 
             // labelTestClientWeight
             // 
@@ -458,7 +458,7 @@
             this.labelTestClientWeight.Name = "labelTestClientWeight";
             this.labelTestClientWeight.Size = new System.Drawing.Size(143, 13);
             this.labelTestClientWeight.TabIndex = 2;
-            this.labelTestClientWeight.Text = "Gewicht van de cliënt (in Kg)";
+            this.labelTestClientWeight.Text = "Client weight (in Kg)";
             // 
             // textBoxTestClientAge
             // 
@@ -476,14 +476,14 @@
             // 
             // buttonTestNoodstop
             // 
-            this.buttonTestNoodstop.BackColor = System.Drawing.Color.Red;
-            this.buttonTestNoodstop.Location = new System.Drawing.Point(302, 172);
-            this.buttonTestNoodstop.Name = "buttonTestNoodstop";
-            this.buttonTestNoodstop.Size = new System.Drawing.Size(124, 116);
-            this.buttonTestNoodstop.TabIndex = 0;
-            this.buttonTestNoodstop.Text = "Noodstop";
-            this.buttonTestNoodstop.UseVisualStyleBackColor = false;
-            this.buttonTestNoodstop.Click += new System.EventHandler(this.buttonTestNoodstop_Click);
+            this.buttonTestEmergencyBreak.BackColor = System.Drawing.Color.Red;
+            this.buttonTestEmergencyBreak.Location = new System.Drawing.Point(302, 172);
+            this.buttonTestEmergencyBreak.Name = "buttonTestNoodstop";
+            this.buttonTestEmergencyBreak.Size = new System.Drawing.Size(124, 116);
+            this.buttonTestEmergencyBreak.TabIndex = 0;
+            this.buttonTestEmergencyBreak.Text = "Emergency Break";
+            this.buttonTestEmergencyBreak.UseVisualStyleBackColor = false;
+            this.buttonTestEmergencyBreak.Click += new System.EventHandler(this.buttonTestNoodstop_Click);
             // 
             // Form1
             // 
@@ -556,7 +556,7 @@
         private System.Windows.Forms.Button buttonStartTestEnvironment;
         private System.Windows.Forms.GroupBox groupBoxAstrandTest;
         private System.Windows.Forms.GroupBox groupBoxRealContent;
-        private System.Windows.Forms.Button buttonTestNoodstop;
+        private System.Windows.Forms.Button buttonTestEmergencyBreak;
         private System.Windows.Forms.TextBox textBoxTestClientAge;
         private System.Windows.Forms.TextBox textBoxTestClientWeight;
         private System.Windows.Forms.ProgressBar progressBarTest;
