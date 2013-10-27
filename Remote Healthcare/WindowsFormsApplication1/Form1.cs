@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
+        List<int> heartBeat = new List<int>();
 
         public enum TestStates
         {
@@ -360,7 +361,7 @@ namespace WindowsFormsApplication1
 
         private void astrandMainTest()
         {
-            List<int> heartBeat = new List<int>();
+            
             double tussenWaardeVO2Max = 0;
             double VO2max = 0;
             int age = 25;
@@ -369,7 +370,7 @@ namespace WindowsFormsApplication1
             //TODO <IMPORTANT> warning when client's RMP drops below 57 or above 63!! 
             labelTestClientStatusTitle.Text = "Åstrand test is bezig.\n Client fietst nu met een RPM van ong. 60.";
             DateTime beginTestTijd = DateTime.Now;
-            //TODO elke min hartslag in de hartslag list zetten
+            startAstrandTestTimer();
             if (DateTime.Now <= beginTestTijd.AddMinutes(6))
             {
                 eindPulse = Convert.ToInt32(astrandClient.getVal().Pulse);
@@ -392,11 +393,15 @@ namespace WindowsFormsApplication1
                 astrandClient.VO2Max = Math.Round(VO2max*10)/10;
             }
         }
-
-        internal Dictionary<int, int> astrandGewicht;
+        Timer astrandTestTimer;
+        private void startAstrandTestTimer()
+        {
+            astrandTestTimer = new Timer();
+            astrandTestTimer.Tick += new EventHandler(astrandTestTimer_Tick);
+            astrandTestTimer.Interval = 1000; // in miliseconds
+            astrandTestTimer.Start();
+        }
         internal Dictionary<int, double> astrandLeeftijd;
-        
-        internal Dictionary<int, Dictionary<int,int>> astrandResultaat; //Mischien Dict<Watt, Dict<Hartslag, resultaat>> of Dict<Watt, Int[]> waarbij de index altijd -120 is ipv Dict<int, int>
         internal Client astrandClient { get; set; }
         public int eindPulse { get; set; }
         
@@ -424,5 +429,13 @@ namespace WindowsFormsApplication1
         }
 
         public float workload { get; set; }
+        public int timerCount { get; set; }
+            private void astrandTestTimer_Tick(object sender, EventArgs e)
+            {
+                heartBeat.Add(Convert.ToInt32(astrandClient.getVal().Pulse));
+                ++timerCount;
+                if (timerCount == 6) astrandTestTimer.Stop();
+            }
     }
+
 }
