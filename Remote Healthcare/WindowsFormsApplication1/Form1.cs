@@ -272,13 +272,43 @@ namespace WindowsFormsApplication1
 
         private void buttonStartTest_Click(object sender, EventArgs e)
         {
-            //TODO
-            //SEND CM
+            groupBoxRealContent.Visible = !groupBoxRealContent.Visible;
+            if (astrandRunning) toggleAstrand(true);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void buttonTestBegin_Click(object sender, EventArgs e)
+        {
+            toggleAstrand();
+        }
+
+        private void toggleAstrand(bool nood=false)
+        {
+            if (!astrandRunning)
+            {
+                astrandRunning = true;
+                buttonTestBegin.Enabled = false;
+                textBoxTestClientAge.Enabled = false;
+                textBoxTestClientWeight.Enabled = false;
+                labelTestClientStatus.Text = "Warming up is bezig";
+                buttonTestNoodstop.Visible = true;
+            }
+            else if (astrandRunning && nood)
+            {
+                astrandRunning = false;
+                buttonTestBegin.Enabled = true;
+                textBoxTestClientAge.Enabled = true;
+                textBoxTestClientWeight.Enabled = true;
+                labelTestClientStatus.Text = "Astrand test is geannuleerd";
+                buttonTestNoodstop.Visible = false;
+            }
+
+        }
+
+        public bool astrandRunning { get; set; }
     }
 }

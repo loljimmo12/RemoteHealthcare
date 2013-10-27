@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.clientChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -57,6 +57,8 @@
             this.buttonStartTestEnvironment = new System.Windows.Forms.Button();
             this.groupBoxAstrandTest = new System.Windows.Forms.GroupBox();
             this.groupBoxRealContent = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.labeTestlDescriptionProgressBar = new System.Windows.Forms.Label();
             this.buttonTestBegin = new System.Windows.Forms.Button();
             this.labelTestClientStatus = new System.Windows.Forms.Label();
@@ -67,8 +69,6 @@
             this.textBoxTestClientAge = new System.Windows.Forms.TextBox();
             this.textBoxTestClientWeight = new System.Windows.Forms.TextBox();
             this.buttonTestNoodstop = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clientChart)).BeginInit();
             this.groupBoxAstrandTest.SuspendLayout();
             this.groupBoxRealContent.SuspendLayout();
@@ -91,21 +91,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(105, 399);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(370, 20);
+            this.textBox1.Size = new System.Drawing.Size(360, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // clientChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.clientChart.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.clientChart.ChartAreas.Add(chartArea3);
             this.clientChart.Location = new System.Drawing.Point(105, 12);
             this.clientChart.Name = "clientChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "Heartbeat";
-            this.clientChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "Heartbeat";
+            this.clientChart.Series.Add(series3);
             this.clientChart.Size = new System.Drawing.Size(283, 157);
             this.clientChart.TabIndex = 2;
             this.clientChart.Text = "Client";
@@ -373,6 +373,28 @@
             this.groupBoxRealContent.Size = new System.Drawing.Size(432, 326);
             this.groupBoxRealContent.TabIndex = 24;
             this.groupBoxRealContent.TabStop = false;
+            this.groupBoxRealContent.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(113, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Geslacht van de cliënt";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Man",
+            "Vrouw"});
+            this.comboBox1.Location = new System.Drawing.Point(155, 69);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(110, 21);
+            this.comboBox1.TabIndex = 9;
             // 
             // labeTestlDescriptionProgressBar
             // 
@@ -391,6 +413,7 @@
             this.buttonTestBegin.TabIndex = 7;
             this.buttonTestBegin.Text = "Start Åstrand test";
             this.buttonTestBegin.UseVisualStyleBackColor = true;
+            this.buttonTestBegin.Click += new System.EventHandler(this.buttonTestBegin_Click);
             // 
             // labelTestClientStatus
             // 
@@ -461,32 +484,11 @@
             this.buttonTestNoodstop.Text = "Noodstop";
             this.buttonTestNoodstop.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Man",
-            "Vrouw"});
-            this.comboBox1.Location = new System.Drawing.Point(155, 69);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(110, 21);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 69);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(113, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Geslacht van de cliënt";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 433);
+            this.ClientSize = new System.Drawing.Size(1028, 433);
             this.Controls.Add(this.groupBoxAstrandTest);
             this.Controls.Add(this.buttonLock);
             this.Controls.Add(this.buttonLoadOldData);
