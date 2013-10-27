@@ -32,6 +32,17 @@ namespace WindowsFormsApplication1
             comboBoxSelectReciever.SelectedIndex = 0;
             comboBoxPower.SelectedIndex = 0;
             astrandGewicht = new Dictionary<int, int> { {80, 80} };
+            astrandLeeftijd.Add(15, 1.10);
+            astrandLeeftijd.Add(20, 1.05);
+            astrandLeeftijd.Add(25, 1.0);
+            astrandLeeftijd.Add(30, 0.94);
+            astrandLeeftijd.Add(35, 0.87);
+            astrandLeeftijd.Add(40, 0.83); 
+            astrandLeeftijd.Add(45, 0.78);
+            astrandLeeftijd.Add(50, 0.75);
+            astrandLeeftijd.Add(55, 0.71); 
+            astrandLeeftijd.Add(60, 0.68);
+            astrandLeeftijd.Add(65, 0.65);
         }
         
 
@@ -224,7 +235,7 @@ namespace WindowsFormsApplication1
                 {
                     buttonTestBegin.Enabled = true;
                     buttonTestBegin.Text = "Finish warmup";
-                    labelTestClientStatus.Text = "Click on \"Finish warmup\" to continue test";
+                    labelTestClientStatus.Text = "Click on the \"Finish warmup\" button \n to continue to the main test";
 
                 }
                 else if (astrandClient.astrandRunning && (val.Pulse < 120 || val.Pulse > 170))
@@ -310,7 +321,8 @@ namespace WindowsFormsApplication1
                 astrandClient.testState = TestStates.TESTING;
                 progressBarTest.Value = 33;
                 buttonTestBegin.Enabled = false;
-                buttonTestBegin.Text = "Start Astrand test";
+                buttonTestBegin.Text = "Start Åstrand test";
+                astrandMainTest();
             }
             toggleAstrand();
             
@@ -318,6 +330,7 @@ namespace WindowsFormsApplication1
 
         private void toggleAstrand(bool nood=false)
         {
+            //TODO add imposibility to start test when the 3 client values are not entered correctly
             if (!astrandClient.astrandRunning)
             {
                 astrandClient.astrandRunning = true;
@@ -337,7 +350,7 @@ namespace WindowsFormsApplication1
                 buttonTestBegin.Enabled = true;
                 textBoxTestClientAge.Enabled = true;
                 textBoxTestClientWeight.Enabled = true;
-                labelTestClientStatus.Text = "Astrand test is geannuleerd";
+                labelTestClientStatus.Text = "Åstrand test is geannuleerd";
                 buttonTestNoodstop.Visible = false;
                 connect.sendCommand("RS", astrandClient.getName());
                 astrandClient.testState = TestStates.STOPPED;
@@ -345,9 +358,71 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void astrandMainTest()
+        {
+            List<int> heartBeat = new List<int>();
+            double tussenWaardeVO2Max = 0;
+            double VO2max = 0;
+            int age = 25;
+            double ageCorrection = 0.0;
+
+            //TODO <IMPORTANT> warning when client's RMP drops below 57 or above 63!! 
+            labelTestClientStatusTitle.Text = "Åstrand test is bezig.\n Client fietst nu met een RPM van ong. 60.";
+            DateTime beginTestTijd = DateTime.Now;
+            //TODO elke min hartslag in de hartslag list zetten
+            if (DateTime.Now <= beginTestTijd.AddMinutes(6))
+            {
+                eindPulse = Convert.ToInt32(astrandClient.getVal().Pulse);
+                workload = (float) (astrandClient.getVal().RequestedPower * 6.12);
+                age = calculateUsableAge(Convert.ToInt32(textBoxTestClientAge.Text));
+                foreach(KeyValuePair<int,double> cor in astrandLeeftijd)
+                {
+                    if (cor.Key==age)
+                    {
+                        ageCorrection = cor.Value;
+                        break;
+                    }
+                }
+                double HRss = heartBeat.Average();
+                astrandClient.testState = TestStates.COOLINGDOWN;
+                labelTestClientStatusTitle.Text = "Åstrand is afgerond, cliënt is aan het uitfietsen.";
+                if(comboBox1.SelectedValue.ToString().Equals("Vrouw") )tussenWaardeVO2Max = (0.00193 * workload + 0.326) / (0.769 * HRss - 56.1) * 100;
+                else if (comboBox1.SelectedValue.ToString().Equals("Man")) tussenWaardeVO2Max = (0.00212 * workload + 0.299) / (0.769 * HRss - 48.5) * 100;
+                VO2max = (tussenWaardeVO2Max * ageCorrection * 1000)/Convert.ToInt32(textBoxTestClientWeight.Text);
+                astrandClient.VO2Max = Math.Round(VO2max*10)/10;
+            }
+        }
+
         internal Dictionary<int, int> astrandGewicht;
-        internal Dictionary<int, int> astrandLeeftijd;
-        internal Dictionary<int, int> astrandResultaat; //Mischien Dict<Watt, Dict<Hartslag, resultaat>> of Dict<Watt, Int[]> waarbij de index altijd -120 is ipv Dict<int, int>
+        internal Dictionary<int, double> astrandLeeftijd;
+        
+        internal Dictionary<int, Dictionary<int,int>> astrandResultaat; //Mischien Dict<Watt, Dict<Hartslag, resultaat>> of Dict<Watt, Int[]> waarbij de index altijd -120 is ipv Dict<int, int>
         internal Client astrandClient { get; set; }
+        public int eindPulse { get; set; }
+        
+        private void buttonTestNoodstop_Click(object sender, EventArgs e)
+        {
+            //TODO add emergency break code here
+        }
+
+        //TODO Check if this code is usable
+        private int calculateUsableAge(int age)
+        {
+            if (age >= 65)
+            {
+                return 65;
+            }
+            else if (age % 5 == 0)
+            {
+                return age;
+            }
+            else if (age % 5 != 0)
+            {
+                return calculateUsableAge(++age);
+            }
+            else return 25;
+        }
+
+        public float workload { get; set; }
     }
 }

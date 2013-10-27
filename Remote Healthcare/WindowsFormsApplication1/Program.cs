@@ -347,6 +347,10 @@ namespace WindowsFormsApplication1
          {
              throw new NotImplementedException();
          }
+
+         public Form1.TestStates testState { get; set; }
+
+         public bool astrandRunning { get; set; }
      }
 
 }
