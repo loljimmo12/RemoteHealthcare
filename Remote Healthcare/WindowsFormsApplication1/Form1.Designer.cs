@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.clientChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -98,14 +98,14 @@
             // 
             // clientChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.clientChart.ChartAreas.Add(chartArea3);
+            chartArea5.Name = "ChartArea1";
+            this.clientChart.ChartAreas.Add(chartArea5);
             this.clientChart.Location = new System.Drawing.Point(105, 12);
             this.clientChart.Name = "clientChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Name = "Heartbeat";
-            this.clientChart.Series.Add(series3);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Name = "Heartbeat";
+            this.clientChart.Series.Add(series5);
             this.clientChart.Size = new System.Drawing.Size(283, 157);
             this.clientChart.TabIndex = 2;
             this.clientChart.Text = "Client";

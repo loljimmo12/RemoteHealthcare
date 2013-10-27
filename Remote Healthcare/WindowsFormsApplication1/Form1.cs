@@ -16,6 +16,14 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
+
+        public enum TestStates
+        {
+            STOPPED,
+            WARMINGUP,
+            TESTING,
+            COOLINGDOWN
+        }
         
         public Form1()
         {
@@ -23,6 +31,7 @@ namespace WindowsFormsApplication1
             connect = Program.connect;
             comboBoxSelectReciever.SelectedIndex = 0;
             comboBoxPower.SelectedIndex = 0;
+            astrandGewicht = new Dictionary<int, int> { {80, 80} };
         }
         
 
@@ -188,6 +197,7 @@ namespace WindowsFormsApplication1
             if (selectedReciever < Program.clients.Count() && selectedReciever != -1)
             {
                 chatArea.Text = Program.clients[selectedReciever].getChat();
+                astrandClient = Program.clients[selectedReciever];
             }
             else
             {
@@ -210,6 +220,18 @@ namespace WindowsFormsApplication1
                 label6.Text = "Power " + val.RequestedPower;
                 label7.Text = "Energy " + val.Energy;
                 clientChart.Series["Heartbeat"].Points.AddXY(val.Time.TotalSeconds, val.Pulse);
+                if (astrandClient.astrandRunning && val.Pulse >= 120 && val.Pulse <= 170 && !buttonTestBegin.Enabled)
+                {
+                    buttonTestBegin.Enabled = true;
+                    buttonTestBegin.Text = "Finish warmup";
+                    labelTestClientStatus.Text = "Click on \"Finish warmup\" to continue test";
+
+                }
+                else if (astrandClient.astrandRunning && (val.Pulse < 120 || val.Pulse > 170))
+                {
+                    labelTestClientStatus.Text = "Pulse is too high or too low,\ncannot finish warmup";
+                    if (buttonTestBegin.Enabled) buttonTestBegin.Enabled = false;
+                }
             }
         }
 
@@ -273,7 +295,7 @@ namespace WindowsFormsApplication1
         private void buttonStartTest_Click(object sender, EventArgs e)
         {
             groupBoxRealContent.Visible = !groupBoxRealContent.Visible;
-            if (astrandRunning) toggleAstrand(true);
+            if (astrandClient.astrandRunning) toggleAstrand(true);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -283,32 +305,49 @@ namespace WindowsFormsApplication1
 
         private void buttonTestBegin_Click(object sender, EventArgs e)
         {
+            if (astrandClient.testState == TestStates.WARMINGUP)
+            {
+                astrandClient.testState = TestStates.TESTING;
+                progressBarTest.Value = 33;
+                buttonTestBegin.Enabled = false;
+                buttonTestBegin.Text = "Start Astrand test";
+            }
             toggleAstrand();
+            
         }
 
         private void toggleAstrand(bool nood=false)
         {
-            if (!astrandRunning)
+            if (!astrandClient.astrandRunning)
             {
-                astrandRunning = true;
+                astrandClient.astrandRunning = true;
                 buttonTestBegin.Enabled = false;
                 textBoxTestClientAge.Enabled = false;
                 textBoxTestClientWeight.Enabled = false;
                 labelTestClientStatus.Text = "Warming up is bezig";
                 buttonTestNoodstop.Visible = true;
+                connect.sendCommand("RS", astrandClient.getName());
+                System.Threading.Thread.Sleep(2000); //Wait for bike to reboot
+                connect.sendCommand("CM", astrandClient.getName());
+                astrandClient.testState = TestStates.WARMINGUP;
             }
-            else if (astrandRunning && nood)
+            else if (astrandClient.astrandRunning && nood)
             {
-                astrandRunning = false;
+                astrandClient.astrandRunning = false;
                 buttonTestBegin.Enabled = true;
                 textBoxTestClientAge.Enabled = true;
                 textBoxTestClientWeight.Enabled = true;
                 labelTestClientStatus.Text = "Astrand test is geannuleerd";
                 buttonTestNoodstop.Visible = false;
+                connect.sendCommand("RS", astrandClient.getName());
+                astrandClient.testState = TestStates.STOPPED;
             }
 
         }
 
-        public bool astrandRunning { get; set; }
+        internal Dictionary<int, int> astrandGewicht;
+        internal Dictionary<int, int> astrandLeeftijd;
+        internal Dictionary<int, int> astrandResultaat; //Mischien Dict<Watt, Dict<Hartslag, resultaat>> of Dict<Watt, Int[]> waarbij de index altijd -120 is ipv Dict<int, int>
+        internal Client astrandClient { get; set; }
     }
 }
