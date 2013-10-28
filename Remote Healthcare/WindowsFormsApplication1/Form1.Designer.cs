@@ -483,7 +483,7 @@
             this.buttonTestEmergencyBreak.TabIndex = 0;
             this.buttonTestEmergencyBreak.Text = "Emergency Break";
             this.buttonTestEmergencyBreak.UseVisualStyleBackColor = false;
-            this.buttonTestEmergencyBreak.Click += new System.EventHandler(this.buttonTestNoodstop_Click);
+            this.buttonTestEmergencyBreak.Click += new System.EventHandler(this.buttonTestEmergencyBreak_Click);
             // 
             // Form1
             // 

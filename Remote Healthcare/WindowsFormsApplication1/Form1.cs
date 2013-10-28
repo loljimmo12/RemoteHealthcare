@@ -16,7 +16,6 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
-        List<int> heartBeat = new List<int>();
 
         public enum TestStates
         {
@@ -32,18 +31,8 @@ namespace WindowsFormsApplication1
             connect = Program.connect;
             comboBoxSelectReciever.SelectedIndex = 0;
             comboBoxPower.SelectedIndex = 0;
-            astrandGewicht = new Dictionary<int, int> { {80, 80} };
-            astrandLeeftijd.Add(15, 1.10);
-            astrandLeeftijd.Add(20, 1.05);
-            astrandLeeftijd.Add(25, 1.0);
-            astrandLeeftijd.Add(30, 0.94);
-            astrandLeeftijd.Add(35, 0.87);
-            astrandLeeftijd.Add(40, 0.83); 
-            astrandLeeftijd.Add(45, 0.78);
-            astrandLeeftijd.Add(50, 0.75);
-            astrandLeeftijd.Add(55, 0.71); 
-            astrandLeeftijd.Add(60, 0.68);
-            astrandLeeftijd.Add(65, 0.65);
+            //astrandWeight = new Dictionary<int, int> { {80, 80} };
+            astrandLeeftijd = new Dictionary<int, double> { { 15, 1.10 }, {20,1.05}, {25,1.0}, {30,0.94},{35,0.87},{40,0.83},{45,0.78},{50,0.75},{55,0.71},{60,0.68},{65,0.65}};
         }
         
 
@@ -244,6 +233,19 @@ namespace WindowsFormsApplication1
                     labelTestClientStatus.Text = "Pulse is too high or too low,\ncannot finish warmup";
                     if (buttonTestBegin.Enabled) buttonTestBegin.Enabled = false;
                 }
+                else if (astrandClient.astrandRunning && astrandClient.testState == TestStates.TESTING)
+                {
+                    //TODO <IMPORTANT> warning for Doctor AND Client when client's RMP drops below 57 or above 63!! 
+                    if(val.RPM<57 || val.RPM>63)
+                    {
+                        connect.sendMessage("Let op uw RPM!", astrandClient.getName());
+                    }
+                    astrandClient.heartBeat.Add(Convert.ToInt32(val.Pulse));
+                    if(astrandClient.getVal().Time.TotalSeconds>=0)
+                    {
+                        astrandMainTestCalculation(Convert.ToInt32(val.Pulse),Convert.ToDouble(val.RequestedPower));
+                    }
+                }
             }
         }
 
@@ -323,7 +325,8 @@ namespace WindowsFormsApplication1
                 progressBarTest.Value = 33;
                 buttonTestBegin.Enabled = false;
                 buttonTestBegin.Text = "Start Åstrand test";
-                astrandMainTest();
+                labelTestClientStatus.Text = "Åstrand test in progress.\n Client is cycling with a RPM of 60.";
+                connect.sendCommand("PT 360", astrandClient.getName());
             }
             toggleAstrand();
             
@@ -339,7 +342,7 @@ namespace WindowsFormsApplication1
                 textBoxTestClientAge.Enabled = false;
                 textBoxTestClientWeight.Enabled = false;
                 labelTestClientStatus.Text = "Warming up is bezig";
-                buttonTestNoodstop.Visible = true;
+                buttonTestEmergencyBreak.Visible = true;
                 connect.sendCommand("RS", astrandClient.getName());
                 System.Threading.Thread.Sleep(2000); //Wait for bike to reboot
                 connect.sendCommand("CM", astrandClient.getName());
@@ -352,14 +355,14 @@ namespace WindowsFormsApplication1
                 textBoxTestClientAge.Enabled = true;
                 textBoxTestClientWeight.Enabled = true;
                 labelTestClientStatus.Text = "Åstrand test is geannuleerd";
-                buttonTestNoodstop.Visible = false;
+                buttonTestEmergencyBreak.Visible = false;
                 connect.sendCommand("RS", astrandClient.getName());
                 astrandClient.testState = TestStates.STOPPED;
             }
 
         }
 
-        private void astrandMainTest()
+        private void astrandMainTestCalculation(int endPulse, double workload)
         {
             
             double tempValueVO2Max = 0;
@@ -367,40 +370,30 @@ namespace WindowsFormsApplication1
             int age = 25;
             double ageCorrection = 0.0;
 
-            //TODO <IMPORTANT> warning for Doctor AND Client when client's RMP drops below 57 or above 63!! 
-            labelTestClientStatusTitle.Text = "Åstrand test in progress.\n Client is cycling with a RPM of 60.";
-            DateTime beginTestTijd = DateTime.Now;
-            startAstrandTestTimer();
-            if (DateTime.Now <= beginTestTijd.AddMinutes(6))
-            {
-                eindPulse = Convert.ToInt32(astrandClient.getVal().Pulse);
-                workload = (float) (astrandClient.getVal().RequestedPower * 6.12);
-                age = calculateUsableAge(Convert.ToInt32(textBoxTestClientAge.Text));
-                foreach(KeyValuePair<int,double> cor in astrandLeeftijd)
-                {
-                    if (cor.Key==age)
+            
+            
+            
+                    age = calculateUsableAge(Convert.ToInt32(textBoxTestClientAge.Text));
+                    foreach (KeyValuePair<int, double> cor in astrandLeeftijd)
                     {
-                        ageCorrection = cor.Value;
-                        break;
+                        if (cor.Key == age)
+                        {
+                            ageCorrection = cor.Value;
+                            break;
+                        }
                     }
-                }
-                double HRss = heartBeat.Average();
-                astrandClient.testState = TestStates.COOLINGDOWN;
-                labelTestClientStatusTitle.Text = "Åstrand is completed. Client is cooling down.";
-                if(comboBox1.SelectedValue.ToString().Equals("Vrouw") )tempValueVO2Max = (0.00193 * workload + 0.326) / (0.769 * HRss - 56.1) * 100;
-                else if (comboBox1.SelectedValue.ToString().Equals("Man")) tempValueVO2Max = (0.00212 * workload + 0.299) / (0.769 * HRss - 48.5) * 100;
-                VO2max = (tempValueVO2Max * ageCorrection * 1000)/Convert.ToInt32(textBoxTestClientWeight.Text);
-                astrandClient.VO2Max = Math.Round(VO2max*10)/10;
+                    double HRss = astrandClient.heartBeat.Average();
+                    astrandClient.testState = TestStates.COOLINGDOWN;
+                    labelTestClientStatusTitle.Text = "Åstrand is completed. Client is cooling down.";
+                    if (comboBox1.SelectedValue.ToString().Equals("Vrouw")) tempValueVO2Max = (0.00193 * workload + 0.326) / (0.769 * HRss - 56.1) * 100;
+                    else if (comboBox1.SelectedValue.ToString().Equals("Man")) tempValueVO2Max = (0.00212 * workload + 0.299) / (0.769 * HRss - 48.5) * 100;
+                    VO2max = (tempValueVO2Max * ageCorrection * 1000) / Convert.ToInt32(textBoxTestClientWeight.Text);
+                    astrandClient.VO2Max = Math.Round(VO2max * 10) / 10;
+                
             }
-        }
-        Timer astrandTestTimer;
-        private void startAstrandTestTimer()
-        {
-            astrandTestTimer = new Timer();
-            astrandTestTimer.Tick += new EventHandler(astrandTestTimer_Tick);
-            astrandTestTimer.Interval = 1000;
-            astrandTestTimer.Start();
-        }
+
+        
+
         internal Dictionary<int, double> astrandLeeftijd;
         internal Client astrandClient { get; set; }
         public int eindPulse { get; set; }
@@ -437,16 +430,7 @@ namespace WindowsFormsApplication1
             }
             else return 25;
         }
-
         public float workload { get; set; }
-
-        public int timerCount { get; set; }
-            private void astrandTestTimer_Tick(object sender, EventArgs e)
-            {
-                heartBeat.Add(Convert.ToInt32(astrandClient.getVal().Pulse));
-                ++timerCount;
-                if (timerCount == 6) astrandTestTimer.Stop();
-            }
     }
 
 }

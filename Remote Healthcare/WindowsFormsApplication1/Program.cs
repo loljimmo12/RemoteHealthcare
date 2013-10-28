@@ -312,6 +312,7 @@ namespace WindowsFormsApplication1
          protected string chatLog;
          protected Kettler_X7_Lib.Objects.Value lastValue;
          
+         
          public Client(string naam)
          {
              this.naam = naam;
@@ -351,6 +352,10 @@ namespace WindowsFormsApplication1
          public Form1.TestStates testState { get; set; }
 
          public bool astrandRunning { get; set; }
+
+         public double VO2Max { get; set; }
+
+         public List<int> heartBeat {get;set;}
      }
 
 }
