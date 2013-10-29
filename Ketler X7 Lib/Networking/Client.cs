@@ -166,7 +166,7 @@ namespace Kettler_X7_Lib.Networking
             System.Security.Cryptography.X509Certificates.X509Certificate2 pX509Certificate2 = (System.Security.Cryptography.X509Certificates.X509Certificate2)pX509Certificate;
             
             // Verify certificate
-            if (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint == "F02AB77F80CEA6D05EC4E739B36F49A2FCAD069C")
+            if (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint == "ED5F11F6351F4F575120F7113D4279E9D51DCDF2")
             {
                 return true;
             }
