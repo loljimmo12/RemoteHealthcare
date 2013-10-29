@@ -249,7 +249,7 @@ namespace WindowsFormsApplication1
             System.Security.Cryptography.X509Certificates.X509Certificate2 pX509Certificate2 = (System.Security.Cryptography.X509Certificates.X509Certificate2)pX509Certificate;
             Console.WriteLine(pX509Certificate2.Subject);
             Console.WriteLine(pX509Certificate2.Thumbprint);
-            return (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint.Equals("C6DF2597EF96EE13F129E4227D8C66757C606228"));
+            return (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint.Equals("ED5F11F6351F4F575120F7113D4279E9D51DCDF2"));
             //return true;
         }
 
