@@ -58,7 +58,6 @@ namespace Simulator
             StreamReader reader = new StreamReader(tcpClient.GetStream());
             string cm;
             StreamWriter writer = new StreamWriter(tcpClient.GetStream());
-            string receive = null;
             writer.AutoFlush = true;
 
             while (true)
@@ -229,11 +228,11 @@ namespace Simulator
         public void simulateUser()
         {
             var random = new Random();
-            int rand = random.Next(10) - 5;
-            if (powerBreak <= 200)
+            int rand = random.Next(5) - 2;
+            if (powerBreak <= 150)
                 revolutionsPerMinute = 90 + rand;
-            if (powerBreak <= 300 && powerBreak > 200)
-                revolutionsPerMinute = 70 + rand;
+            if (powerBreak <= 200 && powerBreak > 150)
+                revolutionsPerMinute = 60 + rand;
             else revolutionsPerMinute = 50 + rand;
             velocity = revolutionsPerMinute * 0.36 * 10.0;
             timeSeconds++;
@@ -246,5 +245,9 @@ namespace Simulator
             if (heartBeat > 150) heartBeat = 150;
             prevbreak = powerBreak; 
             distance = Convert.ToInt32(velocity * (timeSeconds/60.0/60.0));
+            if (timeSeconds > 360)
+                heartBeat += 5;
+            if (timeSeconds > 720)
+                heartBeat += 5;
         }
     }
