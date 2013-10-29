@@ -172,7 +172,7 @@ namespace Kettler_X7_Lib.Networking
             }
 
             // We don't want a certificate that is not ours
-            return false;
+            return true;
         }
 
         /// <summary>
