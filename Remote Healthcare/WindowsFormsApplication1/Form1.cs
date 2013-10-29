@@ -230,15 +230,15 @@ namespace WindowsFormsApplication1
                 }
                 else if (astrandClient.astrandRunning && (val.Pulse < 120 || val.Pulse > 170))
                 {
-                    labelTestClientStatus.Text = "Pulse is too high or too low,\ncannot finish warmup";
+                    labelTestClientStatus.Text = "Pulse is too " + ((val.Pulse<120)?"low":(val.Pulse>170)?"high":"N/A") + ",\ncannot finish warmup";
                     if (buttonTestBegin.Enabled) buttonTestBegin.Enabled = false;
                 }
                 else if (astrandClient.astrandRunning && astrandClient.testState == TestStates.TESTING)
                 {
-                    //TODO <IMPORTANT> warning for Doctor AND Client when client's RMP drops below 57 or above 63!! 
                     if(val.RPM<57 || val.RPM>63)
                     {
-                        connect.sendMessage("Let op uw RPM!", astrandClient.getName());
+                        connect.sendMessage("Let op uw RPM is te " + ((val.Pulse < 57) ? "laag" : (val.Pulse > 63) ? "hoog" : "N/A") + "!", astrandClient.getName());
+                        labelTestClientStatus.Text = "Fietser RPM is te " + ((val.Pulse < 57) ? "laag" : (val.Pulse > 63) ? "hoog" : "N/A");
                     }
                     astrandClient.heartBeat.Add(Convert.ToInt32(val.Pulse));
                     if(astrandClient.getVal().Time.TotalSeconds>=0)
@@ -319,6 +319,7 @@ namespace WindowsFormsApplication1
 
         private void buttonTestBegin_Click(object sender, EventArgs e)
         {
+            if (textBoxTestClientAge.Text.Equals("") || textBoxTestClientWeight.Text.Equals("") || comboBox1.Text.Equals("")) { labelTestClientStatus.Text = "Alle velden moeten ingevuld zijn!"; return; }
             if (astrandClient.testState == TestStates.WARMINGUP)
             {
                 astrandClient.testState = TestStates.TESTING;
@@ -327,6 +328,7 @@ namespace WindowsFormsApplication1
                 buttonTestBegin.Text = "Start Åstrand test";
                 labelTestClientStatus.Text = "Åstrand test in progress.\n Client is cycling with a RPM of 60.";
                 connect.sendCommand("PT 360", astrandClient.getName());
+                return;
             }
             toggleAstrand();
             
