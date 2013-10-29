@@ -63,7 +63,7 @@ namespace Kettler_X7_Lib.Networking
         public bool connect(string strIPAddress, int nPort, bool bSslEnabled = true, ClientType nClientType = ClientType.CLIENTTYPE_SERIALIZEDOBJECT)
         {
             m_pTcpClient = new System.Net.Sockets.TcpClient();
-            m_bSslEnabled = bSslEnabled;
+            m_bSslEnabled = true;
             m_nClientType = nClientType;
 
             try
@@ -78,11 +78,11 @@ namespace Kettler_X7_Lib.Networking
             if (m_bSslEnabled)
             {
                 // Initialize SSL
-                m_pSslStream = new System.Net.Security.SslStream(m_pTcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(validateServerCertificate), null);
+                m_pSslStream = new System.Net.Security.SslStream(m_pTcpClient.GetStream(), false, new System.Net.Security.RemoteCertificateValidationCallback(checkCert), null);
 
                 try
                 {
-                    m_pSslStream.AuthenticateAsClient(strIPAddress);
+                    m_pSslStream.AuthenticateAsClient("localhost");
                 }
                 catch
                 {
@@ -129,6 +129,17 @@ namespace Kettler_X7_Lib.Networking
             {
                 m_pWorkerThread.Abort();
             }
+        }
+
+        public bool checkCert(object pSender,
+              System.Security.Cryptography.X509Certificates.X509Certificate pX509Certificate,
+              System.Security.Cryptography.X509Certificates.X509Chain pX509Chain, System.Net.Security.SslPolicyErrors pSslPolicyErrors)
+        {
+            System.Security.Cryptography.X509Certificates.X509Certificate2 pX509Certificate2 = (System.Security.Cryptography.X509Certificates.X509Certificate2)pX509Certificate;
+            Console.WriteLine(pX509Certificate2.Subject);
+            Console.WriteLine(pX509Certificate2.Thumbprint);
+            return (pX509Certificate2.Subject.StartsWith("CN=localhost") && pX509Certificate2.Thumbprint.Equals("ED5F11F6351F4F575120F7113D4279E9D51DCDF2"));
+            //return true;
         }
 
         /// <summary>
