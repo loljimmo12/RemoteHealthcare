@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private Connection connect;
         public int selectedReciever;
         private System.Timers.Timer timer;
+        public int count;
 
         public enum TestStates
         {
@@ -221,6 +222,15 @@ namespace WindowsFormsApplication1
                 label6.Text = "Power " + val.RequestedPower;
                 label7.Text = "Energy " + val.Energy;
                 clientChart.Series["Heartbeat"].Points.AddXY(val.Time.TotalSeconds, val.Pulse);
+                if (astrandClient.astrandRunning && astrandClient.testState == TestStates.WARMINGUP)
+                {
+                    if (count > 5)
+                    {
+                        connect.sendCommand("PW " + (Convert.ToInt32(val.RequestedPower) + 5), astrandClient.getName());
+                        count = 0;
+                    }
+                    ++count;
+                }
                 if (astrandClient.astrandRunning && val.Pulse >= 120 && val.Pulse <= 170 && !buttonTestBegin.Enabled)
                 {
                     buttonTestBegin.Enabled = true;
@@ -233,17 +243,19 @@ namespace WindowsFormsApplication1
                     labelTestClientStatus.Text = "Pulse is too " + ((val.Pulse<120)?"low":(val.Pulse>170)?"high":"N/A") + ",\ncannot finish warmup";
                     if (buttonTestBegin.Enabled) buttonTestBegin.Enabled = false;
                 }
+                
                 else if (astrandClient.astrandRunning && astrandClient.testState == TestStates.TESTING)
                 {
-                    if(val.RPM<57 || val.RPM>63)
+                    if (val.RPM < 57 || val.RPM > 63)
                     {
                         connect.sendMessage("Let op uw RPM is te " + ((val.Pulse < 57) ? "laag" : (val.Pulse > 63) ? "hoog" : "N/A") + "!", astrandClient.getName());
                         labelTestClientStatus.Text = "Fietser RPM is te " + ((val.Pulse < 57) ? "laag" : (val.Pulse > 63) ? "hoog" : "N/A");
                     }
+
                     astrandClient.heartBeat.Add(Convert.ToInt32(val.Pulse));
-                    if(astrandClient.getVal().Time.TotalSeconds>=0)
+                    if (astrandClient.getVal().Time.TotalSeconds >= astrandClient.startTime + 360)
                     {
-                        astrandMainTestCalculation(Convert.ToInt32(val.Pulse),Convert.ToDouble(val.RequestedPower));
+                        astrandMainTestCalculation(Convert.ToInt32(val.Pulse), Convert.ToDouble(val.RequestedPower));
                     }
                 }
             }
@@ -327,7 +339,8 @@ namespace WindowsFormsApplication1
                 buttonTestBegin.Enabled = false;
                 buttonTestBegin.Text = "Start Åstrand test";
                 labelTestClientStatus.Text = "Åstrand test in progress.\n Client is cycling with a RPM of 60.";
-                connect.sendCommand("PT 360", astrandClient.getName());
+                connect.sendCommand("PT 0", astrandClient.getName());
+                astrandClient.startTime = astrandClient.getVal().Time.TotalSeconds;
                 return;
             }
             toggleAstrand();
@@ -336,7 +349,6 @@ namespace WindowsFormsApplication1
 
         private void toggleAstrand(bool nood=false)
         {
-            //TODO add imposibility to start test when the 3 client values are not entered correctly
             if (!astrandClient.astrandRunning)
             {
                 astrandClient.astrandRunning = true;
@@ -345,9 +357,11 @@ namespace WindowsFormsApplication1
                 textBoxTestClientWeight.Enabled = false;
                 labelTestClientStatus.Text = "Warming up is bezig";
                 buttonTestEmergencyBreak.Visible = true;
+                connect.sendCommand("CM", astrandClient.getName());
                 connect.sendCommand("RS", astrandClient.getName());
                 System.Threading.Thread.Sleep(2000); //Wait for bike to reboot
                 connect.sendCommand("CM", astrandClient.getName());
+                connect.sendCommand("PW "+ (comboBox1.Text.Equals("Man")?"50":"25"), astrandClient.getName());
                 astrandClient.testState = TestStates.WARMINGUP;
             }
             else if (astrandClient.astrandRunning && nood)

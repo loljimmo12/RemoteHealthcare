@@ -356,6 +356,8 @@ namespace WindowsFormsApplication1
          public double VO2Max { get; set; }
 
          public List<int> heartBeat {get;set;}
+
+         public double startTime { get; set; }
      }
 
 }
