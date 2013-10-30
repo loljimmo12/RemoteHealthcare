@@ -32,7 +32,6 @@ namespace WindowsFormsApplication1
             connect = Program.connect;
             comboBoxSelectReciever.SelectedIndex = 0;
             comboBoxPower.SelectedIndex = 0;
-            //astrandWeight = new Dictionary<int, int> { {80, 80} };
             astrandLeeftijd = new Dictionary<int, double> { { 15, 1.10 }, {20,1.05}, {25,1.0}, {30,0.94},{35,0.87},{40,0.83},{45,0.78},{50,0.75},{55,0.71},{60,0.68},{65,0.65}};
         }
         
@@ -320,6 +319,7 @@ namespace WindowsFormsApplication1
 
         private void buttonStartTest_Click(object sender, EventArgs e)
         {
+            this.Size = new Size(1050,this.Size.Height);
             groupBoxRealContent.Visible = !groupBoxRealContent.Visible;
             if (astrandClient.astrandRunning) toggleAstrand(true);
         }

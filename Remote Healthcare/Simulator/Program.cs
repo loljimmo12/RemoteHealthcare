@@ -58,7 +58,6 @@ namespace Simulator
             StreamReader reader = new StreamReader(tcpClient.GetStream());
             string cm;
             StreamWriter writer = new StreamWriter(tcpClient.GetStream());
-            string receive = null;
             writer.AutoFlush = true;
 
             while (true)
@@ -229,22 +228,36 @@ namespace Simulator
         public void simulateUser()
         {
             var random = new Random();
-            int rand = random.Next(10) - 5;
-            if (powerBreak <= 200)
+            int rand = random.Next(5) - 2;
+            if (powerBreak <= 150)
                 revolutionsPerMinute = 90 + rand;
-            if (powerBreak <= 300 && powerBreak > 200)
-                revolutionsPerMinute = 70 + rand;
+            if (powerBreak <= 200 && powerBreak > 150)
+                revolutionsPerMinute = 60 + rand;
             else revolutionsPerMinute = 50 + rand;
             velocity = revolutionsPerMinute * 0.36 * 10.0;
             timeSeconds++;
             
             if (timeSeconds % 3 == 0)
                 kiloJoules = kiloJoules + powerBreak/25;
-            if (heartBeat <= 150) heartBeat = heartBeat + ((prevbreak > powerBreak)?-(powerBreak / 25 / 2):(powerBreak / 25 / 2));
-            if (heartBeat >= 70) heartBeat = heartBeat + ((rand<0)?rand*2:rand);
+            if (powerBreak > 25 && powerBreak < 65)
+                heartBeat = 70;
+            else if (powerBreak> 65 && powerBreak< 80)
+                heartBeat = 85;
+            else if (powerBreak > 80 && powerBreak < 105)
+                heartBeat = 100;
+            else if (powerBreak > 105 && powerBreak < 130)
+                heartBeat = 115;
+            else if (powerBreak > 130 && powerBreak < 145)
+                heartBeat = 125;
+            else if (heartBeat <= 150) heartBeat = heartBeat + ((prevbreak > powerBreak)?-(powerBreak / 25 / 2):(powerBreak / 25 / 2));
             if (heartBeat < 70) heartBeat = 70;
             if (heartBeat > 150) heartBeat = 150;
+            if (heartBeat >= 70) heartBeat = heartBeat + ((rand < 0) ? rand * 2 : rand);
             prevbreak = powerBreak; 
             distance = Convert.ToInt32(velocity * (timeSeconds/60.0/60.0));
+            if (timeSeconds > 360)
+                heartBeat += 5;
+            if (timeSeconds > 720)
+                heartBeat += 5;
         }
     }

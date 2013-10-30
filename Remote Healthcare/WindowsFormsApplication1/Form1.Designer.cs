@@ -91,7 +91,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(105, 399);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(360, 20);
+            this.textBox1.Size = new System.Drawing.Size(0, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -335,7 +335,7 @@
             // 
             // buttonStartTestEnvironment
             // 
-            this.buttonStartTestEnvironment.Location = new System.Drawing.Point(6, 19);
+            this.buttonStartTestEnvironment.Location = new System.Drawing.Point(439, 204);
             this.buttonStartTestEnvironment.Name = "buttonStartTestEnvironment";
             this.buttonStartTestEnvironment.Size = new System.Drawing.Size(136, 23);
             this.buttonStartTestEnvironment.TabIndex = 23;
@@ -346,7 +346,6 @@
             // groupBoxAstrandTest
             // 
             this.groupBoxAstrandTest.Controls.Add(this.groupBoxRealContent);
-            this.groupBoxAstrandTest.Controls.Add(this.buttonStartTestEnvironment);
             this.groupBoxAstrandTest.Location = new System.Drawing.Point(581, 12);
             this.groupBoxAstrandTest.Name = "groupBoxAstrandTest";
             this.groupBoxAstrandTest.Size = new System.Drawing.Size(445, 381);
@@ -380,7 +379,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(7, 69);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(113, 13);
+            this.label8.Size = new System.Drawing.Size(83, 13);
             this.label8.TabIndex = 10;
             this.label8.Text = "Sex of the client";
             // 
@@ -401,7 +400,7 @@
             this.labeTestlDescriptionProgressBar.AutoSize = true;
             this.labeTestlDescriptionProgressBar.Location = new System.Drawing.Point(6, 278);
             this.labeTestlDescriptionProgressBar.Name = "labeTestlDescriptionProgressBar";
-            this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(153, 13);
+            this.labeTestlDescriptionProgressBar.Size = new System.Drawing.Size(51, 13);
             this.labeTestlDescriptionProgressBar.TabIndex = 8;
             this.labeTestlDescriptionProgressBar.Text = "Progress:";
             // 
@@ -421,7 +420,7 @@
             this.labelTestClientStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTestClientStatus.Location = new System.Drawing.Point(10, 127);
             this.labelTestClientStatus.Name = "labelTestClientStatus";
-            this.labelTestClientStatus.Size = new System.Drawing.Size(94, 16);
+            this.labelTestClientStatus.Size = new System.Drawing.Size(108, 16);
             this.labelTestClientStatus.TabIndex = 6;
             this.labelTestClientStatus.Text = "Test is not active";
             // 
@@ -447,7 +446,7 @@
             this.labelTestClientAge.AutoSize = true;
             this.labelTestClientAge.Location = new System.Drawing.Point(6, 47);
             this.labelTestClientAge.Name = "labelTestClientAge";
-            this.labelTestClientAge.Size = new System.Drawing.Size(148, 13);
+            this.labelTestClientAge.Size = new System.Drawing.Size(102, 13);
             this.labelTestClientAge.TabIndex = 3;
             this.labelTestClientAge.Text = "Client age (in years):";
             // 
@@ -456,7 +455,7 @@
             this.labelTestClientWeight.AutoSize = true;
             this.labelTestClientWeight.Location = new System.Drawing.Point(6, 22);
             this.labelTestClientWeight.Name = "labelTestClientWeight";
-            this.labelTestClientWeight.Size = new System.Drawing.Size(143, 13);
+            this.labelTestClientWeight.Size = new System.Drawing.Size(100, 13);
             this.labelTestClientWeight.TabIndex = 2;
             this.labelTestClientWeight.Text = "Client weight (in Kg)";
             // 
@@ -474,11 +473,11 @@
             this.textBoxTestClientWeight.Size = new System.Drawing.Size(110, 20);
             this.textBoxTestClientWeight.TabIndex = 0;
             // 
-            // buttonTestNoodstop
+            // buttonTestEmergencyBreak
             // 
             this.buttonTestEmergencyBreak.BackColor = System.Drawing.Color.Red;
             this.buttonTestEmergencyBreak.Location = new System.Drawing.Point(302, 172);
-            this.buttonTestEmergencyBreak.Name = "buttonTestNoodstop";
+            this.buttonTestEmergencyBreak.Name = "buttonTestEmergencyBreak";
             this.buttonTestEmergencyBreak.Size = new System.Drawing.Size(124, 116);
             this.buttonTestEmergencyBreak.TabIndex = 0;
             this.buttonTestEmergencyBreak.Text = "Emergency Break";
@@ -489,8 +488,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 433);
+            this.ClientSize = new System.Drawing.Size(586, 433);
             this.Controls.Add(this.groupBoxAstrandTest);
+            this.Controls.Add(this.buttonStartTestEnvironment);
             this.Controls.Add(this.buttonLock);
             this.Controls.Add(this.buttonLoadOldData);
             this.Controls.Add(this.button1);
