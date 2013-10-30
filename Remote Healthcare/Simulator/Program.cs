@@ -232,8 +232,15 @@ namespace Simulator
             if (powerBreak <= 150)
                 revolutionsPerMinute = 90 + rand;
             if (powerBreak <= 200 && powerBreak > 150)
+            {
                 revolutionsPerMinute = 60 + rand;
-            else revolutionsPerMinute = 50 + rand;
+                revolutionsPerMinute += 10;
+            }
+            else
+            {
+                revolutionsPerMinute = 50 + rand;
+                revolutionsPerMinute += 10;
+            }
             velocity = revolutionsPerMinute * 0.36 * 10.0;
             timeSeconds++;
             
